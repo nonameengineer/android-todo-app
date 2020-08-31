@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.architecture.blueprints.todoapp.addedittask
+package com.example.androidtodoapp.addedittask
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,12 +23,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.android.architecture.blueprints.todoapp.EventObserver
-import com.example.android.architecture.blueprints.todoapp.R
-import com.example.android.architecture.blueprints.todoapp.databinding.AddtaskFragBinding
-import com.example.android.architecture.blueprints.todoapp.tasks.ADD_EDIT_RESULT_OK
-import com.example.android.architecture.blueprints.todoapp.util.setupRefreshLayout
-import com.example.android.architecture.blueprints.todoapp.util.setupSnackbar
+import com.example.androidtodoapp.EventObserver
+import com.example.androidtodoapp.R
+import com.example.androidtodoapp.databinding.AddtaskFragBinding
+import com.example.androidtodoapp.tasks.ADD_EDIT_RESULT_OK
+import com.example.androidtodoapp.util.setupRefreshLayout
+import com.example.androidtodoapp.util.setupSnackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

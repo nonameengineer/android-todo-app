@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp
+package com.example.androidtodoapp
 
-import com.example.android.architecture.blueprints.todoapp.di.DaggerApplicationComponent
+import com.example.androidtodoapp.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import timber.log.Timber
