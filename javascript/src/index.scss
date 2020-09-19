@@ -79,6 +79,11 @@ section {
     margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
+    transition: 200ms;
+
+    &:hover {
+        box-shadow: 0px 0px 4px 4px rgba(255, 230, 32, 0.25);
+    }
 
     &--activated {
         border: 3px solid #FFE71D;
@@ -149,6 +154,7 @@ img {
 }
 
 .color-picker {
+    cursor: pointer;
     margin-right: 2px;
     width: 21px;
     height: 21px;
