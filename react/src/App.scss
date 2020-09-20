@@ -1,0 +1,18 @@
+main {
+  min-height: 812px;
+  height: 100%;
+  width: 100%;
+}
+
+.title {
+  cursor: pointer;
+  margin-top: 15px;
+  display: flex;
+  font-weight: 900;
+  font-size: 24pt;
+  margin-bottom: 9px;
+
+  span {
+    color: #2094f9;
+  }
+}
