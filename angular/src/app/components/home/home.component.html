@@ -1,39 +1,16 @@
 <div class="wrapper">
   <input type="text" placeholder="New..." class="input__new" routerLink="new">
   <section>
-    <div class="section-title">Today</div>
-    <div class="item">
-      <div class="text">Homework</div>
-      <div class="buttons">
-        <img src="assets/svg/favorite_border-24px.svg" alt="Favourite">
-        <img src="assets/svg/access_time-24px.svg" alt="Favourite">
-      </div>
-    </div>
+    <app-section-title title="Today" [isDark]="isDark$ | async"></app-section-title>
+    <app-task-item title="Homework" [isDark]="isDark$ | async"></app-task-item>
   </section>
   <section>
-    <div class="section-title">Soon</div>
-    <div class="item" style="border: 3px solid #05F5EA">
-      <div class="text">Homework</div>
-      <div class="buttons">
-        <img src="assets/svg/favorite_border-24px.svg">
-        <img src="assets/svg/access_time-24px.svg">
-      </div>
-    </div>
-    <div class="item item--activated">
-      <div class="text">2 days remaining...</div>
-      <div class="buttons">
-        <img src="assets/svg/east-24px.svg">
-      </div>
-    </div>
+    <app-section-title title="Soon" [isDark]="isDark$ | async"></app-section-title>
+    <app-task-item title="Homework" [isDark]="isDark$ | async"></app-task-item>
+    <app-task-item title="Homework" [isDark]="isDark$ | async" [isActive]="true"></app-task-item>
   </section>
   <section>
-    <div class="section-title">Favourites</div>
-    <div class="item" style="border: 3px solid #777AFF">
-      <div class="text">Homework</div>
-      <div class="buttons">
-        <img src="assets/svg/favorite-24px.svg">
-        <img src="assets/svg/access_time-24px.svg">
-      </div>
-    </div>
+    <app-section-title title="Favourites" [isDark]="isDark$ | async"></app-section-title>
+    <app-task-item title="Homework" [isDark]="isDark$ | async" [isFavorite]="true"></app-task-item>
   </section>
 </div>

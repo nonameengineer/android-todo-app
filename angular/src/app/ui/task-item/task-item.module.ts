@@ -8,6 +8,7 @@ import { TaskItemComponent } from './task-item.component';
   declarations: [TaskItemComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [TaskItemComponent]
 })
 export class TaskItemModule { }

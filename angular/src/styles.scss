@@ -40,13 +40,33 @@ img {
   cursor: pointer;
   user-select: none;
 
-  &.dark {
-    path {
-      fill: #ffffff;
-    }
-  }
-
   &:hover {
     transform: scale(1.2);
+  }
+}
+
+// Section
+
+section {
+  margin-top: 50px;
+}
+
+.section-title {
+  font-size: 24pt;
+  margin-bottom: 9px;
+  transition: 200ms;
+
+  &.dark {
+    color: #ffffff;
+  }
+}
+
+// Text {
+
+.text {
+  transition: 200ms;
+
+  &.dark {
+    color: #ffffff;
   }
 }
