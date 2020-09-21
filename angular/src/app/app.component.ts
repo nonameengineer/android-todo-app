@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { ThemeService } from './services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'todo-app';
   isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
@@ -22,9 +22,5 @@ export class AppComponent implements OnInit {
 
     const BODY_DARK_CLASS = 'dark';
     this.elementRef.nativeElement.ownerDocument.body.classList.toggle(BODY_DARK_CLASS);
-  }
-
-  ngOnInit(): void {
-    this.isDark$.subscribe(v => console.log(v));
   }
 }
