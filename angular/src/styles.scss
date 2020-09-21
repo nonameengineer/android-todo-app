@@ -25,3 +25,12 @@
   max-width: 372px;
   width: 100%;
 }
+
+img {
+  transition: 200ms;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}

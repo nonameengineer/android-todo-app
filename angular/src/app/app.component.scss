@@ -16,3 +16,20 @@ main {
     color: #2094f9;
   }
 }
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttons {
+  margin-top: 6px;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+
+  img {
+    margin-left: 12px;
+  }
+}
