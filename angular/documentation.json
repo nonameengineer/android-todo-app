@@ -1,7 +1,33 @@
 {
     "pipes": [],
     "interfaces": [],
-    "injectables": [],
+    "injectables": [
+        {
+            "name": "ThemeService",
+            "id": "injectable-ThemeService-82fd85a9dd0441d9d05d5f044a3a164d",
+            "file": "src/app/services/theme/theme.service.ts",
+            "properties": [
+                {
+                    "name": "isDark$",
+                    "defaultValue": "new BehaviorSubject<boolean>(false)",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methods": [],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { BehaviorSubject } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class ThemeService {\n  // By default is light theme\n  isDark$ = new BehaviorSubject<boolean>(false);\n\n  constructor() { }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 9
+            },
+            "type": "injectable"
+        }
+    ],
     "classes": [
         {
             "name": "AppPage",
@@ -39,7 +65,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-a924e5468b579d680360736ec0954fef",
+            "id": "component-AppComponent-264953d3c6f5129be9f2e8e592251a95",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -59,30 +85,89 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "isDark$",
+                    "defaultValue": "this.themeService.isDark$",
+                    "type": "BehaviorSubject<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
                     "name": "title",
                     "defaultValue": "'todo-app'",
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 11
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "changeTheme",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 27
+                }
+            ],
             "hostBindings": [],
             "hostListeners": [],
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'todo-app';\n}\n",
+            "sourceCode": "import { Component, ElementRef, OnInit } from '@angular/core';\nimport { ThemeService } from './services/theme/theme.service';\nimport { BehaviorSubject } from 'rxjs';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss'],\n})\nexport class AppComponent implements OnInit {\n  title = 'todo-app';\n  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;\n\n  constructor(\n    private themeService: ThemeService,\n    private elementRef: ElementRef,\n  ) {}\n\n  changeTheme(): void {\n    const isDark = this.isDark$.getValue();\n    isDark ? this.isDark$.next(false) : this.isDark$.next(true);\n\n    const BODY_DARK_CLASS = 'dark';\n    this.elementRef.nativeElement.ownerDocument.body.classList.toggle(BODY_DARK_CLASS);\n  }\n\n  ngOnInit(): void {\n    this.isDark$.subscribe(v => this.isDark$.next(v));\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "main {\n  min-height: 812px;\n  height: 100%;\n  width: 100%;\n}\n\n.title {\n  cursor: pointer;\n  margin-top: 15px;\n  display: flex;\n  font-weight: 900;\n  font-size: 24pt;\n  margin-bottom: 9px;\n\n  span {\n    color: #2094f9;\n  }\n}\n",
+                    "data": ":host {\n  background-color: #FA124F;\n}\n\nmain {\n  min-height: 812px;\n  height: 100%;\n  width: 100%;\n}\n\n.title {\n  cursor: pointer;\n  margin-top: 15px;\n  display: flex;\n  font-weight: 900;\n  font-size: 24pt;\n  margin-bottom: 9px;\n\n  span {\n    color: #2094f9;\n  }\n}\n\nheader {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.buttons {\n  margin-top: 6px;\n  display: flex;\n  align-items: flex-end;\n  height: 100%;\n\n  img {\n    margin-left: 12px;\n  }\n}\n",
                     "styleUrl": "./app.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<header>\n  <div class=\"wrapper\">\n    <div class=\"title\" routerLink=\"/\">Delat<span>'</span></div>\n  </div>\n</header>\n<main>\n  <router-outlet></router-outlet>\n</main>\n"
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "themeService",
+                        "type": "ThemeService"
+                    },
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef"
+                    }
+                ],
+                "line": 12,
+                "jsdoctags": [
+                    {
+                        "name": "themeService",
+                        "type": "ThemeService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"wrapper\">\n  <header>\n    <div class=\"title\" [ngClass]=\"{'dark': isDark$ | async}\" routerLink=\"/\">Delat<span>'</span></div>\n    <div class=\"buttons\">\n      <img src=\"assets/svg/delete-24px.svg\" routerLink=\"/trashcan\">\n      <img src=\"assets/svg/wb_sunny-24px.svg\" (click)=\"changeTheme()\">\n    </div>\n  </header>\n  <main>\n    <router-outlet></router-outlet>\n  </main>\n</div>\n"
         },
         {
             "name": "ButtonComponent",
@@ -164,6 +249,62 @@
                     }
                 }
             }
+        },
+        {
+            "name": "ColorPickerComponent",
+            "id": "component-ColorPickerComponent-7597c204bdafa5d25a6b30ada5a97c55",
+            "file": "src/app/ui/color-picker/color-picker.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-color-picker",
+            "styleUrls": [
+                "./color-picker.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./color-picker.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-color-picker',\n  templateUrl: './color-picker.component.html',\n  styleUrls: ['./color-picker.component.scss']\n})\nexport class ColorPickerComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./color-picker.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>color-picker works!</p>\n"
         },
         {
             "name": "HeaderComponent",
@@ -267,7 +408,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".input__new {\n  border: 3px solid #000;\n  border-radius: 3px;\n  width: 100%;\n  height: 40px;\n  padding: 0 9px;\n  box-sizing: border-box;\n\n  &::placeholder {\n    color: #000;\n  }\n}\n\nsection {\n  margin-top: 50px;\n}\n\n.section-title {\n  font-size: 24pt;\n  margin-bottom: 9px;\n}\n\n.item {\n  box-sizing: border-box;\n  cursor: pointer;\n  border: 3px solid #FA124F;\n  border-radius: 3px;\n  width: 100%;\n  height: 40px;\n  padding: 0 9px;\n  display: flex;\n  align-items: center;\n  margin-bottom: 12px;\n  justify-content: space-between;\n  transition: 200ms;\n\n  &:hover {\n    box-shadow: 0 0 4px 4px rgba(255, 230, 32, 0.25);\n  }\n\n  &--activated {\n    border: 3px solid #FFE71D;\n    background: #FFE71D;\n    border-radius: 3px;\n    width: 100%;\n    height: 36px;\n    padding: 0 9px;\n    display: flex;\n    align-items: center;\n  }\n}\n\n.buttons {\n  display: flex;\n  align-items: center;\n\n  img {\n    margin-left: 14px;\n  }\n}\n\nimg {\n  transition: 200ms;\n\n  &:hover {\n    transform: scale(1.2);\n  }\n}\n\n",
+                    "data": ".input__new {\n  border: 3px solid #000;\n  border-radius: 3px;\n  width: 100%;\n  height: 40px;\n  padding: 0 9px;\n  box-sizing: border-box;\n\n  &::placeholder {\n    color: #000;\n  }\n}\n\nsection {\n  margin-top: 50px;\n}\n\n.section-title {\n  font-size: 24pt;\n  margin-bottom: 9px;\n}\n\n.item {\n  box-sizing: border-box;\n  cursor: pointer;\n  border: 3px solid #FA124F;\n  border-radius: 3px;\n  width: 100%;\n  height: 40px;\n  padding: 0 9px;\n  display: flex;\n  align-items: center;\n  margin-bottom: 12px;\n  justify-content: space-between;\n  transition: 200ms;\n\n  &:hover {\n    box-shadow: 0 0 4px 4px rgba(255, 230, 32, 0.25);\n  }\n\n  &--activated {\n    border: 3px solid #FFE71D;\n    background: #FFE71D;\n    border-radius: 3px;\n    width: 100%;\n    height: 36px;\n    padding: 0 9px;\n    display: flex;\n    align-items: center;\n  }\n}\n\n.buttons {\n  display: flex;\n  align-items: center;\n\n  img {\n    margin-left: 14px;\n  }\n}\n",
                     "styleUrl": "./home.component.scss"
                 }
             ],
@@ -446,6 +587,286 @@
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "SettingsComponent",
+            "id": "component-SettingsComponent-90b5cdcdf5abaacd099ebef374fe1806",
+            "file": "src/app/components/settings/settings.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-settings",
+            "styleUrls": [
+                "./settings.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./settings.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-settings',\n  templateUrl: './settings.component.html',\n  styleUrls: ['./settings.component.scss']\n})\nexport class SettingsComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./settings.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>settings works!</p>\n"
+        },
+        {
+            "name": "TaskCardComponent",
+            "id": "component-TaskCardComponent-756ef79758a38ce02d87daf9e0ee2660",
+            "file": "src/app/ui/task-card/task-card.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-task-card",
+            "styleUrls": [
+                "./task-card.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./task-card.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-task-card',\n  templateUrl: './task-card.component.html',\n  styleUrls: ['./task-card.component.scss']\n})\nexport class TaskCardComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./task-card.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>task-card works!</p>\n"
+        },
+        {
+            "name": "TaskComponent",
+            "id": "component-TaskComponent-0385e2784dafca8cf3a2ecc906a07e40",
+            "file": "src/app/components/task/task.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-task",
+            "styleUrls": [
+                "./task.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./task.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-task',\n  templateUrl: './task.component.html',\n  styleUrls: ['./task.component.scss']\n})\nexport class TaskComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./task.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>task works!</p>\n"
+        },
+        {
+            "name": "TaskItemComponent",
+            "id": "component-TaskItemComponent-a499018d356eeca575942574141ebdc5",
+            "file": "src/app/ui/task-item/task-item.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-task-item",
+            "styleUrls": [
+                "./task-item.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./task-item.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-task-item',\n  templateUrl: './task-item.component.html',\n  styleUrls: ['./task-item.component.scss']\n})\nexport class TaskItemComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./task-item.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>task-item works!</p>\n"
+        },
+        {
+            "name": "TrashcanComponent",
+            "id": "component-TrashcanComponent-c77220c10ae679b9e6d668072b19a792",
+            "file": "src/app/components/trashcan/trashcan.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-trashcan",
+            "styleUrls": [
+                "./trashcan.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./trashcan.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-trashcan',\n  templateUrl: './trashcan.component.html',\n  styleUrls: ['./trashcan.component.scss']\n})\nexport class TrashcanComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./trashcan.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>trashcan works!</p>\n"
         }
     ],
     "modules": [
@@ -500,6 +921,39 @@
                 {
                     "type": "declarations",
                     "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "ColorPickerModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "ColorPickerComponent"
+                        }
+                    ]
                 },
                 {
                     "type": "imports",
@@ -624,6 +1078,270 @@
         },
         {
             "name": "NewCardRoutingModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SettingsModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "SettingsComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "SettingsRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SettingsRoutingModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TaskCardModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "TaskCardComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TaskItemModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "TaskItemComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TaskModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "TaskComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "TaskRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TaskRoutingModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TrashcanModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "TrashcanComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "TrashcanRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TrashcanRoutingModule",
             "children": [
                 {
                     "type": "providers",
@@ -971,6 +1689,30 @@
                                 "module": "NewCardModule"
                             }
                         ]
+                    },
+                    {
+                        "path": "trashcan",
+                        "loadChildren": "./components/trashcan/trashcan.module#TrashcanModule",
+                        "children": [
+                            {
+                                "kind": "module",
+                                "children": [
+                                    {
+                                        "name": "routes",
+                                        "filename": "src/app/components/trashcan/trashcan-routing.module.ts",
+                                        "module": "TrashcanRoutingModule",
+                                        "children": [
+                                            {
+                                                "path": "",
+                                                "component": "TrashcanComponent"
+                                            }
+                                        ],
+                                        "kind": "module"
+                                    }
+                                ],
+                                "module": "TrashcanModule"
+                            }
+                        ]
                     }
                 ],
                 "kind": "module"
@@ -978,7 +1720,7 @@
         ]
     },
     "coverage": {
-        "count": 3,
+        "count": 2,
         "status": "low",
         "files": [
             {
@@ -996,7 +1738,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -1015,6 +1757,69 @@
                 "name": "NewCardComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/settings/settings.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SettingsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/task/task.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TaskComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/trashcan/trashcan.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TrashcanComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/theme/theme.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "ThemeService",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/color-picker/color-picker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ColorPickerComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/task-card/task-card.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TaskCardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/task-item/task-item.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TaskItemComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {

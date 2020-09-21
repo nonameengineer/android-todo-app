@@ -1,3 +1,7 @@
+:host {
+  background-color: #FA124F;
+}
+
 main {
   min-height: 812px;
   height: 100%;
@@ -11,6 +15,11 @@ main {
   font-weight: 900;
   font-size: 24pt;
   margin-bottom: 9px;
+  transition: 200ms;
+
+  &.dark {
+    color: white;
+  }
 
   span {
     color: #2094f9;

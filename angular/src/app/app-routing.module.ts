@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'new',
     loadChildren: () => import('./components/new-card/new-card.module').then(m => m.NewCardModule)
+  },
+  {
+    path: 'trashcan',
+    loadChildren: () => import('./components/trashcan/trashcan.module').then(m => m.TrashcanModule)
   }
 ];
 

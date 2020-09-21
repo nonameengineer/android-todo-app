@@ -20,6 +20,15 @@
   padding: 0;
 }
 
+body {
+  height: 100%;
+  transition: 200ms;
+
+  &.dark {
+    background-color: #000000;
+  }
+}
+
 .wrapper {
   margin: 0 auto;
   max-width: 372px;
@@ -29,6 +38,13 @@
 img {
   transition: 200ms;
   cursor: pointer;
+  user-select: none;
+
+  &.dark {
+    path {
+      fill: #ffffff;
+    }
+  }
 
   &:hover {
     transform: scale(1.2);

@@ -1,12 +1,12 @@
 <div class="wrapper">
   <header>
-    <div class="title" routerLink="/">Delat<span>'</span></div>
+    <div class="title" [ngClass]="{'dark': isDark$ | async}" routerLink="/">Delat<span>'</span></div>
     <div class="buttons">
-      <img src="assets/svg/delete-24px.svg">
-      <img src="assets/svg/wb_sunny-24px.svg">
+      <img src="assets/svg/delete-24px.svg" routerLink="/trashcan">
+      <img src="assets/svg/wb_sunny-24px.svg" class="dark" (click)="changeTheme()">
     </div>
   </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 </div>
-<main>
-  <router-outlet></router-outlet>
-</main>
