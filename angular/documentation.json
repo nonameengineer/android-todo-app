@@ -3,10 +3,10 @@
     "interfaces": [
         {
             "name": "Task",
-            "id": "interface-Task-1dbc695b3fa39e5ba544fedffa03d87e",
+            "id": "interface-Task-3028d2646c1fd8b5e4f09289bf36c345",
             "file": "src/app/models/task.ts",
             "type": "interface",
-            "sourceCode": "export interface Task {\n  id: string;\n  title: string;\n  date: Date;\n  color: string;\n  isFavorite: boolean;\n  isArchived: boolean;\n}\n",
+            "sourceCode": "export interface Task {\n  id: string;\n  title: string;\n  date: string;\n  color: string;\n  isFavorite: boolean;\n  isArchived: boolean;\n}\n",
             "properties": [
                 {
                     "name": "color",
@@ -17,7 +17,7 @@
                 },
                 {
                     "name": "date",
-                    "type": "Date",
+                    "type": "string",
                     "optional": false,
                     "description": "",
                     "line": 4
@@ -59,21 +59,76 @@
     "injectables": [
         {
             "name": "TasksStorageService",
-            "id": "injectable-TasksStorageService-683b1dad280b9a9bf6082e86be155e9a",
+            "id": "injectable-TasksStorageService-50a96a0ae6867dd14477c5cc0626c038",
             "file": "src/app/services/tasks-storage/tasks-storage.service.ts",
             "properties": [],
             "methods": [
+                {
+                    "name": "getMockTasks",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Task[]",
+                    "typeParameters": [],
+                    "line": 34,
+                    "modifierKind": [
+                        112
+                    ]
+                },
+                {
+                    "name": "getTaskById",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Task",
+                    "typeParameters": [],
+                    "line": 30,
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "getTasks",
                     "args": [],
                     "optional": false,
                     "returnType": "Task[]",
                     "typeParameters": [],
-                    "line": 15
+                    "line": 21
+                },
+                {
+                    "name": "saveTask",
+                    "args": [
+                        {
+                            "name": "task",
+                            "type": "Task"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "jsdoctags": [
+                        {
+                            "name": "task",
+                            "type": "Task",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport {Task} from '../../models/task';\nimport { TaskModel } from '../../models/task.model';\nimport { Colors } from '../../models/colors';\n\nconst TASKS_STORAGE_KEY = 'tasks';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class TasksStorageService {\n\n  constructor() { }\n\n  getTasks(): Task[] {\n    const tasksFromStorage = localStorage.getItem(TASKS_STORAGE_KEY);\n\n    if (tasksFromStorage === null) {\n      return [\n        new TaskModel(\n          '1',\n          'task 1',\n          new Date('1995-12-17T03:24:00'),\n          Colors.RED,\n          false,\n          false\n        ),\n        new TaskModel(\n          '2',\n          'task 2',\n          new Date(),\n          Colors.CYAN,\n          false,\n          false\n        ),\n        new TaskModel(\n          '3',\n          'task 3',\n          new Date(),\n          Colors.GREEN,\n          false,\n          false\n        ),\n        new TaskModel(\n          '4',\n          'task 4',\n          new Date(),\n          Colors.RED,\n          true,\n          false\n        ),\n        new TaskModel(\n          '5',\n          'task 5',\n          new Date(),\n          Colors.CYAN,\n          true,\n          false\n        ),\n        new TaskModel(\n          '6',\n          'task 6',\n          new Date(),\n          Colors.GREEN,\n          false,\n          true\n        )\n      ];\n    }\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport {Task} from '../../models/task';\nimport { TaskModel } from '../../models/task.model';\nimport { Colors } from '../../models/colors';\n\nconst TASKS_STORAGE_KEY = 'tasks';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class TasksStorageService {\n\n  constructor() { }\n\n  saveTask(task: Task): void {\n    const tasks = this.getTasks();\n    tasks.push(task);\n    localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));\n  }\n\n  getTasks(): Task[] {\n    const tasksFromStorage = localStorage.getItem(TASKS_STORAGE_KEY);\n    if (tasksFromStorage === null) {\n      return this.getMockTasks();\n    } else {\n      return JSON.parse(tasksFromStorage);\n    }\n  }\n\n  getTaskById(id: string): Task {\n    return this.getTasks().filter(task => task.id === id)[0];\n  }\n\n  private getMockTasks(): Task[] {\n    return [\n      new TaskModel(\n        '1',\n        'task 1',\n        new Date('1995-12-17T03:24:00').toDateString(),\n        Colors.RED,\n        false,\n        false\n      ),\n      new TaskModel(\n        '2',\n        'task 2',\n        new Date().toDateString(),\n        Colors.CYAN,\n        false,\n        false\n      ),\n      new TaskModel(\n        '3',\n        'task 3',\n        new Date().toDateString(),\n        Colors.GREEN,\n        false,\n        false\n      ),\n      new TaskModel(\n        '4',\n        'task 4',\n        new Date().toDateString(),\n        Colors.RED,\n        true,\n        false\n      ),\n      new TaskModel(\n        '5',\n        'task 5',\n        new Date().toDateString(),\n        Colors.CYAN,\n        true,\n        false\n      ),\n      new TaskModel(\n        '6',\n        'task 6',\n        new Date().toDateString(),\n        Colors.GREEN,\n        false,\n        true\n      )\n    ];\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -224,10 +279,10 @@
         },
         {
             "name": "TaskModel",
-            "id": "class-TaskModel-a11a085d660449c95a4aaac3222a82b0",
+            "id": "class-TaskModel-c2a30027454a276078dfe0d80c71fe04",
             "file": "src/app/models/task.model.ts",
             "type": "class",
-            "sourceCode": "import {Task} from './task';\n\nexport class TaskModel implements Task {\n  id: string;\n  title: string;\n  date: Date;\n  color: string;\n  isFavorite: boolean;\n  isArchived: boolean;\n\n  constructor(\n    id,\n    title,\n    date,\n    color,\n    isFavorite,\n    isArchived\n  ) {\n    this.id = id;\n    this.title = title;\n    this.date = date;\n    this.color = color;\n    this.isFavorite = isFavorite;\n    this.isArchived = isArchived;\n  }\n}\n",
+            "sourceCode": "import {Task} from './task';\n\nexport class TaskModel implements Task {\n  id: string;\n  title: string;\n  date: string;\n  color: string;\n  isFavorite: boolean;\n  isArchived: boolean;\n\n  constructor(\n    id,\n    title,\n    date,\n    color,\n    isFavorite,\n    isArchived\n  ) {\n    this.id = id;\n    this.title = title;\n    this.date = date;\n    this.color = color;\n    this.isFavorite = isFavorite;\n    this.isArchived = isArchived;\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -313,7 +368,7 @@
                 },
                 {
                     "name": "date",
-                    "type": "Date",
+                    "type": "string",
                     "optional": false,
                     "description": "",
                     "line": 6
@@ -571,7 +626,7 @@
         },
         {
             "name": "HomeComponent",
-            "id": "component-HomeComponent-0c566023ed5b8cf09554c8c5c8b65093",
+            "id": "component-HomeComponent-445a7663db6c2d0a9587b49e8910d35a",
             "file": "src/app/components/home/home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -642,11 +697,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { ThemeService } from '../../services/theme/theme.service';\nimport { BehaviorSubject } from 'rxjs';\nimport { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';\nimport { Task } from 'src/app/models/task';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.scss']\n})\nexport class HomeComponent implements OnInit {\n  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;\n  tasks: Task[];\n  todayTasks: Task[];\n  favoriteTasks: Task[];\n  soonTasks: Task[];\n\n  constructor(\n    private themeService: ThemeService,\n    private tasksStorage: TasksStorageService\n  ) { }\n\n  ngOnInit(): void {\n    this.tasks = this.tasksStorage.getTasks();\n    this.todayTasks = this.tasks.filter(task => task.date.toDateString() === new Date().toDateString()\n      && task.isFavorite === false\n      && task.isArchived === false);\n    this.favoriteTasks = this.tasks.filter(task => task.isFavorite === true && task.isArchived === false);\n    this.soonTasks = this.tasks.filter(task => task.date.toDateString() !== new Date().toDateString()\n      && task.isFavorite === false\n      && task.isArchived === false);\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { ThemeService } from '../../services/theme/theme.service';\nimport { BehaviorSubject } from 'rxjs';\nimport { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';\nimport { Task } from 'src/app/models/task';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.scss']\n})\nexport class HomeComponent implements OnInit {\n  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;\n  tasks: Task[];\n  todayTasks: Task[];\n  favoriteTasks: Task[];\n  soonTasks: Task[];\n\n  constructor(\n    private themeService: ThemeService,\n    private tasksStorage: TasksStorageService\n  ) { }\n\n  ngOnInit(): void {\n    this.tasks = this.tasksStorage.getTasks();\n    this.todayTasks = this.tasks.filter(task => task.date === new Date().toDateString()\n      && task.isFavorite === false\n      && task.isArchived === false);\n    this.favoriteTasks = this.tasks.filter(task => task.isFavorite === true && task.isArchived === false);\n    this.soonTasks = this.tasks.filter(task => task.date !== new Date().toDateString()\n      && task.isFavorite === false\n      && task.isArchived === false);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".input__new {\n  border: 3px solid #000;\n  border-radius: 3px;\n  width: 100%;\n  height: 40px;\n  padding: 0 9px;\n  box-sizing: border-box;\n\n  &::placeholder {\n    color: #000;\n  }\n}\n\n.show-more {\n  cursor: pointer;\n  width: 100%;\n  text-align: center;\n  color: #2094f9;\n}\n",
+                    "data": ".input__new {\n  border: 3px solid #000;\n  border-radius: 3px;\n  width: 100%;\n  height: 40px;\n  padding: 0 9px;\n  box-sizing: border-box;\n  background: none;\n\n  &.dark {\n    border: 3px solid #fff;\n\n    &::placeholder {\n      color: #fff;\n    }\n  }\n\n  &::placeholder {\n    color: #000;\n  }\n}\n\n.show-more {\n  cursor: pointer;\n  width: 100%;\n  text-align: center;\n  color: #2094f9;\n}\n",
                     "styleUrl": "./home.component.scss"
                 }
             ],
@@ -685,11 +740,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"wrapper\">\n  <input type=\"text\" placeholder=\"New...\" class=\"input__new\" routerLink=\"new\">\n  <section>\n    <app-section-title title=\"Today\" [isDark]=\"isDark$ | async\" [clickable]=\"true\" [routerLink]=\"'section-settings'\" [queryParams]=\"{title: 'today'}\"></app-section-title>\n    <app-task-item\n      *ngFor=\"let task of todayTasks\"\n      [title]=\"task.title\"\n      [color]=\"task.color\"\n      [isDark]=\"isDark$ | async\"\n      [routerLink]=\"'task'\"\n      [queryParams]=\"{id: task.id}\"></app-task-item>\n  </section>\n  <section>\n    <app-section-title\n      title=\"Favourites\"\n      [isDark]=\"isDark$ | async\"\n      [clickable]=\"true\"\n      [routerLink]=\"'section-settings'\"\n      [queryParams]=\"{title: 'favourites'}\"></app-section-title>\n    <app-task-item\n      *ngFor=\"let task of favoriteTasks\"\n      [title]=\"task.title\"\n      [color]=\"task.color\"\n      [isDark]=\"isDark$ | async\"\n      [isFavorite]=\"true\"\n      [routerLink]=\"'task'\"\n      [queryParams]=\"{id: task.id}\"></app-task-item>\n  </section>\n  <section>\n    <app-section-title\n      title=\"Soon\"\n      [isDark]=\"isDark$ | async\"\n      [clickable]=\"true\"\n      [routerLink]=\"'section-settings'\"\n      [queryParams]=\"{title: 'soon'}\"></app-section-title>\n    <app-task-item\n      *ngFor=\"let task of soonTasks\"\n      [title]=\"task.title\"\n      [color]=\"task.color\"\n      [isDark]=\"isDark$ | async\"\n      [routerLink]=\"'task'\"\n      [queryParams]=\"{id: task.id}\"></app-task-item>\n    <app-task-item\n      title=\"Homework\"\n      [isDark]=\"isDark$ | async\"\n      [isActive]=\"true\"\n      [routerLink]=\"'task'\"\n      [queryParams]=\"{id: '1'}\"></app-task-item>\n  </section>\n  <div class=\"show-more\">Show more...</div>\n</div>\n"
+            "templateData": "<div class=\"wrapper\">\n  <input\n    type=\"text\"\n    placeholder=\"New...\"\n    class=\"input__new\"\n    routerLink=\"new\"\n    [ngClass]=\"{'dark': isDark$ | async}\">\n  <section>\n    <app-section-title\n      title=\"Today\"\n      [isDark]=\"isDark$ | async\"\n      [clickable]=\"true\"\n      [routerLink]=\"'section-settings'\"\n      [queryParams]=\"{title: 'today'}\"></app-section-title>\n    <app-task-item\n      *ngFor=\"let task of todayTasks\"\n      [title]=\"task.title\"\n      [color]=\"task.color\"\n      [isDark]=\"isDark$ | async\"\n      [routerLink]=\"'task'\"\n      [queryParams]=\"{id: task.id}\"></app-task-item>\n  </section>\n  <section>\n    <app-section-title\n      title=\"Favourites\"\n      [isDark]=\"isDark$ | async\"\n      [clickable]=\"true\"\n      [routerLink]=\"'section-settings'\"\n      [queryParams]=\"{title: 'favourites'}\"></app-section-title>\n    <app-task-item\n      *ngFor=\"let task of favoriteTasks\"\n      [title]=\"task.title\"\n      [color]=\"task.color\"\n      [isDark]=\"isDark$ | async\"\n      [isFavorite]=\"true\"\n      [routerLink]=\"'task'\"\n      [queryParams]=\"{id: task.id}\"></app-task-item>\n  </section>\n  <section>\n    <app-section-title\n      title=\"Soon\"\n      [isDark]=\"isDark$ | async\"\n      [clickable]=\"true\"\n      [routerLink]=\"'section-settings'\"\n      [queryParams]=\"{title: 'soon'}\"></app-section-title>\n    <app-task-item\n      *ngFor=\"let task of soonTasks\"\n      [title]=\"task.title\"\n      [color]=\"task.color\"\n      [isDark]=\"isDark$ | async\"\n      [routerLink]=\"'task'\"\n      [queryParams]=\"{id: task.id}\"></app-task-item>\n    <app-task-item\n      title=\"Homework\"\n      [isDark]=\"isDark$ | async\"\n      [isActive]=\"true\"\n      [routerLink]=\"'task'\"\n      [queryParams]=\"{id: '1'}\"></app-task-item>\n  </section>\n  <div class=\"show-more\">Show more...</div>\n</div>\n"
         },
         {
             "name": "NewCardComponent",
-            "id": "component-NewCardComponent-9926786357cc019827f743125aca789e",
+            "id": "component-NewCardComponent-3c1d9bfb96b7a11eb4b7449219606830",
             "file": "src/app/components/new-card/new-card.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -710,12 +765,20 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "borderColor",
+                    "name": "color",
                     "defaultValue": "Colors.RED",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 19
+                },
+                {
+                    "name": "form",
+                    "defaultValue": "this.fb.group({\n    id: [''],\n    title: [''],\n    date: [new Date()],\n    color: [Colors.RED],\n    isFavorite: [false],\n    isArchived: [false]\n  })",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
                 },
                 {
                     "name": "isColorPickerActive",
@@ -723,7 +786,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 18
                 },
                 {
                     "name": "isDark$",
@@ -731,7 +794,7 @@
                     "type": "BehaviorSubject<boolean>",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 17
                 }
             ],
             "methodsClass": [
@@ -741,7 +804,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 23
+                    "line": 37
                 },
                 {
                     "name": "onCancel",
@@ -749,7 +812,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26
+                    "line": 41
                 },
                 {
                     "name": "onCloseColorPicker",
@@ -757,7 +820,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 43
+                    "line": 60
                 },
                 {
                     "name": "onColorPicker",
@@ -770,7 +833,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 38,
+                    "line": 55,
                     "jsdoctags": [
                         {
                             "name": "event",
@@ -792,7 +855,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 47,
+                    "line": 64,
                     "jsdoctags": [
                         {
                             "name": "color",
@@ -809,7 +872,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34
+                    "line": 51
                 },
                 {
                     "name": "onDone",
@@ -817,7 +880,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 30
+                    "line": 45
                 }
             ],
             "hostBindings": [],
@@ -825,11 +888,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { ThemeService } from '../../services/theme/theme.service';\nimport { BehaviorSubject } from 'rxjs';\nimport { Colors } from '../../models/colors';\n\n@Component({\n  selector: 'app-new-card',\n  templateUrl: './new-card.component.html',\n  styleUrls: ['./new-card.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class NewCardComponent implements OnInit {\n  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;\n  isColorPickerActive = false;\n  borderColor = Colors.RED;\n\n  constructor(\n    private router: Router,\n    private themeService: ThemeService,\n  ) { }\n\n  ngOnInit(): void {\n  }\n\n  onCancel(): void {\n    this.router.navigate(['/']);\n  }\n\n  onDone(): void {\n    this.router.navigate(['/']);\n  }\n\n  onDate(): void {\n    console.log('Input date');\n  }\n\n  onColorPicker(event): void {\n    event.stopPropagation();\n    this.isColorPickerActive = true;\n  }\n\n  onCloseColorPicker(): void {\n    this.isColorPickerActive = false;\n  }\n\n  onColorSelect(color: string): void {\n    this.borderColor = Colors[color];\n    this.isColorPickerActive = false;\n    console.log(this.isColorPickerActive);\n  }\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { ThemeService } from '../../services/theme/theme.service';\nimport { BehaviorSubject } from 'rxjs';\nimport { Colors } from '../../models/colors';\nimport { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';\nimport { FormBuilder, FormGroup } from '@angular/forms';\nimport { Task } from 'src/app/models/task';\n\n@Component({\n  selector: 'app-new-card',\n  templateUrl: './new-card.component.html',\n  styleUrls: ['./new-card.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class NewCardComponent implements OnInit {\n  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;\n  isColorPickerActive = false;\n  color = Colors.RED;\n\n  form: FormGroup = this.fb.group({\n    id: [''],\n    title: [''],\n    date: [new Date()],\n    color: [Colors.RED],\n    isFavorite: [false],\n    isArchived: [false]\n  });\n\n  constructor(\n    private router: Router,\n    private themeService: ThemeService,\n    private tasksStorage: TasksStorageService,\n    private fb: FormBuilder\n  ) { }\n\n  ngOnInit(): void {\n    this.form.valueChanges.subscribe(x => console.log(x));\n  }\n\n  onCancel(): void {\n    this.router.navigate(['/']);\n  }\n\n  onDone(): void {\n    this.form.controls.color.setValue(this.color);\n    this.tasksStorage.saveTask(this.form.value as Task);\n    this.router.navigate(['/']);\n  }\n\n  onDate(): void {\n    console.log('Input date');\n  }\n\n  onColorPicker(event): void {\n    event.stopPropagation();\n    this.isColorPickerActive = true;\n  }\n\n  onCloseColorPicker(): void {\n    this.isColorPickerActive = false;\n  }\n\n  onColorSelect(color: string): void {\n    this.color = Colors[color];\n    this.form.controls.color.setValue(this.color);\n    this.isColorPickerActive = false;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "// Card\n\n.card {\n  box-sizing: border-box;\n  width: 100%;\n  height: 600px;\n  border: 3px solid #000000;\n  border-radius: 3px;\n  padding: 12px 24px;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n\n  .content {\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n    flex-direction: column;\n  }\n\n  input {\n    border: 0;\n    height: 40px;\n    padding: 0 9px;\n    box-sizing: inherit;\n\n    &::placeholder {\n      color: #000;\n    }\n  }\n\n  &__bottom {\n    display: flex;\n    justify-content: space-between;\n  }\n}\n\nimg {\n  cursor: pointer;\n}\n\n.row {\n  display: inline-flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.color-picker-button {\n  cursor: pointer;\n  margin-right: 2px;\n  width: 21px;\n  height: 21px;\n  background-color: #FA124F;\n  border-radius: 100%;\n  box-sizing: border-box;\n  position: relative;\n}\n\n.color-picker {\n  position: absolute;\n  right: 0;\n}\n",
+                    "data": "// Card\n\n.card {\n  box-sizing: border-box;\n  width: 100%;\n  height: 600px;\n  border: 3px solid #000000;\n  border-radius: 3px;\n  padding: 12px 24px;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n\n  .content {\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n    flex-direction: column;\n  }\n\n  &__bottom {\n    display: flex;\n    justify-content: space-between;\n  }\n}\n\nimg {\n  cursor: pointer;\n}\n\n.row {\n  display: inline-flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.header {\n  align-items: flex-start;\n}\n\n.color-picker-button {\n  cursor: pointer;\n  margin-right: 2px;\n  width: 21px;\n  height: 21px;\n  background-color: #FA124F;\n  border-radius: 100%;\n  box-sizing: border-box;\n  position: relative;\n}\n\n.color-picker {\n  position: absolute;\n  right: 0;\n}\n\ntextarea {\n  border: 0;\n  box-sizing: inherit;\n  resize: vertical;\n  background: none;\n  overflow-y: auto;\n  max-height: 320px;\n  width: 92%;\n\n  &.dark {\n    color: #ffffff;\n\n    &::placeholder {\n      color: #ffffff;\n    }\n  }\n\n  &::placeholder {\n    color: #000;\n  }\n}\n",
                     "styleUrl": "./new-card.component.scss"
                 }
             ],
@@ -845,9 +908,17 @@
                     {
                         "name": "themeService",
                         "type": "ThemeService"
+                    },
+                    {
+                        "name": "tasksStorage",
+                        "type": "TasksStorageService"
+                    },
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder"
                     }
                 ],
-                "line": 16,
+                "line": 28,
                 "jsdoctags": [
                     {
                         "name": "router",
@@ -862,13 +933,27 @@
                         "tagName": {
                             "text": "param"
                         }
+                    },
+                    {
+                        "name": "tasksStorage",
+                        "type": "TasksStorageService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "tagName": {
+                            "text": "param"
+                        }
                     }
                 ]
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"wrapper\">\n  <div class=\"card\" [ngStyle]=\"{'border-color': borderColor}\">\n    <div class=\"content\">\n      <div class=\"row\">\n        <input type=\"text\" placeholder=\"New...\">\n        <div class=\"color-picker-button\" (click)=\"onColorPicker($event)\">\n          <app-color-picker\n            class=\"color-picker\"\n            *ngIf=\"isColorPickerActive\"\n            [isDark]=\"isDark$ | async\"\n            (colorSelect)=\"onColorSelect($event)\"\n            (outsideClick)=\"onCloseColorPicker()\"></app-color-picker>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div>Time widget</div>\n        <img [src]=\"(isDark$ | async) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'\" alt=\"Date\" (click)=\"onDate()\">\n      </div>\n    </div>\n    <div class=\"card__bottom\">\n      <img [src]=\"(isDark$ | async) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'\" alt=\"Cancel\" (click)=\"onCancel()\">\n      <img [src]=\"(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'\" alt=\"Done\" (click)=\"onDone()\">\n    </div>\n  </div>\n</div>\n\n"
+            "templateData": "<div class=\"wrapper\">\n  <div class=\"card\" [ngStyle]=\"{'border-color': color}\">\n    <div class=\"content\" [formGroup]=\"form\">\n      <div class=\"row header\">\n        <textarea\n          type=\"text\"\n          placeholder=\"New...\"\n          formControlName=\"title\"\n          [ngClass]=\"{'dark': isDark$ | async}\"></textarea>\n        <div class=\"color-picker-button\" (click)=\"onColorPicker($event)\">\n          <app-color-picker\n            class=\"color-picker\"\n            *ngIf=\"isColorPickerActive\"\n            [isDark]=\"isDark$ | async\"\n            (colorSelect)=\"onColorSelect($event)\"\n            (outsideClick)=\"onCloseColorPicker()\"></app-color-picker>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div>Time widget</div>\n        <img [src]=\"(isDark$ | async) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'\" alt=\"Date\" (click)=\"onDate()\">\n      </div>\n    </div>\n    <div class=\"card__bottom\">\n      <img [src]=\"(isDark$ | async) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'\" alt=\"Cancel\" (click)=\"onCancel()\">\n      <img [src]=\"(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'\" alt=\"Done\" (click)=\"onDone()\">\n    </div>\n  </div>\n</div>\n\n"
         },
         {
             "name": "SectionSettingsComponent",
@@ -1043,8 +1128,9 @@
         },
         {
             "name": "TaskCardComponent",
-            "id": "component-TaskCardComponent-756ef79758a38ce02d87daf9e0ee2660",
+            "id": "component-TaskCardComponent-f96351ad2eb5d83f533660dbee4f862e",
             "file": "src/app/ui/task-card/task-card.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1061,7 +1147,40 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "Colors.RED",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "form",
+                    "defaultValue": "this.fb.group({\n    id: [''],\n    title: [''],\n    date: [new Date()],\n    color: [Colors.RED],\n    isFavorite: [false],\n    isArchived: [false]\n  })",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "isColorPickerActive",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "isDark$",
+                    "defaultValue": "this.themeService.isDark$",
+                    "type": "BehaviorSubject<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
             "methodsClass": [
                 {
                     "name": "ngOnInit",
@@ -1069,7 +1188,83 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 37
+                },
+                {
+                    "name": "onCancel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41
+                },
+                {
+                    "name": "onCloseColorPicker",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 60
+                },
+                {
+                    "name": "onColorPicker",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onColorSelect",
+                    "args": [
+                        {
+                            "name": "color",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 64,
+                    "jsdoctags": [
+                        {
+                            "name": "color",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onDate",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 51
+                },
+                {
+                    "name": "onDone",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 45
                 }
             ],
             "hostBindings": [],
@@ -1077,11 +1272,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-task-card',\n  templateUrl: './task-card.component.html',\n  styleUrls: ['./task-card.component.scss']\n})\nexport class TaskCardComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';\nimport { BehaviorSubject } from 'rxjs';\nimport { Colors } from '../../models/colors';\nimport { FormBuilder, FormGroup } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { ThemeService } from '../../services/theme/theme.service';\nimport { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';\nimport { Task } from '../../models/task';\n\n@Component({\n  selector: 'app-task-card',\n  templateUrl: './task-card.component.html',\n  styleUrls: ['./task-card.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class TaskCardComponent implements OnInit {\n  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;\n  isColorPickerActive = false;\n  color = Colors.RED;\n\n  form: FormGroup = this.fb.group({\n    id: [''],\n    title: [''],\n    date: [new Date()],\n    color: [Colors.RED],\n    isFavorite: [false],\n    isArchived: [false]\n  });\n\n  constructor(\n    private router: Router,\n    private themeService: ThemeService,\n    private tasksStorage: TasksStorageService,\n    private fb: FormBuilder\n  ) { }\n\n  ngOnInit(): void {\n    this.form.valueChanges.subscribe(x => console.log(x));\n  }\n\n  onCancel(): void {\n    this.router.navigate(['/']);\n  }\n\n  onDone(): void {\n    this.form.controls.color.setValue(this.color);\n    this.tasksStorage.saveTask(this.form.value as Task);\n    this.router.navigate(['/']);\n  }\n\n  onDate(): void {\n    console.log('Input date');\n  }\n\n  onColorPicker(event): void {\n    event.stopPropagation();\n    this.isColorPickerActive = true;\n  }\n\n  onCloseColorPicker(): void {\n    this.isColorPickerActive = false;\n  }\n\n  onColorSelect(color: string): void {\n    this.color = Colors[color];\n    this.form.controls.color.setValue(this.color);\n    this.isColorPickerActive = false;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "// Card\n\n.card {\n  box-sizing: border-box;\n  width: 100%;\n  height: 600px;\n  border: 3px solid #000000;\n  border-radius: 3px;\n  padding: 12px 24px;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n\n  .content {\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n    flex-direction: column;\n  }\n\n  &__bottom {\n    display: flex;\n    justify-content: space-between;\n  }\n}\n\nimg {\n  cursor: pointer;\n}\n\n.row {\n  display: inline-flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.header {\n  align-items: flex-start;\n}\n\n.color-picker-button {\n  cursor: pointer;\n  margin-right: 2px;\n  width: 21px;\n  height: 21px;\n  background-color: #FA124F;\n  border-radius: 100%;\n  box-sizing: border-box;\n  position: relative;\n}\n\n.color-picker {\n  position: absolute;\n  right: 0;\n}\n\ntextarea {\n  border: 0;\n  box-sizing: inherit;\n  resize: vertical;\n  background: none;\n  overflow-y: auto;\n  max-height: 320px;\n  width: 92%;\n\n  &.dark {\n    color: #ffffff;\n\n    &::placeholder {\n      color: #ffffff;\n    }\n  }\n\n  &::placeholder {\n    color: #000;\n  }\n}\n",
                     "styleUrl": "./task-card.component.scss"
                 }
             ],
@@ -1089,17 +1284,64 @@
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
-                "args": [],
-                "line": 8
+                "args": [
+                    {
+                        "name": "router",
+                        "type": "Router"
+                    },
+                    {
+                        "name": "themeService",
+                        "type": "ThemeService"
+                    },
+                    {
+                        "name": "tasksStorage",
+                        "type": "TasksStorageService"
+                    },
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder"
+                    }
+                ],
+                "line": 28,
+                "jsdoctags": [
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "themeService",
+                        "type": "ThemeService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "tasksStorage",
+                        "type": "TasksStorageService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<p>task-card works!</p>\n"
+            "templateData": "<div class=\"wrapper\">\n  <div class=\"card\" [ngStyle]=\"{'border-color': color}\">\n    <div class=\"content\" [formGroup]=\"form\">\n      <div class=\"row header\">\n        <textarea\n          type=\"text\"\n          placeholder=\"New...\"\n          formControlName=\"title\"\n          [ngClass]=\"{'dark': isDark$ | async}\"></textarea>\n        <div class=\"color-picker-button\" (click)=\"onColorPicker($event)\">\n          <app-color-picker\n            class=\"color-picker\"\n            *ngIf=\"isColorPickerActive\"\n            [isDark]=\"isDark$ | async\"\n            (colorSelect)=\"onColorSelect($event)\"\n            (outsideClick)=\"onCloseColorPicker()\"></app-color-picker>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div>Time widget</div>\n        <img [src]=\"(isDark$ | async) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'\" alt=\"Date\" (click)=\"onDate()\">\n      </div>\n    </div>\n    <div class=\"card__bottom\">\n      <img [src]=\"(isDark$ | async) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'\" alt=\"Cancel\" (click)=\"onCancel()\">\n      <img [src]=\"(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'\" alt=\"Done\" (click)=\"onDone()\">\n    </div>\n  </div>\n</div>\n\n"
         },
         {
             "name": "TaskComponent",
-            "id": "component-TaskComponent-0385e2784dafca8cf3a2ecc906a07e40",
+            "id": "component-TaskComponent-788be7ed7318ff1efd946d3525763386",
             "file": "src/app/components/task/task.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1117,7 +1359,15 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "task",
+                    "type": "Task",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
             "methodsClass": [
                 {
                     "name": "ngOnInit",
@@ -1125,7 +1375,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 19
                 }
             ],
             "hostBindings": [],
@@ -1133,7 +1383,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-task',\n  templateUrl: './task.component.html',\n  styleUrls: ['./task.component.scss']\n})\nexport class TaskComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { ActivatedRoute } from '@angular/router';\nimport { Task } from 'src/app/models/task';\nimport { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';\n\n@Component({\n  selector: 'app-task',\n  templateUrl: './task.component.html',\n  styleUrls: ['./task.component.scss']\n})\nexport class TaskComponent implements OnInit {\n  task: Task;\n\n  constructor(\n    private route: ActivatedRoute,\n    private tasksStorage: TasksStorageService\n  ) { }\n\n  ngOnInit(): void {\n    this.route.queryParams.subscribe((params) => {\n      this.task = this.tasksStorage.getTaskById(params.id);\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1145,69 +1395,38 @@
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
-                "args": [],
-                "line": 8
+                "args": [
+                    {
+                        "name": "route",
+                        "type": "ActivatedRoute"
+                    },
+                    {
+                        "name": "tasksStorage",
+                        "type": "TasksStorageService"
+                    }
+                ],
+                "line": 12,
+                "jsdoctags": [
+                    {
+                        "name": "route",
+                        "type": "ActivatedRoute",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "tasksStorage",
+                        "type": "TasksStorageService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
             "implements": [
                 "OnInit"
             ],
             "templateData": "<p>task works!</p>\n"
-        },
-        {
-            "name": "TaskItemBaseComponent",
-            "id": "component-TaskItemBaseComponent-aab463146fbdb42484bd3ece03b3633c",
-            "file": "src/app/ui/task-item-base/task-item-base.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-task-item-base",
-            "styleUrls": [
-                "./task-item-base.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./task-item-base.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 12
-                }
-            ],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-task-item-base',\n  templateUrl: './task-item-base.component.html',\n  styleUrls: ['./task-item-base.component.scss']\n})\nexport class TaskItemBaseComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".item {\n  outline: none;\n  box-sizing: border-box;\n  cursor: pointer;\n  border: 3px solid #FA124F;\n  border-radius: 3px;\n  width: 100%;\n  height: 40px;\n  padding: 0 9px;\n  display: flex;\n  align-items: center;\n  margin-bottom: 12px;\n  justify-content: space-between;\n  transition: 200ms;\n\n  &:hover {\n    box-shadow: 0 0 4px 4px rgba(255, 230, 32, 0.25);\n  }\n\n  &--active {\n    box-sizing: border-box;\n    border: 3px solid #FFE71D;\n    background: #FFE71D;\n    border-radius: 3px;\n    width: 100%;\n    height: 40px;\n    padding: 0 9px;\n    display: flex;\n    align-items: center;\n  }\n}\n\n.text {\n  color: #000000;\n\n  &.dark {\n    color: #ffffff;\n  }\n}\n\n.buttons {\n  display: flex;\n  align-items: center;\n\n  img {\n    margin-left: 14px;\n  }\n}\n",
-                    "styleUrl": "./task-item-base.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [],
-                "line": 8
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<div class=\"item\" [ngClass]=\"{'item--active': isActive}\" [ngStyle]=\"{'border-color': color}\">\n  <div class=\"text\" [ngClass]=\"{'dark': isDark && !isActive}\">{{title}}</div>\n  <div class=\"buttons\" *ngIf=\"!isActive; else activeButtons\">\n    <img *ngIf=\"!isFavorite; else favorite\" [src]=\"isDark ? 'assets/svg/favorite_border-dark-24px.svg' : 'assets/svg/favorite_border-24px.svg'\" (click)=\"onFavorite($event)\">\n    <ng-template #favorite>\n      <img [src]=\"isDark ? 'assets/svg/favorite-dark-24px.svg' : 'assets/svg/favorite-24px.svg'\" (click)=\"onFavorite($event)\">\n    </ng-template>\n    <img [src]=\"isDark ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'\" (click)=\"onTime($event)\">\n  </div>\n  <ng-template #activeButtons>\n    <div class=\"buttons\">\n      <img src=\"assets/svg/east-24px.svg\" (click)=\"onBack($event)\">\n    </div>\n  </ng-template>\n</div>\n"
         },
         {
             "name": "TaskItemComponent",
@@ -1845,43 +2064,6 @@
             ]
         },
         {
-            "name": "TaskItemBaseModule",
-            "children": [
-                {
-                    "type": "providers",
-                    "elements": []
-                },
-                {
-                    "type": "declarations",
-                    "elements": [
-                        {
-                            "name": "TaskItemBaseComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "imports",
-                    "elements": []
-                },
-                {
-                    "type": "exports",
-                    "elements": [
-                        {
-                            "name": "TaskItemBaseComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "bootstrap",
-                    "elements": []
-                },
-                {
-                    "type": "classes",
-                    "elements": []
-                }
-            ]
-        },
-        {
             "name": "TaskItemModule",
             "children": [
                 {
@@ -2100,14 +2282,6 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui/task-item-base/task-item-base.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "require",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2129,14 +2303,6 @@
                 "file": "src/app/ui/color-picker/color-picker.stories.ts",
                 "type": "Story<ColorPickerComponent>",
                 "defaultValue": "(args: ColorPickerComponent) => ({\n  component: ColorPickerComponent,\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui/task-item-base/task-item-base.stories.ts",
-                "type": "Story<TaskItemBaseComponent>",
-                "defaultValue": "(args: TaskItemBaseComponent) => ({\n  component: TaskItemBaseComponent,\n  props: args,\n})"
             }
         ],
         "functions": [],
@@ -2248,24 +2414,6 @@
                     "file": "src/app/ui/color-picker/color-picker.stories.ts",
                     "type": "Story<ColorPickerComponent>",
                     "defaultValue": "(args: ColorPickerComponent) => ({\n  component: ColorPickerComponent,\n  props: args,\n})"
-                }
-            ],
-            "src/app/ui/task-item-base/task-item-base.stories.ts": [
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui/task-item-base/task-item-base.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui/task-item-base/task-item-base.stories.ts",
-                    "type": "Story<TaskItemBaseComponent>",
-                    "defaultValue": "(args: TaskItemBaseComponent) => ({\n  component: TaskItemBaseComponent,\n  props: args,\n})"
                 }
             ],
             "src/app/services/tasks-storage/tasks-storage.service.ts": [
@@ -2499,7 +2647,7 @@
                 "linktype": "component",
                 "name": "NewCardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -2517,7 +2665,7 @@
                 "linktype": "component",
                 "name": "TaskComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -2553,7 +2701,7 @@
                 "linktype": "injectable",
                 "name": "TasksStorageService",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -2638,36 +2786,7 @@
                 "linktype": "component",
                 "name": "TaskCardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/ui/task-item-base/task-item-base.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "TaskItemBaseComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/ui/task-item-base/task-item-base.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/ui/task-item-base/task-item-base.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {

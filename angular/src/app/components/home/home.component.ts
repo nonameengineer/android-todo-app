@@ -23,11 +23,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.tasks = this.tasksStorage.getTasks();
-    this.todayTasks = this.tasks.filter(task => task.date.toDateString() === new Date().toDateString()
+    this.todayTasks = this.tasks.filter(task => task.date === new Date().toDateString()
       && task.isFavorite === false
       && task.isArchived === false);
     this.favoriteTasks = this.tasks.filter(task => task.isFavorite === true && task.isArchived === false);
-    this.soonTasks = this.tasks.filter(task => task.date.toDateString() !== new Date().toDateString()
+    this.soonTasks = this.tasks.filter(task => task.date !== new Date().toDateString()
       && task.isFavorite === false
       && task.isArchived === false);
   }

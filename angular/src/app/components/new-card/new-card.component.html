@@ -1,8 +1,12 @@
 <div class="wrapper">
-  <div class="card" [ngStyle]="{'border-color': borderColor}">
-    <div class="content">
-      <div class="row">
-        <input type="text" placeholder="New...">
+  <div class="card" [ngStyle]="{'border-color': color}">
+    <div class="content" [formGroup]="form">
+      <div class="row header">
+        <textarea
+          type="text"
+          placeholder="New..."
+          formControlName="title"
+          [ngClass]="{'dark': isDark$ | async}"></textarea>
         <div class="color-picker-button" (click)="onColorPicker($event)">
           <app-color-picker
             class="color-picker"
