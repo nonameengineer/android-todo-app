@@ -23,9 +23,7 @@ export class ColorPickerComponent implements OnInit {
 
   @HostListener('document:click')
   clickOutside(): void {
-    if (!this.wasInside) {
-      this.outsideClick.emit();
-    }
+    this.outsideClick.emit();
     this.wasInside = false;
   }
 

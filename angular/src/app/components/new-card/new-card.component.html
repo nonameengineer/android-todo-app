@@ -6,9 +6,10 @@
         <div class="color-picker-button" (click)="onColorPicker($event)">
           <app-color-picker
             class="color-picker"
-            *ngIf="isColorPickerActive" [isDark]="isDark$ | async"
+            *ngIf="isColorPickerActive"
+            [isDark]="isDark$ | async"
             (colorSelect)="onColorSelect($event)"
-            (outsideClick)="onCloseColorPicker($event)"></app-color-picker>
+            (outsideClick)="onCloseColorPicker()"></app-color-picker>
         </div>
       </div>
       <div class="row">

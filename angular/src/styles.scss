@@ -22,7 +22,7 @@
 
 body {
   height: 100%;
-  transition: 200ms;
+  transition: background-color 200ms;
 
   &.dark {
     background-color: #000000;
@@ -80,7 +80,7 @@ section {
 // Text {
 
 .text {
-  transition: 200ms;
+  transition: color 200ms;
 
   &.dark {
     color: #ffffff;
