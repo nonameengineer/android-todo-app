@@ -1,30 +1,34 @@
-<div class="wrapper">
-  <div class="card" [ngStyle]="{'border-color': color}">
-    <div class="content" [formGroup]="form">
-      <div class="row header">
+<div class="card" [ngStyle]="{'border-color': form.controls.color.value}">
+  <div class="content" [formGroup]="form">
+    <div class="row header">
         <textarea
           type="text"
           placeholder="New..."
           formControlName="title"
-          [ngClass]="{'dark': isDark$ | async}"></textarea>
-        <div class="color-picker-button" (click)="onColorPicker($event)">
-          <app-color-picker
-            class="color-picker"
-            *ngIf="isColorPickerActive"
-            [isDark]="isDark$ | async"
-            (colorSelect)="onColorSelect($event)"
-            (outsideClick)="onCloseColorPicker()"></app-color-picker>
-        </div>
-      </div>
-      <div class="row">
-        <div>Time widget</div>
-        <img [src]="(isDark$ | async) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" alt="Date" (click)="onDate()">
+          [ngClass]="{'dark': isDark}"></textarea>
+      <div
+        class="color-picker-button"
+        [style.backgroundColor]="form.controls.color.value"
+        (click)="onColorPicker($event)">
+        <app-color-picker
+          class="color-picker"
+          *ngIf="isColorPickerActive"
+          [isDark]="isDark"
+          (colorSelect)="onColorSelect($event)"
+          (outsideClick)="onCloseColorPicker()"></app-color-picker>
       </div>
     </div>
-    <div class="card__bottom">
-      <img [src]="(isDark$ | async) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'" alt="Cancel" (click)="onCancel()">
-      <img [src]="(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'" alt="Done" (click)="onDone()">
+    <div class="row">
+      <app-date-input formControlName="date"></app-date-input>
+      <img [src]="(isDark) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" alt="Date"
+           (click)="onDate()">
     </div>
   </div>
+  <div class="card__bottom">
+    <img [src]="(isDark) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'" alt="Cancel"
+         (click)="onCancel()">
+    <img [src]="(isDark) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'" alt="Done" (click)="onDone()">
+  </div>
 </div>
+
 

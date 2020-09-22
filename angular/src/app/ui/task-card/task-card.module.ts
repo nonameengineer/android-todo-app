@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TaskCardComponent } from './task-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorPickerModule } from '../color-picker/color-picker.module';
+import { DateInputModule } from '../date-input/date-input.module';
 
 
 
@@ -12,6 +13,7 @@ import { ColorPickerModule } from '../color-picker/color-picker.module';
     CommonModule,
     ReactiveFormsModule,
     ColorPickerModule,
+    DateInputModule,
   ],
   exports: [TaskCardComponent]
 })

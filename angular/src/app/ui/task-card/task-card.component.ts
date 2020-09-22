@@ -1,10 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Colors } from '../../models/colors';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ThemeService } from '../../services/theme/theme.service';
-import { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';
 import { Task } from '../../models/task';
 
 @Component({
@@ -14,9 +10,13 @@ import { Task } from '../../models/task';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskCardComponent implements OnInit {
-  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+  @Output() closed = new EventEmitter<void>();
+  @Output() accepted = new EventEmitter<Task>();
+
+  @Input() task: Task;
+  @Input() isDark: boolean;
+
   isColorPickerActive = false;
-  color = Colors.RED;
 
   form: FormGroup = this.fb.group({
     id: [''],
@@ -27,24 +27,23 @@ export class TaskCardComponent implements OnInit {
     isArchived: [false]
   });
 
-  constructor(
-    private themeService: ThemeService,
-    private tasksStorage: TasksStorageService,
-    private fb: FormBuilder
-  ) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    if (this.task) {
+      this.form.setValue(this.task);
+      console.log(this.task);
+    }
     this.form.valueChanges.subscribe(x => console.log(x));
   }
 
   onCancel(): void {
-    // this.router.navigate(['/']);
+    this.closed.emit();
   }
 
   onDone(): void {
-    this.form.controls.color.setValue(this.color);
-    this.tasksStorage.saveTask(this.form.value as Task);
-    // this.router.navigate(['/']);
+    this.accepted.emit(this.form.value as Task);
+    // this.tasksStorage.saveTask(this.form.value as Task);
   }
 
   onDate(): void {
@@ -61,8 +60,7 @@ export class TaskCardComponent implements OnInit {
   }
 
   onColorSelect(color: string): void {
-    this.color = Colors[color];
-    this.form.controls.color.setValue(this.color);
+    this.form.controls.color.setValue(Colors[color]);
     this.isColorPickerActive = false;
   }
 }

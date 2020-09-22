@@ -625,6 +625,199 @@
             "templateData": "<div class=\"color-picker\" [ngClass]=\"{'dark': isDark}\">\n  <div *ngFor=\"let color of colors\" class=\"color color--{{color | lowercase}}\" (click)=\"onColor(color)\"></div>\n</div>\n"
         },
         {
+            "name": "DateInputComponent",
+            "id": "component-DateInputComponent-a8966ad1cd8c6057759e3b7c503849c1",
+            "file": "src/app/ui/date-input/date-input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [
+                {
+                    "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateInputComponent), multi: true,\n}",
+                    "type": "component"
+                }
+            ],
+            "selector": "app-date-input",
+            "styleUrls": [
+                "./date-input.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./date-input.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "form",
+                    "defaultValue": "this.fb.group({\n    day: ['', [Validators.required]],\n    month: ['', [Validators.required]],\n    year: ['', [Validators.required]]\n  })",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "onChange",
+                    "defaultValue": "() => {...}",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "onTouch",
+                    "defaultValue": "() => {...}",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 45
+                },
+                {
+                    "name": "registerOnChange",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "any"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 37,
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "any",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnTouched",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "any"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "any",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "writeValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "any"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33,
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, forwardRef, OnInit } from '@angular/core';\nimport { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-date-input',\n  templateUrl: './date-input.component.html',\n  styleUrls: ['./date-input.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => DateInputComponent),\n      multi: true,\n    },\n  ],\n})\nexport class DateInputComponent implements ControlValueAccessor, OnInit {\n  form: FormGroup = this.fb.group({\n    day: ['', [Validators.required]],\n    month: ['', [Validators.required]],\n    year: ['', [Validators.required]]\n  });\n\n  constructor(private fb: FormBuilder) {}\n\n  onChange: any = () => {};\n  onTouch: any = () => {};\n\n  set value(value) {\n    this.onChange(value);\n    this.onTouch(value);\n  }\n\n  writeValue(value: any): void {\n    this.value = value;\n  }\n\n  registerOnChange(fn: any): void {\n    this.onChange = fn;\n  }\n\n  registerOnTouched(fn: any): void {\n    this.onTouch = fn;\n  }\n\n  ngOnInit(): void {\n    this.form.valueChanges.subscribe(value => {\n      console.log(value);\n      this.writeValue(\n        new Date(\n          this.form.controls.year.value > 0 ? this.form.controls.year.value - 1 : 0,\n          this.form.controls.month.value > 0 ? this.form.controls.month.value - 1 : 0,\n          this.form.controls.day.value > 0 ? this.form.controls.day.value - 1 : 0,\n          0,\n          0,\n          0,\n          0)\n      );\n    });\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".date-input {\n  display: flex;\n  align-items: center;\n}\n\ninput {\n  margin-left: 3px;\n  border: 3px solid #000000;\n  border-radius: 3px;\n  width: 50px;\n}\n",
+                    "styleUrl": "./date-input.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder"
+                    }
+                ],
+                "line": 21,
+                "jsdoctags": [
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "ControlValueAccessor",
+                "OnInit"
+            ],
+            "accessors": {
+                "value": {
+                    "name": "value",
+                    "setSignature": {
+                        "name": "value",
+                        "type": "void",
+                        "args": [
+                            {
+                                "name": "value",
+                                "type": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 28,
+                        "jsdoctags": [
+                            {
+                                "name": "value",
+                                "type": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "templateData": "<div class=\"date-input\" [formGroup]=\"form\">\n  <input placeholder=\"Day\" formControlName=\"day\" type=\"number\">\n  <input placeholder=\"Month\" formControlName=\"month\" type=\"number\">\n  <input placeholder=\"Year\" formControlName=\"year\" type=\"number\">\n</div>\n"
+        },
+        {
             "name": "HomeComponent",
             "id": "component-HomeComponent-445a7663db6c2d0a9587b49e8910d35a",
             "file": "src/app/components/home/home.component.ts",
@@ -1128,7 +1321,7 @@
         },
         {
             "name": "TaskCardComponent",
-            "id": "component-TaskCardComponent-f96351ad2eb5d83f533660dbee4f862e",
+            "id": "component-TaskCardComponent-92994c240cac77ea31a0f263f39d167b",
             "file": "src/app/ui/task-card/task-card.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1145,8 +1338,27 @@
                 "./task-card.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "isDark",
+                    "line": 16,
+                    "type": "boolean"
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "accepted",
+                    "defaultValue": "new EventEmitter<Task>()",
+                    "line": 14,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "closed",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "line": 13,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [
                 {
                     "name": "color",
@@ -1171,14 +1383,6 @@
                     "optional": false,
                     "description": "",
                     "line": 18
-                },
-                {
-                    "name": "isDark$",
-                    "defaultValue": "this.themeService.isDark$",
-                    "type": "BehaviorSubject<boolean>",
-                    "optional": false,
-                    "description": "",
-                    "line": 17
                 }
             ],
             "methodsClass": [
@@ -1188,7 +1392,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37
+                    "line": 32
                 },
                 {
                     "name": "onCancel",
@@ -1196,7 +1400,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41
+                    "line": 36
                 },
                 {
                     "name": "onCloseColorPicker",
@@ -1204,7 +1408,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 60
+                    "line": 55
                 },
                 {
                     "name": "onColorPicker",
@@ -1217,7 +1421,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 55,
+                    "line": 50,
                     "jsdoctags": [
                         {
                             "name": "event",
@@ -1239,7 +1443,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 64,
+                    "line": 59,
                     "jsdoctags": [
                         {
                             "name": "color",
@@ -1256,7 +1460,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 51
+                    "line": 46
                 },
                 {
                     "name": "onDone",
@@ -1264,7 +1468,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 45
+                    "line": 40
                 }
             ],
             "hostBindings": [],
@@ -1272,7 +1476,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';\nimport { BehaviorSubject } from 'rxjs';\nimport { Colors } from '../../models/colors';\nimport { FormBuilder, FormGroup } from '@angular/forms';\nimport { Router } from '@angular/router';\nimport { ThemeService } from '../../services/theme/theme.service';\nimport { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';\nimport { Task } from '../../models/task';\n\n@Component({\n  selector: 'app-task-card',\n  templateUrl: './task-card.component.html',\n  styleUrls: ['./task-card.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class TaskCardComponent implements OnInit {\n  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;\n  isColorPickerActive = false;\n  color = Colors.RED;\n\n  form: FormGroup = this.fb.group({\n    id: [''],\n    title: [''],\n    date: [new Date()],\n    color: [Colors.RED],\n    isFavorite: [false],\n    isArchived: [false]\n  });\n\n  constructor(\n    private router: Router,\n    private themeService: ThemeService,\n    private tasksStorage: TasksStorageService,\n    private fb: FormBuilder\n  ) { }\n\n  ngOnInit(): void {\n    this.form.valueChanges.subscribe(x => console.log(x));\n  }\n\n  onCancel(): void {\n    this.router.navigate(['/']);\n  }\n\n  onDone(): void {\n    this.form.controls.color.setValue(this.color);\n    this.tasksStorage.saveTask(this.form.value as Task);\n    this.router.navigate(['/']);\n  }\n\n  onDate(): void {\n    console.log('Input date');\n  }\n\n  onColorPicker(event): void {\n    event.stopPropagation();\n    this.isColorPickerActive = true;\n  }\n\n  onCloseColorPicker(): void {\n    this.isColorPickerActive = false;\n  }\n\n  onColorSelect(color: string): void {\n    this.color = Colors[color];\n    this.form.controls.color.setValue(this.color);\n    this.isColorPickerActive = false;\n  }\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport { Colors } from '../../models/colors';\nimport { FormBuilder, FormGroup } from '@angular/forms';\nimport { Task } from '../../models/task';\n\n@Component({\n  selector: 'app-task-card',\n  templateUrl: './task-card.component.html',\n  styleUrls: ['./task-card.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class TaskCardComponent implements OnInit {\n  @Output() closed = new EventEmitter<void>();\n  @Output() accepted = new EventEmitter<Task>();\n\n  @Input() isDark: boolean;\n\n  isColorPickerActive = false;\n  color = Colors.RED;\n\n  form: FormGroup = this.fb.group({\n    id: [''],\n    title: [''],\n    date: [new Date()],\n    color: [Colors.RED],\n    isFavorite: [false],\n    isArchived: [false]\n  });\n\n  constructor(private fb: FormBuilder) { }\n\n  ngOnInit(): void {\n    this.form.valueChanges.subscribe(x => console.log(x));\n  }\n\n  onCancel(): void {\n    this.closed.emit();\n  }\n\n  onDone(): void {\n    this.form.controls.color.setValue(this.color);\n    this.accepted.emit(this.form.value as Task);\n    // this.tasksStorage.saveTask(this.form.value as Task);\n  }\n\n  onDate(): void {\n    console.log('Input date');\n  }\n\n  onColorPicker(event): void {\n    event.stopPropagation();\n    this.isColorPickerActive = true;\n  }\n\n  onCloseColorPicker(): void {\n    this.isColorPickerActive = false;\n  }\n\n  onColorSelect(color: string): void {\n    this.color = Colors[color];\n    this.form.controls.color.setValue(this.color);\n    this.isColorPickerActive = false;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1286,45 +1490,12 @@
                 "description": "",
                 "args": [
                     {
-                        "name": "router",
-                        "type": "Router"
-                    },
-                    {
-                        "name": "themeService",
-                        "type": "ThemeService"
-                    },
-                    {
-                        "name": "tasksStorage",
-                        "type": "TasksStorageService"
-                    },
-                    {
                         "name": "fb",
                         "type": "FormBuilder"
                     }
                 ],
                 "line": 28,
                 "jsdoctags": [
-                    {
-                        "name": "router",
-                        "type": "Router",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "themeService",
-                        "type": "ThemeService",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "tasksStorage",
-                        "type": "TasksStorageService",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
                     {
                         "name": "fb",
                         "type": "FormBuilder",
@@ -1337,7 +1508,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"wrapper\">\n  <div class=\"card\" [ngStyle]=\"{'border-color': color}\">\n    <div class=\"content\" [formGroup]=\"form\">\n      <div class=\"row header\">\n        <textarea\n          type=\"text\"\n          placeholder=\"New...\"\n          formControlName=\"title\"\n          [ngClass]=\"{'dark': isDark$ | async}\"></textarea>\n        <div class=\"color-picker-button\" (click)=\"onColorPicker($event)\">\n          <app-color-picker\n            class=\"color-picker\"\n            *ngIf=\"isColorPickerActive\"\n            [isDark]=\"isDark$ | async\"\n            (colorSelect)=\"onColorSelect($event)\"\n            (outsideClick)=\"onCloseColorPicker()\"></app-color-picker>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div>Time widget</div>\n        <img [src]=\"(isDark$ | async) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'\" alt=\"Date\" (click)=\"onDate()\">\n      </div>\n    </div>\n    <div class=\"card__bottom\">\n      <img [src]=\"(isDark$ | async) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'\" alt=\"Cancel\" (click)=\"onCancel()\">\n      <img [src]=\"(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'\" alt=\"Done\" (click)=\"onDone()\">\n    </div>\n  </div>\n</div>\n\n"
+            "templateData": "<div class=\"wrapper\">\n  <div class=\"card\" [ngStyle]=\"{'border-color': color}\">\n    <div class=\"content\" [formGroup]=\"form\">\n      <div class=\"row header\">\n        <textarea\n          type=\"text\"\n          placeholder=\"New...\"\n          formControlName=\"title\"\n          [ngClass]=\"{'dark': isDark}\"></textarea>\n        <div class=\"color-picker-button\" (click)=\"onColorPicker($event)\">\n          <app-color-picker\n            class=\"color-picker\"\n            *ngIf=\"isColorPickerActive\"\n            [isDark]=\"isDark\"\n            (colorSelect)=\"onColorSelect($event)\"\n            (outsideClick)=\"onCloseColorPicker()\"></app-color-picker>\n        </div>\n      </div>\n      <div class=\"row\">\n        <app-date-input formControlName=\"date\"></app-date-input>\n        <img [src]=\"(isDark) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'\" alt=\"Date\" (click)=\"onDate()\">\n      </div>\n    </div>\n    <div class=\"card__bottom\">\n      <img [src]=\"(isDark) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'\" alt=\"Cancel\" (click)=\"onCancel()\">\n      <img [src]=\"(isDark) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'\" alt=\"Done\" (click)=\"onDone()\">\n    </div>\n  </div>\n</div>\n\n"
         },
         {
             "name": "TaskComponent",
@@ -1784,6 +1955,43 @@
             ]
         },
         {
+            "name": "DateInputModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "DateInputComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "DateInputComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
             "name": "HomeModule",
             "children": [
                 {
@@ -2047,11 +2255,22 @@
                 },
                 {
                     "type": "imports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "ColorPickerModule"
+                        },
+                        {
+                            "name": "DateInputModule"
+                        }
+                    ]
                 },
                 {
                     "type": "exports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "TaskCardComponent"
+                        }
+                    ]
                 },
                 {
                     "type": "bootstrap",
@@ -2282,6 +2501,22 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/date-input/date-input.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/task-card/task-card.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "require",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2303,6 +2538,22 @@
                 "file": "src/app/ui/color-picker/color-picker.stories.ts",
                 "type": "Story<ColorPickerComponent>",
                 "defaultValue": "(args: ColorPickerComponent) => ({\n  component: ColorPickerComponent,\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/date-input/date-input.stories.ts",
+                "type": "Story<DateInputComponent>",
+                "defaultValue": "(args: DateInputComponent) => ({\n  component: DateInputComponent,\n  moduleMetadata: {\n    imports: [\n      DateInputModule\n    ]\n  },\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/task-card/task-card.stories.ts",
+                "type": "Story<TaskCardComponent>",
+                "defaultValue": "(args: TaskCardComponent) => ({\n  component: TaskCardComponent,\n  moduleMetadata: {\n    imports: [\n      TaskCardModule\n    ]\n  },\n  props: args,\n})"
             }
         ],
         "functions": [],
@@ -2414,6 +2665,42 @@
                     "file": "src/app/ui/color-picker/color-picker.stories.ts",
                     "type": "Story<ColorPickerComponent>",
                     "defaultValue": "(args: ColorPickerComponent) => ({\n  component: ColorPickerComponent,\n  props: args,\n})"
+                }
+            ],
+            "src/app/ui/date-input/date-input.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/date-input/date-input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/date-input/date-input.stories.ts",
+                    "type": "Story<DateInputComponent>",
+                    "defaultValue": "(args: DateInputComponent) => ({\n  component: DateInputComponent,\n  moduleMetadata: {\n    imports: [\n      DateInputModule\n    ]\n  },\n  props: args,\n})"
+                }
+            ],
+            "src/app/ui/task-card/task-card.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/task-card/task-card.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/task-card/task-card.stories.ts",
+                    "type": "Story<TaskCardComponent>",
+                    "defaultValue": "(args: TaskCardComponent) => ({\n  component: TaskCardComponent,\n  moduleMetadata: {\n    imports: [\n      TaskCardModule\n    ]\n  },\n  props: args,\n})"
                 }
             ],
             "src/app/services/tasks-storage/tasks-storage.service.ts": [
@@ -2772,6 +3059,35 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/ui/date-input/date-input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DateInputComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/date-input/date-input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/date-input/date-input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/ui/section-title/section-title.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -2786,7 +3102,27 @@
                 "linktype": "component",
                 "name": "TaskCardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/15",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/task-card/task-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/task-card/task-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
