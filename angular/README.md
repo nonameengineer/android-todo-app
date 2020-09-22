@@ -1,4 +1,16 @@
-# TodoApp
+# To do application
+
+<a href="https://github.com/storybooks/storybook" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
+
+### Features
+- Angular 10+, SCSS
+- Github Actions
+- Content projection
+- Theme toggle (dark and light themes)
+- Reactive forms
+- Storybook UI kit
+- Local storage
+- Animations
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
 
