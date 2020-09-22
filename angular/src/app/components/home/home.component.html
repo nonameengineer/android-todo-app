@@ -1,7 +1,17 @@
 <div class="wrapper">
-  <input type="text" placeholder="New..." class="input__new" routerLink="new">
+  <input
+    type="text"
+    placeholder="New..."
+    class="input__new"
+    routerLink="new"
+    [ngClass]="{'dark': isDark$ | async}">
   <section>
-    <app-section-title title="Today" [isDark]="isDark$ | async" [clickable]="true" [routerLink]="'section-settings'" [queryParams]="{title: 'today'}"></app-section-title>
+    <app-section-title
+      title="Today"
+      [isDark]="isDark$ | async"
+      [clickable]="true"
+      [routerLink]="'section-settings'"
+      [queryParams]="{title: 'today'}"></app-section-title>
     <app-task-item
       *ngFor="let task of todayTasks"
       [title]="task.title"
