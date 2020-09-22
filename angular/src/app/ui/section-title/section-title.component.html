@@ -1,1 +1,4 @@
-<div class="section-title" [ngClass]="{'dark': isDark}">{{title}}</div>
+<div class="section-title" [ngClass]="{
+  'dark': isDark,
+  'section-title--clickable': clickable
+}">{{title}}</div>

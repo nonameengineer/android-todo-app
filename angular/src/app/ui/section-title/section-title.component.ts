@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 export class SectionTitleComponent implements OnInit {
   @Input() title: string;
   @Input() isDark: boolean;
+  @Input() clickable = false;
 
   constructor() { }
 

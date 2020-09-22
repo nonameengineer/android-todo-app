@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThemeService } from '../../services/theme/theme.service';
+import { BehaviorSubject } from 'rxjs';
+import { Colors } from '../../models/colors';
 
 @Component({
   selector: 'app-new-card',
@@ -7,9 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./new-card.component.scss']
 })
 export class NewCardComponent implements OnInit {
+  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+  isColorPickerActive = false;
+  borderColor = Colors.RED;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService,
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +34,16 @@ export class NewCardComponent implements OnInit {
     console.log('Input date');
   }
 
-  onColorPicker(): void {
-    console.log('Set color');
+  onColorPicker(event): void {
+    event.stopPropagation();
+    this.isColorPickerActive = true;
+  }
+
+  onCloseColorPicker(event): void {
+    this.isColorPickerActive = false;
+  }
+
+  onColorSelect(color: string): void {
+    this.borderColor = Colors[color];
   }
 }

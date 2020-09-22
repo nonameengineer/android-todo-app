@@ -1,0 +1,71 @@
+@import 'colors.scss';
+
+:host {
+  z-index: 1;
+}
+
+.color-picker {
+  width: 128px;
+  height: 64px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  z-index: 1;
+  background-color: #ffffff;
+  transition: 200ms;
+
+  &.dark {
+    background-color: #000000;
+    box-shadow: 0px 0px 10px 0px rgba($yellow, 0.7);
+  }
+}
+
+.color {
+  cursor: pointer;
+  margin-right: 2px;
+  width: 21px;
+  height: 21px;
+  background-color: gray;
+  border-radius: 100%;
+  box-sizing: border-box;
+  justify-self: center;
+  align-self: center;
+  transition: 200ms;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &--red {
+    background-color: $red;
+  }
+
+  &--orange {
+    background-color: $orange;
+  }
+
+  &--yellow {
+    background-color: $yellow;
+  }
+
+  &--green {
+    background-color: $green;
+  }
+
+  &--cyan {
+    background-color: $cyan;
+  }
+
+  &--blue {
+    background-color: $blue;
+  }
+
+  &--dark-blue {
+    background-color: $dark-blue;
+  }
+
+  &--purple {
+    background-color: $purple;
+  }
+}

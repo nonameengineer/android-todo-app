@@ -8,6 +8,7 @@ import { ColorPickerComponent } from './color-picker.component';
   declarations: [ColorPickerComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [ColorPickerComponent]
 })
 export class ColorPickerModule { }

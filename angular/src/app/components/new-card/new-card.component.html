@@ -1,18 +1,25 @@
 <div class="wrapper">
-  <div class="card">
+  <div class="card" [ngStyle]="{'border-color': borderColor}">
     <div class="content">
       <div class="row">
         <input type="text" placeholder="New...">
-        <div class="color-picker" (click)="onColorPicker()"></div>
+        <div class="color-picker-button" (click)="onColorPicker($event)">
+          <app-color-picker
+            class="color-picker"
+            *ngIf="isColorPickerActive" [isDark]="isDark$ | async"
+            (colorSelect)="onColorSelect($event)"
+            (outsideClick)="onCloseColorPicker($event)"></app-color-picker>
+        </div>
       </div>
       <div class="row">
         <div>Time widget</div>
-        <img src="assets/svg/access_time-24px.svg" alt="Date" (click)="onDate()">
+        <img [src]="(isDark$ | async) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" alt="Date" (click)="onDate()">
       </div>
     </div>
     <div class="card__bottom">
-      <img src="assets/svg/clear-24px.svg" alt="Cancel" (click)="onCancel()">
-      <img src="assets/svg/done-24px.svg" alt="Done" (click)="onDone()">
+      <img [src]="(isDark$ | async) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'" alt="Cancel" (click)="onCancel()">
+      <img [src]="(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'" alt="Done" (click)="onDone()">
     </div>
   </div>
 </div>
+

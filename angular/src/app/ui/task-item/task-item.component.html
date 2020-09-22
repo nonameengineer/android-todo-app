@@ -1,15 +1,15 @@
-<div class="item" [ngClass]="{'item--active': isActive}">
+<div class="item" [ngClass]="{'item--active': isActive}" [ngStyle]="{'border-color': color}">
   <div class="text" [ngClass]="{'dark': isDark && !isActive}">{{title}}</div>
   <div class="buttons" *ngIf="!isActive; else activeButtons">
-    <img *ngIf="!isFavorite; else favorite" [src]="isDark ? 'assets/svg/favorite_border-dark-24px.svg' : 'assets/svg/favorite_border-24px.svg'">
+    <img *ngIf="!isFavorite; else favorite" [src]="isDark ? 'assets/svg/favorite_border-dark-24px.svg' : 'assets/svg/favorite_border-24px.svg'" (click)="onFavorite($event)">
     <ng-template #favorite>
-      <img [src]="isDark ? 'assets/svg/favorite-dark-24px.svg' : 'assets/svg/favorite-24px.svg'">
+      <img [src]="isDark ? 'assets/svg/favorite-dark-24px.svg' : 'assets/svg/favorite-24px.svg'" (click)="onFavorite($event)">
     </ng-template>
-    <img [src]="isDark ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'">
+    <img [src]="isDark ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" (click)="onTime($event)">
   </div>
   <ng-template #activeButtons>
     <div class="buttons">
-      <img src="assets/svg/east-24px.svg">
+      <img src="assets/svg/east-24px.svg" (click)="onBack($event)">
     </div>
   </ng-template>
 </div>

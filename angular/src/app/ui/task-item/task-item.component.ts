@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Colors } from '../../models/colors';
 
 @Component({
   selector: 'app-task-item',
@@ -8,6 +9,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 })
 export class TaskItemComponent implements OnInit {
   @Input() title: string;
+  @Input() color = Colors.RED;
   @Input() isDark: boolean;
   @Input() isActive: boolean;
   @Input() isFavorite: boolean;
@@ -18,5 +20,20 @@ export class TaskItemComponent implements OnInit {
     if (this.isActive) {
       this.title = '2 days remaining...';
     }
+  }
+
+  onFavorite(event: any): void {
+    event.stopPropagation();
+    this.isFavorite = !this.isFavorite;
+  }
+
+  onTime(event: any): void {
+    event.stopPropagation();
+    this.isActive = true;
+  }
+
+  onBack(event: any): void {
+    event.stopPropagation();
+    this.isActive = false;
   }
 }

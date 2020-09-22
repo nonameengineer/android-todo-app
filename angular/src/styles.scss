@@ -29,6 +29,10 @@ body {
   }
 }
 
+.dark {
+  color: #ffffff;
+}
+
 .wrapper {
   margin: 0 auto;
   max-width: 372px;
@@ -36,6 +40,8 @@ body {
 }
 
 img {
+  position: relative;
+  z-index: 0;
   outline: none;
   transition: 200ms;
   cursor: pointer;
@@ -61,6 +67,14 @@ section {
   &.dark {
     color: #ffffff;
   }
+
+  &--clickable {
+    &.dark {
+      color: #2094f9;
+    }
+
+    color: #2094f9;
+  }
 }
 
 // Text {
@@ -76,4 +90,9 @@ section {
 // Title
 .title {
   outline: none;
+}
+
+:active, :hover, :focus {
+  outline: 0;
+  outline-offset: 0;
 }

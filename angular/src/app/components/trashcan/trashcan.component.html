@@ -1,4 +1,4 @@
 <section>
   <app-section-title title="Archived" [isDark]="isDark$ | async"></app-section-title>
-  <app-task-item title="Homework" [isDark]="isDark$ | async"></app-task-item>
+  <app-task-item *ngFor="let task of tasks" [title]="task.title" [isDark]="isDark$ | async"></app-task-item>
 </section>
