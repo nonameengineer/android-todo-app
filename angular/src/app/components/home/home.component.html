@@ -14,8 +14,7 @@
       [queryParams]="{title: 'today'}"></app-section-title>
     <app-task-item
       *ngFor="let task of todayTasks"
-      [title]="task.title"
-      [color]="task.color"
+      [task]="task"
       [isDark]="isDark$ | async"
       [routerLink]="'task'"
       [queryParams]="{id: task.id}"></app-task-item>
@@ -29,8 +28,7 @@
       [queryParams]="{title: 'favourites'}"></app-section-title>
     <app-task-item
       *ngFor="let task of favoriteTasks"
-      [title]="task.title"
-      [color]="task.color"
+      [task]="task"
       [isDark]="isDark$ | async"
       [isFavorite]="true"
       [routerLink]="'task'"
@@ -45,8 +43,7 @@
       [queryParams]="{title: 'soon'}"></app-section-title>
     <app-task-item
       *ngFor="let task of soonTasks"
-      [title]="task.title"
-      [color]="task.color"
+      [task]="task"
       [isDark]="isDark$ | async"
       [routerLink]="'task'"
       [queryParams]="{id: task.id}"></app-task-item>

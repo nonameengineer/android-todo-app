@@ -1,5 +1,5 @@
-<div class="item" [ngClass]="{'item--active': isActive}" [ngStyle]="{'border-color': color, 'background-color': isActive ? color : 'unset'}">
-  <div class="text" [ngClass]="{'dark': isDark && !isActive}">{{isActive ? remaining : title}}</div>
+<div class="item" [ngClass]="{'item--active': isActive}" [ngStyle]="{'border-color': task.color, 'background-color': isActive ? task.color : 'unset'}">
+  <div class="text" [ngClass]="{'dark': isDark && !isActive}">{{isActive ? remaining : task.title}}</div>
   <div class="buttons" *ngIf="!isActive; else activeButtons">
     <app-more-menu></app-more-menu>
     <img [src]="isDark ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" (click)="onTime($event)">

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Colors } from '../../models/colors';
+import { Task } from 'src/app/models/task';
 
 @Component({
   selector: 'app-task-item',
@@ -8,8 +8,7 @@ import { Colors } from '../../models/colors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskItemComponent implements OnInit {
-  @Input() title: string;
-  @Input() color = Colors.RED;
+  @Input() task: Task;
   @Input() isDark: boolean;
   @Input() isActive: boolean;
   @Input() isFavorite: boolean;
@@ -25,9 +24,14 @@ export class TaskItemComponent implements OnInit {
     this.isFavorite = !this.isFavorite;
   }
 
+  /**
+   * Calculates remaining time of task.
+   */
   onTime(event: any): void {
     event.stopPropagation();
     this.isActive = true;
+
+    this.remaining = `Remaining ${this.task.date}...`;
   }
 
   onBack(event: any): void {
