@@ -31,6 +31,20 @@ export class TasksStorageService {
     return this.getTasks().filter(task => task.id === id)[0];
   }
 
+  // TODO
+  removeTaskById(id: string): void {
+  }
+
+  // TODO
+  addToFavourites(id: string): void {
+    const task = this.getTaskById(id);
+    task.isFavorite = true;
+  }
+
+  // TODO
+  removeFromFavourites(id: string): void {
+  }
+
   private getMockTasks(): Task[] {
     return [
       new TaskModel(

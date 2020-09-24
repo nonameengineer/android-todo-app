@@ -13,13 +13,11 @@ export class TaskItemComponent implements OnInit {
   @Input() isDark: boolean;
   @Input() isActive: boolean;
   @Input() isFavorite: boolean;
+  remaining: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.isActive) {
-      this.title = '2 days remaining...';
-    }
   }
 
   onFavorite(event: any): void {

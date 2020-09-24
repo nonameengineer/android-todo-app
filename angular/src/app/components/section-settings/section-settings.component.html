@@ -1,4 +1,7 @@
 <section>
   <app-section-title [title]="title | titlecase" [isDark]="isDark$ | async"></app-section-title>
-  <h1>Maximum items</h1>
+  <div class="row">
+    <h1>Maximum items</h1>
+    <input placeholder="Day" type="number" [(ngModel)]="count" (ngModelChange)="onCountChange($event)">
+  </div>
 </section>

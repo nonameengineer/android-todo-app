@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SectionSettingsComponent implements OnInit {
   isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
   title;
+  count: number;
 
   constructor(
     private themeService: ThemeService,
@@ -24,4 +25,7 @@ export class SectionSettingsComponent implements OnInit {
     });
   }
 
+  onCountChange(count: number): void {
+    console.log(count);
+  }
 }

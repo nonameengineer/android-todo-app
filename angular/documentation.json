@@ -937,7 +937,7 @@
         },
         {
             "name": "MoreMenuComponent",
-            "id": "component-MoreMenuComponent-2110f455a52a0b4483742706b712f196",
+            "id": "component-MoreMenuComponent-cbc7ed4d75607e19d3b69df651c0c9a3",
             "file": "src/app/ui/more-menu/more-menu.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -953,17 +953,125 @@
                 "./more-menu.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "isDark",
+                    "defaultValue": "false",
+                    "line": 9
+                },
+                {
+                    "name": "isFavorite",
+                    "line": 10,
+                    "type": "boolean"
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isShow",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "templateRef",
+                    "type": "TemplateRef<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 14,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'template', {read: TemplateRef, static: false}"
+                        }
+                    ]
+                },
+                {
+                    "name": "viewContainerRef",
+                    "type": "ViewContainerRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'container', {read: ViewContainerRef, static: true}"
+                        }
+                    ]
+                }
+            ],
             "methodsClass": [
+                {
+                    "name": "hideMenu",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31
+                },
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23
+                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 19
+                },
+                {
+                    "name": "onFavorite",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "any"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "any",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onMore",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 43
+                },
+                {
+                    "name": "onRemove",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35
+                },
+                {
+                    "name": "showMenu",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 27
                 }
             ],
             "hostBindings": [],
@@ -971,7 +1079,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-more-menu',\n  templateUrl: './more-menu.component.html',\n  styleUrls: ['./more-menu.component.scss']\n})\nexport class MoreMenuComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { AfterViewChecked, AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';\n\n@Component({\n  selector: 'app-more-menu',\n  templateUrl: './more-menu.component.html',\n  styleUrls: ['./more-menu.component.scss']\n})\nexport class MoreMenuComponent implements OnInit, AfterViewInit {\n  @Input() isDark = false;\n  @Input() isFavorite: boolean;\n\n  isShow = false;\n\n  @ViewChild('template', { read: TemplateRef, static: false }) templateRef: TemplateRef<any>;\n  @ViewChild('container', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;\n\n  constructor() { }\n\n  ngOnInit(): void {\n\n  }\n\n  ngAfterViewInit(): void {\n    this.showMenu();\n  }\n\n  showMenu(): void {\n    this.viewContainerRef.createEmbeddedView(this.templateRef);\n  }\n\n  hideMenu(): void {\n    this.viewContainerRef.clear();\n  }\n\n  onRemove(): void {\n\n  }\n\n  onFavorite(event: any): void {\n\n  }\n\n  onMore(): void {\n    this.isShow ? this.hideMenu() : this.showMenu();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -984,12 +1092,13 @@
                 "name": "constructor",
                 "description": "",
                 "args": [],
-                "line": 8
+                "line": 15
             },
             "implements": [
-                "OnInit"
+                "OnInit",
+                "AfterViewInit"
             ],
-            "templateData": "<p>more-menu works!</p>\n"
+            "templateData": "<img [src]=\"(isDark) ? 'assets/svg/more_vert-dark-24px.svg' : 'assets/svg/more_vert-24px.svg'\" alt=\"Date\"\n     (click)=\"onMore()\">\n<ng-container #container></ng-container>\n<ng-template #template>\n  <div class=\"more-menu\">\n    <img *ngIf=\"!isFavorite; else favorite\"\n         [src]=\"isDark ? 'assets/svg/favorite_border-dark-24px.svg' : 'assets/svg/favorite_border-24px.svg'\"\n         (click)=\"onFavorite($event)\">\n    <ng-template #favorite>\n      <img [src]=\"isDark ? 'assets/svg/favorite-dark-24px.svg' : 'assets/svg/favorite-24px.svg'\"\n           (click)=\"onFavorite($event)\">\n    </ng-template>\n    <img [src]=\"isDark ? 'assets/svg/delete-dark-24px.svg' : 'assets/svg/delete-24px.svg'\" (click)=\"onRemove()\">\n  </div>\n</ng-template>\n"
         },
         {
             "name": "NewCardComponent",
@@ -1818,7 +1927,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"item\" [ngClass]=\"{'item--active': isActive}\" [ngStyle]=\"{'border-color': color, 'background-color': isActive ? color : 'unset'}\">\n  <div class=\"text\" [ngClass]=\"{'dark': isDark && !isActive}\">{{title}}</div>\n  <div class=\"buttons\" *ngIf=\"!isActive; else activeButtons\">\n    <img *ngIf=\"!isFavorite; else favorite\" [src]=\"isDark ? 'assets/svg/favorite_border-dark-24px.svg' : 'assets/svg/favorite_border-24px.svg'\" (click)=\"onFavorite($event)\">\n    <ng-template #favorite>\n      <img [src]=\"isDark ? 'assets/svg/favorite-dark-24px.svg' : 'assets/svg/favorite-24px.svg'\" (click)=\"onFavorite($event)\">\n    </ng-template>\n    <img [src]=\"isDark ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'\" (click)=\"onTime($event)\">\n  </div>\n  <ng-template #activeButtons>\n    <div class=\"buttons\">\n      <img src=\"assets/svg/east-24px.svg\" (click)=\"onBack($event)\">\n    </div>\n  </ng-template>\n</div>\n"
+            "templateData": "<div class=\"item\" [ngClass]=\"{'item--active': isActive}\" [ngStyle]=\"{'border-color': color, 'background-color': isActive ? color : 'unset'}\">\n  <div class=\"text\" [ngClass]=\"{'dark': isDark && !isActive}\">{{title}}</div>\n  <div class=\"buttons\" *ngIf=\"!isActive; else activeButtons\">\n    <app-more-menu></app-more-menu>\n    <img [src]=\"isDark ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'\" (click)=\"onTime($event)\">\n  </div>\n  <ng-template #activeButtons>\n    <div class=\"buttons\">\n      <img src=\"assets/svg/east-24px.svg\" (click)=\"onBack($event)\">\n    </div>\n  </ng-template>\n</div>\n"
         },
         {
             "name": "TrashcanComponent",
@@ -2156,7 +2265,11 @@
                 },
                 {
                     "type": "exports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "MoreMenuComponent"
+                        }
+                    ]
                 },
                 {
                     "type": "bootstrap",
@@ -2407,7 +2520,11 @@
                 },
                 {
                     "type": "imports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "MoreMenuModule"
+                        }
+                    ]
                 },
                 {
                     "type": "exports",
@@ -2623,7 +2740,31 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/ui/more-menu/more-menu.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/section-title/section-title.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/ui/task-card/task-card.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/task-item/task-item.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
             },
@@ -2662,9 +2803,33 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/ui/more-menu/more-menu.stories.ts",
+                "type": "Story<MoreMenuComponent>",
+                "defaultValue": "(args: MoreMenuComponent) => ({\n  component: MoreMenuComponent,\n  moduleMetadata: {\n    imports: [\n      MoreMenuModule\n    ]\n  },\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/section-title/section-title.stories.ts",
+                "type": "Story<SectionTitleComponent>",
+                "defaultValue": "(args: SectionTitleComponent) => ({\n  component: SectionTitleComponent,\n  moduleMetadata: {\n    imports: [\n      SectionTitleModule\n    ]\n  },\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/ui/task-card/task-card.stories.ts",
                 "type": "Story<TaskCardComponent>",
                 "defaultValue": "(args: TaskCardComponent) => ({\n  component: TaskCardComponent,\n  moduleMetadata: {\n    imports: [\n      TaskCardModule\n    ]\n  },\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/task-item/task-item.stories.ts",
+                "type": "Story<TaskItemComponent>",
+                "defaultValue": "(args: TaskItemComponent) => ({\n  component: TaskItemComponent,\n  moduleMetadata: {\n    imports: [\n      TaskItemModule\n    ]\n  },\n  props: args,\n})"
             }
         ],
         "functions": [],
@@ -2796,6 +2961,42 @@
                     "defaultValue": "(args: DateInputComponent) => ({\n  component: DateInputComponent,\n  moduleMetadata: {\n    imports: [\n      DateInputModule\n    ]\n  },\n  props: args,\n})"
                 }
             ],
+            "src/app/ui/more-menu/more-menu.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/more-menu/more-menu.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/more-menu/more-menu.stories.ts",
+                    "type": "Story<MoreMenuComponent>",
+                    "defaultValue": "(args: MoreMenuComponent) => ({\n  component: MoreMenuComponent,\n  moduleMetadata: {\n    imports: [\n      MoreMenuModule\n    ]\n  },\n  props: args,\n})"
+                }
+            ],
+            "src/app/ui/section-title/section-title.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/section-title/section-title.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/section-title/section-title.stories.ts",
+                    "type": "Story<SectionTitleComponent>",
+                    "defaultValue": "(args: SectionTitleComponent) => ({\n  component: SectionTitleComponent,\n  moduleMetadata: {\n    imports: [\n      SectionTitleModule\n    ]\n  },\n  props: args,\n})"
+                }
+            ],
             "src/app/ui/task-card/task-card.stories.ts": [
                 {
                     "name": "Primary",
@@ -2812,6 +3013,24 @@
                     "file": "src/app/ui/task-card/task-card.stories.ts",
                     "type": "Story<TaskCardComponent>",
                     "defaultValue": "(args: TaskCardComponent) => ({\n  component: TaskCardComponent,\n  moduleMetadata: {\n    imports: [\n      TaskCardModule\n    ]\n  },\n  props: args,\n})"
+                }
+            ],
+            "src/app/ui/task-item/task-item.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/task-item/task-item.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/task-item/task-item.stories.ts",
+                    "type": "Story<TaskItemComponent>",
+                    "defaultValue": "(args: TaskItemComponent) => ({\n  component: TaskItemComponent,\n  moduleMetadata: {\n    imports: [\n      TaskItemModule\n    ]\n  },\n  props: args,\n})"
                 }
             ],
             "src/app/services/tasks-storage/tasks-storage.service.ts": [
@@ -3204,7 +3423,27 @@
                 "linktype": "component",
                 "name": "MoreMenuComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/14",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/more-menu/more-menu.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/more-menu/more-menu.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -3214,6 +3453,26 @@
                 "name": "SectionTitleComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/section-title/section-title.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/section-title/section-title.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -3252,6 +3511,26 @@
                 "name": "TaskItemComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/task-item/task-item.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/task-item/task-item.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
