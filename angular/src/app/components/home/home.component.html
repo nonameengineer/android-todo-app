@@ -50,12 +50,6 @@
       [isDark]="isDark$ | async"
       [routerLink]="'task'"
       [queryParams]="{id: task.id}"></app-task-item>
-    <app-task-item
-      title="Homework"
-      [isDark]="isDark$ | async"
-      [isActive]="true"
-      [routerLink]="'task'"
-      [queryParams]="{id: '1'}"></app-task-item>
   </section>
   <div class="show-more">Show more...</div>
 </div>
