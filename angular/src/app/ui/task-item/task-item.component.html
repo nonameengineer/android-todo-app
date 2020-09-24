@@ -1,8 +1,8 @@
 <div class="item" [ngClass]="{'item--active': isActive}" [ngStyle]="{'border-color': task.color, 'background-color': isActive ? task.color : 'unset'}">
   <div class="text" [ngClass]="{'dark': isDark && !isActive}">{{isActive ? remaining : task.title}}</div>
   <div class="buttons" *ngIf="!isActive; else activeButtons">
-    <app-more-menu></app-more-menu>
-    <img [src]="isDark ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" (click)="onTime($event)">
+    <app-more-menu [isDark]="isDark" [isFavorite]="isFavorite"></app-more-menu>
+    <img [src]="isDark ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" (click)="onTime($event)" *ngIf="!task.isArchived">
   </div>
   <ng-template #activeButtons>
     <div class="buttons">

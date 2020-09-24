@@ -1,3 +1,5 @@
+@import 'colors.scss';
+
 :host {
   position: relative;
 }
@@ -14,6 +16,11 @@
   background-color: #ffffff;
   transition: 200ms;
 
+  &.dark {
+    background-color: #000000;
+    box-shadow: 0px 0px 10px 0px rgba($yellow, 0.7);
+  }
+
   &__item {
     margin-bottom: 10px;
     display: flex;
@@ -26,6 +33,10 @@
 
     &:hover {
       color: #2094f9;
+
+      img {
+        transform: unset;
+      }
     }
   }
 }
