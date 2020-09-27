@@ -4,6 +4,7 @@ import { TaskItem } from '../../ui/task-item/TaskItem'
 import { SectionTitle } from '../../ui/section-title/SectionTitle'
 import Colors from '../../models/colors'
 
+
 const todayTasks = [
   {
     id: '1',

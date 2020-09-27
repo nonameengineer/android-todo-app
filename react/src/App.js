@@ -6,54 +6,56 @@ import { Home } from './features/home/Home'
 import { ReactComponent as DeleteIcon } from './assets/svg/delete-24px.svg'
 import { ReactComponent as WBSunnyIcon } from './assets/svg/wb_sunny-24px.svg'
 import Themes from './models/themes'
+import { Trashcan } from './features/trashcan/Trashcan'
+import { useHistory } from 'react-router-dom'
 
-export const ThemeContext = React.createContext({
-  theme: Themes.LIGHT,
-  toggleTheme: () => {
-    this.theme === Themes.DARK ? this.theme = Themes.LIGHT : this.theme = Themes.DARK
-  },
-})
+export const ThemeContext = React.createContext(Themes.LIGHT)
 
 function App () {
-  const [theme, setTheme] = useState(useContext(ThemeContext));
-
-  useEffect(() => {
-    const BODY_DARK_CLASS = 'dark';
-    theme === Themes.DARK
-      ? document.body.classList.add(BODY_DARK_CLASS)
-      : document.body.classList.remove(BODY_DARK_CLASS)
-  }, [theme]);
-
-  function toggleTheme() {
+  const [theme, setTheme] = useState(useContext(ThemeContext))
+  const toggleTheme = () => {
     theme === Themes.DARK
       ? setTheme(Themes.LIGHT)
       : setTheme(Themes.DARK)
   }
+  const history = useHistory()
+  const navigateToTrashcan = () => history.push('/trashcan')
+
+  useEffect(() => {
+    const BODY_DARK_CLASS = 'dark'
+    theme === Themes.DARK
+      ? document.body.classList.add(BODY_DARK_CLASS)
+      : document.body.classList.remove(BODY_DARK_CLASS)
+  }, [theme])
 
   return (
     <ThemeContext.Provider value={theme}>
-      <div className="wrapper">
-        <header>
-          <div className="title">Delat<span>'</span>
-          </div>
-          <div className="buttons">
-            <DeleteIcon/>
-            <WBSunnyIcon onClick={toggleTheme} />
-          </div>
-        </header>
-        <main>
-          <Router>
+      <Router>
+        <div className="wrapper">
+          <header>
+            <div className="title">Delat<span>'</span>
+            </div>
+            <div className="buttons">
+              <DeleteIcon onClick={navigateToTrashcan}/>
+              <WBSunnyIcon onClick={toggleTheme}/>
+            </div>
+          </header>
+          <main>
             <Switch>
               <Route path="/new">
                 <NewCard/>
+              </Route>
+              <Route path="/trashcan">
+                <Trashcan/>
               </Route>
               <Route path="/">
                 <Home/>
               </Route>
             </Switch>
-          </Router>
-        </main>
-      </div>
+
+          </main>
+        </div>
+      </Router>
     </ThemeContext.Provider>
   )
 }
