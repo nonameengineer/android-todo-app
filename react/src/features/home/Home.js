@@ -1,4 +1,7 @@
 import React from 'react';
+import {ReactComponent as FavoriteBorderIcon} from '../../svg/favorite_border-24px.svg'
+import {ReactComponent as AccessTimeIcon} from '../../svg/access_time-24px.svg'
+import {ReactComponent as EastIcon} from '../../svg/east-24px.svg'
 import './Home.scss';
 
 export const Home = () => (
@@ -9,34 +12,34 @@ export const Home = () => (
             <div className="item">
                 <div className="text">Homework</div>
                 <div className="buttons">
-                    <img src="%PUBLIC_URL%/assets/svg/favorite_border-24px.svg" alt="Favourite"/>
-                    <img src="%PUBLIC_URL%/assets/svg/access_time-24px.svg" alt="Favourite"/>
+                    <FavoriteBorderIcon />
+                    <AccessTimeIcon />
                 </div>
             </div>
         </section>
         <section>
             <div className="section-title">Soon</div>
-            <div className="item" style="border: 3px solid #05F5EA">
+            <div className="item">
                 <div className="text">Homework</div>
                 <div className="buttons">
-                    <img src="%PUBLIC_URL%/assets/svg/favorite_border-24px.svg" alt="Favourite"/>
-                    <img src="%PUBLIC_URL%/assets/svg/access_time-24px.svg" alt="Favourite"/>
+                    <FavoriteBorderIcon />
+                    <AccessTimeIcon />
                 </div>
             </div>
             <div className="item item--activated">
                 <div className="text">2 days remaining...</div>
                 <div className="buttons">
-                    <img src="%PUBLIC_URL%/assets/svg/east-24px.svg" alt="Favourite"/>
+                    <EastIcon />
                 </div>
             </div>
         </section>
         <section>
             <div className="section-title">Favourites</div>
-            <div className="item" style="border: 3px solid #777AFF">
+            <div className="item">
                 <div className="text">Homework</div>
                 <div className="buttons">
-                    <img src="assets/svg/favorite-24px.svg" alt="Favourite"/>
-                    <img src="assets/svg/access_time-24px.svg" alt="Favourite"/>
+                    <FavoriteBorderIcon />
+                    <AccessTimeIcon />
                 </div>
             </div>
         </section>
