@@ -1,6 +1,6 @@
 import React from 'react'
 import './ColorPicker.scss'
-import Colors from '../../models/colors'
+import { Colors } from '../../models/colors'
 
 export const ColorPicker = () => (
   <div className="color-picker">

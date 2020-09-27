@@ -1,12 +1,17 @@
 import React from 'react'
 import './TaskItem.scss'
+import { MoreMenu } from '../more-menu/MoreMenu'
 
-export const TaskItem = ({task}) => {
+type TaskItemProps = {
+  task: any;
+}
+
+export const TaskItem = ({task}: TaskItemProps) => {
   return (
     <div className="item">
       <div className="text">{task?.title}</div>
       <div className="buttons">
-        <app-more-menu/>
+        <MoreMenu />
         <img/>
       </div>
     </div>

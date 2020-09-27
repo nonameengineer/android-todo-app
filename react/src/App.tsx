@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from 'react-router-dom'
 import './App.scss'
 import { NewCard } from './features/new-card/NewCard'
 import { Home } from './features/home/Home'
@@ -7,7 +12,6 @@ import { ReactComponent as DeleteIcon } from './assets/svg/delete-24px.svg'
 import { ReactComponent as WBSunnyIcon } from './assets/svg/wb_sunny-24px.svg'
 import Themes from './models/themes'
 import { Trashcan } from './features/trashcan/Trashcan'
-import { useHistory } from 'react-router-dom'
 
 export const ThemeContext = React.createContext(Themes.LIGHT)
 
@@ -19,6 +23,7 @@ function App () {
       : setTheme(Themes.DARK)
   }
   const history = useHistory()
+
   const navigateToTrashcan = () => history.push('/trashcan')
 
   useEffect(() => {
@@ -30,7 +35,6 @@ function App () {
 
   return (
     <ThemeContext.Provider value={theme}>
-      <Router>
         <div className="wrapper">
           <header>
             <div className="title">Delat<span>'</span>
@@ -52,10 +56,8 @@ function App () {
                 <Home/>
               </Route>
             </Switch>
-
           </main>
         </div>
-      </Router>
     </ThemeContext.Provider>
   )
 }
