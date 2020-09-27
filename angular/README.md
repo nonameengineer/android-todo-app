@@ -7,6 +7,7 @@
 - Theme toggle (dark and light themes)
 - Reactive forms
 - Control Value Accessor
+- Content projection
 - Local storage
 - Animations
 - Storybook UI kit

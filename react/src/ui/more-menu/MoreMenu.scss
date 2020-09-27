@@ -1,9 +1,5 @@
 @import '../../assets/scss/modules/colors.scss';
 
-:host {
-  position: relative;
-}
-
 .more-menu {
   padding: 12px;
   position: absolute;
@@ -39,4 +35,8 @@
       }
     }
   }
+}
+
+.buttons {
+  margin-top: 0;
 }
