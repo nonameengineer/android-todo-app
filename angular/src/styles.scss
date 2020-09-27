@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "fonts.scss";
+@import "assets/scss/modules/fonts.scss";
 
 * {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
   font-size: 12pt;
   margin: 0;
   padding: 0;
@@ -51,6 +51,7 @@ section {
 .section-title {
   font-size: 18pt;
   margin-bottom: 9px;
+  font-weight: 700;
   transition: 200ms;
   cursor: pointer;
 
