@@ -3,7 +3,7 @@ import './Home.scss'
 import { TaskItem } from '../../ui/task-item/TaskItem'
 import { SectionTitle } from '../../ui/section-title/SectionTitle'
 import { Colors } from '../../models/colors'
-
+import { useHistory } from 'react-router-dom'
 
 const todayTasks = [
   {
@@ -16,25 +16,36 @@ const todayTasks = [
   },
 ]
 
-export const Home = () => {
+export const Home: React.FC = () => {
+  const history = useHistory()
 
   return (
     <div className="wrapper">
       <input
         type="text"
         placeholder="New..."
-        className="input__new"/>
+        className="input__new"
+        onClick={() => history.push('/new')}/>
       <section>
-        <SectionTitle title="Today"/>
-        {todayTasks.map((task, index) => <TaskItem key="index" task={task}/>)}
+        <SectionTitle title="Today" onClick={() => {}}/>
+        {
+          todayTasks.map((task, index) =>
+            <TaskItem key="index" task={task} onClick={() => {}}/>)
+        }
       </section>
       <section>
-        <SectionTitle title="Favourites"/>
-        {todayTasks.map((task, index) => <TaskItem key="index" task={task}/>)}
+        <SectionTitle title="Favourites" onClick={() => {}}/>
+        {
+          todayTasks.map((task, index) =>
+            <TaskItem key="index" task={task} onClick={() => {}}/>)
+        }
       </section>
       <section>
-        <SectionTitle title="Soon"/>
-        {todayTasks.map((task, index) => <TaskItem key="index" task={task}/>)}
+        <SectionTitle title="Soon" onClick={() => {}}/>
+        {
+          todayTasks.map((task, index) =>
+            <TaskItem key="index" task={task} onClick={() => {}}/>)
+        }
       </section>
       <div className="show-more">See more...</div>
     </div>

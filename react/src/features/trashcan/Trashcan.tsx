@@ -1,9 +1,11 @@
 import React from 'react'
 import './Trashcan.scss'
+import { TaskItem } from '../../ui/task-item/TaskItem'
+import { SectionTitle } from '../../ui/section-title/SectionTitle'
 
 export const Trashcan = () => (
   <section>
-    {/*<app-section-title></app-section-title>
-    <app-task-item></app-task-item>*/}
+    <SectionTitle title="Archived"/>
+    <TaskItem task={null}/>
   </section>
-);
+)

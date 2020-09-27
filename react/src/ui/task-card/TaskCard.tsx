@@ -16,12 +16,12 @@ export const TaskCard: React.FC = () => (
         </div>
         <div className="row">
           <DateInput/>
-          <img/>
+          <img alt=""/>
         </div>
       </div>
       <div className="card__bottom">
-        <img/>
-        <img/>
+        <img alt=""/>
+        <img alt=""/>
       </div>
     </div>
   </>
