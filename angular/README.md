@@ -1,4 +1,4 @@
-# To do application
+# To do application (Angular)
 
 <a href="https://github.com/storybooks/storybook" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
@@ -10,7 +10,6 @@
 - Local storage
 - Animations
 - Storybook UI kit
-- Github Actions
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
 

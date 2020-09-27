@@ -1,10 +1,10 @@
 import React from 'react';
-import {ReactComponent as FavoriteBorderIcon} from '../../svg/favorite_border-24px.svg'
-import {ReactComponent as AccessTimeIcon} from '../../svg/access_time-24px.svg'
-import {ReactComponent as EastIcon} from '../../svg/east-24px.svg'
-import './Home.scss';
+import {ReactComponent as FavoriteBorderIcon} from '../../assets/svg/favorite_border-24px.svg'
+import {ReactComponent as AccessTimeIcon} from '../../assets/svg/access_time-24px.svg'
+import {ReactComponent as EastIcon} from '../../assets/svg/east-24px.svg'
+import './SectionSettings.scss';
 
-export const Home = () => (
+export const SectionSettings = () => (
     <div className="wrapper">
         <input type="text" placeholder="New..." className="input__new" routerLink="new"/>
         <section>

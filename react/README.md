@@ -1,4 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# To do application (React)
+
+<a href="https://github.com/storybooks/storybook" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
+
+### Features
+- React 16.13.1+, SCSS
+- Theme toggle (dark and light themes)
+- Local storage
+- Animations
+- Storybook UI kit
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) template.
 
 ## Available Scripts
 
