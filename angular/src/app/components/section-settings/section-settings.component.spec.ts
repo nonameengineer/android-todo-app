@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SectionSettingsComponent } from './section-settings.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SectionSettingsComponent', () => {
   let component: SectionSettingsComponent;
@@ -8,7 +9,8 @@ describe('SectionSettingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SectionSettingsComponent ]
+      declarations: [ SectionSettingsComponent ],
+      imports: [RouterTestingModule]
     })
     .compileComponents();
   }));

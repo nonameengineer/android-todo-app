@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TaskCardComponent } from './task-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { DateInputComponent } from '../date-input/date-input.component';
 
 describe('TaskCardComponent', () => {
   let component: TaskCardComponent;
@@ -8,7 +11,9 @@ describe('TaskCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskCardComponent ]
+      declarations: [ TaskCardComponent, DateInputComponent ],
+      imports: [ReactiveFormsModule],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
