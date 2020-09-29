@@ -28,7 +28,13 @@ export const TaskItem = ({ task, onClick }: TaskItemProps) => {
   }
 
   return (
-    <div className="item" onClick={() => history.push('/task')}>
+    <div
+      className="item"
+      style={{
+        borderColor: task.color,
+        backgroundColor: isActive ? task.color : 'unset'
+      }}
+      onClick={() => history.push('/task')}>
       <div className="text">{isActive ? remaining : task?.title}</div>
       {
         isActive
