@@ -44,7 +44,7 @@ export class NewCardComponent implements OnInit {
 
   onDone(): void {
     this.form.controls.color.setValue(this.color);
-    this.tasksStorage.saveTask(this.form.value as Task);
+    this.tasksStorage.addTask(this.form.value as Task);
     this.router.navigate(['/']);
   }
 
