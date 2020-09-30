@@ -1,3 +1,6 @@
 <div class="wrapper">
-  <app-task-card [task]="task"></app-task-card>
+  <app-task-card
+    [task]="task"
+    (closed)="onCancel()"
+    (accepted)="onDone($event)"></app-task-card>
 </div>
