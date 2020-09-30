@@ -8,28 +8,24 @@
   <section>
     <app-section-title
       title="Today"
-      [isDark]="isDark$ | async"
       [clickable]="true"
       [routerLink]="'section-settings'"
       [queryParams]="{title: 'today'}"></app-section-title>
     <app-task-item
       *ngFor="let task of todayTasks"
       [task]="task"
-      [isDark]="isDark$ | async"
       [routerLink]="'task'"
       [queryParams]="{id: task.id}"></app-task-item>
   </section>
   <section>
     <app-section-title
       title="Favourites"
-      [isDark]="isDark$ | async"
       [clickable]="true"
       [routerLink]="'section-settings'"
       [queryParams]="{title: 'favourites'}"></app-section-title>
     <app-task-item
       *ngFor="let task of favoriteTasks"
       [task]="task"
-      [isDark]="isDark$ | async"
       [isFavorite]="true"
       [routerLink]="'task'"
       [queryParams]="{id: task.id}"></app-task-item>
@@ -37,14 +33,12 @@
   <section>
     <app-section-title
       title="Soon"
-      [isDark]="isDark$ | async"
       [clickable]="true"
       [routerLink]="'section-settings'"
       [queryParams]="{title: 'soon'}"></app-section-title>
     <app-task-item
       *ngFor="let task of soonTasks"
       [task]="task"
-      [isDark]="isDark$ | async"
       [routerLink]="'task'"
       [queryParams]="{id: task.id}"></app-task-item>
   </section>

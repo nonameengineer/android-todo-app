@@ -5,7 +5,7 @@
           type="text"
           placeholder="New..."
           formControlName="title"
-          [ngClass]="{'dark': isDark}"></textarea>
+          [ngClass]="{'dark': isDark$ | async}"></textarea>
       <div
         class="color-picker-button"
         [style.backgroundColor]="form.controls.color.value"
@@ -13,21 +13,20 @@
         <app-color-picker
           class="color-picker"
           *ngIf="isColorPickerActive"
-          [isDark]="isDark"
           (colorSelect)="onColorSelect($event)"
           (outsideClick)="onCloseColorPicker()"></app-color-picker>
       </div>
     </div>
     <div class="row">
       <app-date-input formControlName="date"></app-date-input>
-      <img [src]="(isDark) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" alt="Date"
+      <img [src]="(isDark$ | async) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'" alt="Date"
            (click)="onDate()">
     </div>
   </div>
   <div class="card__bottom">
-    <img [src]="(isDark) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'" alt="Cancel"
+    <img [src]="(isDark$ | async) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'" alt="Cancel"
          (click)="onCancel()">
-    <img [src]="(isDark) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'" alt="Done" (click)="onDone()">
+    <img [src]="(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'" alt="Done" (click)="onDone()">
   </div>
 </div>
 

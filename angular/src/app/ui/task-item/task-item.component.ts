@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/models/task';
+import { BehaviorSubject } from 'rxjs';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-task-item',
@@ -9,12 +11,12 @@ import { Task } from 'src/app/models/task';
 })
 export class TaskItemComponent implements OnInit {
   @Input() task: Task;
-  @Input() isDark: boolean;
   @Input() isActive: boolean;
   @Input() isFavorite: boolean;
+  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
   remaining: string;
 
-  constructor() { }
+  constructor(private themeService: ThemeService) { }
 
   ngOnInit(): void {
   }

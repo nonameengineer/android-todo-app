@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, HostListener } from '@angular/core';
 import { Colors } from '../../models/colors';
+import { BehaviorSubject } from 'rxjs';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-color-picker',
@@ -10,7 +12,7 @@ export class ColorPickerComponent implements OnInit {
   @Output() colorSelect = new EventEmitter<string>();
   @Output() outsideClick = new EventEmitter<void>();
 
-  @Input() isDark: boolean;
+  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
   readonly colors = Object.keys(Colors);
 
@@ -27,7 +29,7 @@ export class ColorPickerComponent implements OnInit {
     this.wasInside = false;
   }
 
-  constructor() { }
+  constructor(private themeService: ThemeService) { }
 
   ngOnInit(): void {
   }

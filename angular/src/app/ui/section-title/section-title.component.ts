@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-section-title',
@@ -8,10 +10,10 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 })
 export class SectionTitleComponent implements OnInit {
   @Input() title: string;
-  @Input() isDark: boolean;
   @Input() clickable = false;
+  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
-  constructor() { }
+  constructor(private themeService: ThemeService) { }
 
   ngOnInit(): void {
   }

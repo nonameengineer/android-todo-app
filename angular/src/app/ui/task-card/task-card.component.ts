@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { Colors } from '../../models/colors';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from '../../models/task';
+import { ThemeService } from '../../services/theme/theme.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-task-card',
@@ -16,6 +18,8 @@ export class TaskCardComponent implements OnInit {
   @Input() task: Task;
   @Input() isDark: boolean;
 
+  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+
   isColorPickerActive = false;
 
   form: FormGroup = this.fb.group({
@@ -27,7 +31,10 @@ export class TaskCardComponent implements OnInit {
     isArchived: [false]
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private themeService: ThemeService
+  ) { }
 
   ngOnInit(): void {
     if (this.task) {

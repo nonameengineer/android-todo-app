@@ -9,6 +9,8 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-more-menu',
@@ -17,7 +19,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MoreMenuComponent implements OnInit, AfterViewInit {
-  @Input() isDark = false;
+  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+
   @Input() isFavorite: boolean;
 
   isShow = false;
@@ -37,7 +40,10 @@ export class MoreMenuComponent implements OnInit, AfterViewInit {
     }
   }
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(
+    private elementRef: ElementRef,
+    private themeService: ThemeService
+  ) { }
 
   ngOnInit(): void {
 
