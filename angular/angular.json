@@ -100,13 +100,6 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.scss",
-              "src/assets/scss/modules/colors.scss",
-              "src/assets/scss/modules/fonts.scss",
-              "src/assets/scss/modules/theme.scss",
-              "src/assets/scss/modules/variables.scss"
-            ],
             "scripts": []
           }
         },
