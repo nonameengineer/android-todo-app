@@ -4,7 +4,9 @@ import './App.scss'
 import { NewCard } from './features/new-card/NewCard'
 import { Home } from './features/home/Home'
 import { ReactComponent as DeleteIcon } from './assets/svg/delete-24px.svg'
+import { ReactComponent as DeleteDarkIcon } from './assets/svg/delete-dark-24px.svg'
 import { ReactComponent as WBSunnyIcon } from './assets/svg/wb_sunny-24px.svg'
+import { ReactComponent as WBSunnyDarkIcon } from './assets/svg/wb_sunny-dark-24px.svg'
 import Themes from './models/themes'
 import { Trashcan } from './features/trashcan/Trashcan'
 import { SectionSettings } from './features/section-settings/SectionSettings'
@@ -33,10 +35,19 @@ function App () {
     <ThemeContext.Provider value={theme}>
       <div className="wrapper">
         <header>
-          <div className="title" onClick={() => history.push('/')}>Delat<span>'</span></div>
+          <div className="title"
+               onClick={() => history.push('/')}>Delat<span>'</span></div>
           <div className="buttons">
-            <DeleteIcon onClick={() => history.push('/trashcan')}/>
-            <WBSunnyIcon onClick={toggleTheme}/>
+            {
+              theme === Themes.LIGHT
+                ? <>
+                  <DeleteIcon onClick={() => history.push('/trashcan')}/>
+                  <WBSunnyIcon onClick={toggleTheme}/></>
+                : <>
+                  <DeleteDarkIcon onClick={() => history.push('/trashcan')}/>
+                  <WBSunnyDarkIcon onClick={toggleTheme}/></>
+            }
+
           </div>
         </header>
         <main>

@@ -1,6 +1,9 @@
 <div class="item"
      [ngClass]="{'item--active': isActive}"
-     [ngStyle]="{'border-color': task?.color, 'background-color': isActive ? task?.color : 'unset'}">
+     [ngStyle]="{
+       'border-color': task?.color,
+       'background-color': isActive ? task?.color : 'unset'
+     }">
   <div class="text" [ngClass]="{'dark': (isDark$ | async) && !isActive}">{{isActive ? remaining : task?.title}}</div>
   <div class="buttons" *ngIf="!isActive; else activeButtons">
     <app-more-menu [isFavorite]="isFavorite"></app-more-menu>

@@ -1,11 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './MoreMenu.scss'
 import { ReactComponent as MoreVertIcon } from '../../assets/svg/more_vert-24px.svg'
+import { ReactComponent as MoreVertDarkIcon } from '../../assets/svg/more_vert-dark-24px.svg'
 import { ReactComponent as FavoriteBorderIcon } from '../../assets/svg/favorite_border-24px.svg'
 import { ReactComponent as FavoriteIcon } from '../../assets/svg/favorite-24px.svg'
+import { ReactComponent as FavoriteDarkIcon } from '../../assets/svg/favorite-dark-24px.svg'
 import { ReactComponent as DeleteIcon } from '../../assets/svg/delete-24px.svg'
+import { ReactComponent as DeleteDarkIcon } from '../../assets/svg/delete-dark-24px.svg'
+import Themes from '../../models/themes'
+import { ThemeContext } from '../../App'
 
 export const MoreMenu = () => {
+  const theme = useContext(ThemeContext)
+
   const containerRef = useRef(null)
 
   const [isShow, setIsShow] = useState(false)
@@ -43,21 +50,29 @@ export const MoreMenu = () => {
 
   return (
     <>
-      <MoreVertIcon onClick={onMore}/>
+      {
+        theme === Themes.LIGHT
+          ? <MoreVertIcon onClick={onMore}/>
+          : <MoreVertDarkIcon onClick={onMore}/>
+      }
       {
         isShow
           ? <div ref={containerRef}>
-            <div className="more-menu">
+            <div className={`more-menu ${theme === Themes.DARK ? 'dark' : null}`}>
               <div className="more-menu__item" onClick={toggleFavorite}>
                 {
                   isFavorite
-                    ? <FavoriteIcon/>
-                    : <FavoriteBorderIcon/>
+                    ? theme === Themes.LIGHT ? <FavoriteIcon/> : <FavoriteDarkIcon/>
+                    : theme === Themes.LIGHT ? <FavoriteBorderIcon/> : <FavoriteDarkIcon/>
                 }
                 <span>Add to Favourites</span>
               </div>
               <div className="more-menu__item" onClick={onRemove}>
-                <DeleteIcon/>
+                {
+                  theme === Themes.LIGHT
+                    ? <DeleteIcon/>
+                    : <DeleteDarkIcon/>
+                }
                 <span>Remove</span>
               </div>
             </div>

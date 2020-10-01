@@ -1,6 +1,7 @@
 # To do application (React)
 
 <a href="https://github.com/storybooks/storybook" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
+[![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
 
 ### Features
 - React 16.13.1+, SCSS

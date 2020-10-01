@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Home.scss'
 import { TaskItem } from '../../ui/task-item/TaskItem'
 import { SectionTitle } from '../../ui/section-title/SectionTitle'
 import { Colors } from '../../models/colors'
 import { useHistory } from 'react-router-dom'
+import { ThemeContext } from '../../App'
+import Themes from '../../models/themes'
 
 const todayTasks = [
   {
@@ -18,13 +20,14 @@ const todayTasks = [
 
 export const Home: React.FC = () => {
   const history = useHistory()
+  const theme = useContext(ThemeContext);
 
   return (
     <div className="wrapper">
       <input
         type="text"
         placeholder="New..."
-        className="input__new"
+        className={`input__new ${theme === Themes.DARK ? 'dark' : null}`}
         onClick={() => history.push('/new')}/>
       <section>
         <SectionTitle title="Today" onClick={() => {}}/>

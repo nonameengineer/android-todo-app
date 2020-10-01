@@ -26,7 +26,8 @@
   <div class="card__bottom">
     <img [src]="(isDark$ | async) ? 'assets/svg/clear-dark-24px.svg' : 'assets/svg/clear-24px.svg'" alt="Cancel"
          (click)="onCancel()">
-    <img [src]="(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'" alt="Done" (click)="onDone()">
+    <img [src]="(isDark$ | async) ? 'assets/svg/done-dark-24px.svg' : 'assets/svg/done-24px.svg'" alt="Done"
+         (click)="onDone()">
   </div>
 </div>
 
