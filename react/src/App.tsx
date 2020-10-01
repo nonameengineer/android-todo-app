@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import './App.scss'
-import { NewCard } from './features/new-card/NewCard'
-import { Home } from './features/home/Home'
+import { NewCard } from './components/new-card/NewCard'
+import { Home } from './components/home/Home'
 import { ReactComponent as DeleteIcon } from './assets/svg/delete-24px.svg'
 import { ReactComponent as DeleteDarkIcon } from './assets/svg/delete-dark-24px.svg'
 import { ReactComponent as WBSunnyIcon } from './assets/svg/wb_sunny-24px.svg'
 import { ReactComponent as WBSunnyDarkIcon } from './assets/svg/wb_sunny-dark-24px.svg'
 import Themes from './models/themes'
-import { Trashcan } from './features/trashcan/Trashcan'
-import { SectionSettings } from './features/section-settings/SectionSettings'
-import { Task } from './features/task/Task'
+import { Trashcan } from './components/trashcan/Trashcan'
+import { SectionSettings } from './components/section-settings/SectionSettings'
+import { Task } from './components/task/Task'
 
 export const ThemeContext = React.createContext(Themes.LIGHT)
 
