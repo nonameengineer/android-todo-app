@@ -10,9 +10,11 @@ import { ReactComponent as DoneIcon } from '../../assets/svg/done-24px.svg'
 import { ReactComponent as DoneDarkIcon } from '../../assets/svg/done-dark-24px.svg'
 import { ThemeContext } from '../../App'
 import Themes from '../../models/themes'
+import { useForm } from 'react-hook-form'
 
 export const TaskCard: React.FC = () => {
   const theme = useContext(ThemeContext)
+  const { register, handleSubmit } = useForm();
   const colorPickerRef = useRef(null)
   const [isShowColor, setIsShowColor] = useState(false)
 
@@ -28,12 +30,14 @@ export const TaskCard: React.FC = () => {
     setIsShowColor(true)
   }
 
+  const onSubmit = (data: any) => console.log(data);
+
   useEffect(() => {
     document.addEventListener('click', handleClickOutside, true)
     return () => {
       document.removeEventListener('click', handleClickOutside, true)
     }
-  })
+  }, [])
 
   return (
     <>
