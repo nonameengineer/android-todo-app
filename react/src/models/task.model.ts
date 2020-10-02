@@ -1,6 +1,6 @@
-import {Task} from './task';
+import {ITask} from './ITask';
 
-export class TaskModel implements Task {
+export class TaskModel implements ITask {
   id: string;
   title: string;
   date: string;

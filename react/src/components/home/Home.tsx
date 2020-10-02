@@ -6,7 +6,7 @@ import { Colors } from '../../models/colors'
 import { useHistory } from 'react-router-dom'
 import { ThemeContext } from '../../App'
 import Themes from '../../models/themes'
-import { Task } from '../../models/task'
+import { ITask } from '../../models/ITask'
 import { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service'
 
 const todayTasks = [
@@ -25,10 +25,10 @@ export const Home: React.FC = () => {
   const theme = useContext(ThemeContext);
 
   const tasksStorage = new TasksStorageService();
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [todayTasks, setTodayTasks] = useState<Task[]>([]);
-  const [favoriteTasks, setFavoriteTasks] = useState<Task[]>([]);
-  const [soonTasks, setSoonTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [todayTasks, setTodayTasks] = useState<ITask[]>([]);
+  const [favoriteTasks, setFavoriteTasks] = useState<ITask[]>([]);
+  const [soonTasks, setSoonTasks] = useState<ITask[]>([]);
 
   function loadAllTasks(): void {
     setTasks(tasksStorage.getTasks());

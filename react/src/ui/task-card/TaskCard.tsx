@@ -11,8 +11,13 @@ import { ReactComponent as DoneDarkIcon } from '../../assets/svg/done-dark-24px.
 import { ThemeContext } from '../../App'
 import Themes from '../../models/themes'
 import { useForm } from 'react-hook-form'
+import { ITask } from '../../models/ITask'
 
-export const TaskCard: React.FC = () => {
+type TaskCardProps = {
+  task?: ITask;
+}
+
+export const TaskCard = ({ task }: TaskCardProps) => {
   const theme = useContext(ThemeContext)
   const { register, handleSubmit } = useForm();
   const colorPickerRef = useRef(null)
@@ -39,14 +44,21 @@ export const TaskCard: React.FC = () => {
     }
   }, [])
 
+  function onTextareaInput (e: any) {
+    console.log(e.value);
+  }
+
   return (
     <>
-      <div className="card">
+      <div
+        className="card"
+        style={{ borderColor: task?.color }}>
         <div className="content">
           <div className="row header">
             <textarea
               placeholder="New..."
-              className={`${theme === Themes.DARK ? 'dark' : null}`}/>
+              className={`${theme === Themes.DARK ? 'dark' : null}`}
+              onChange={onTextareaInput}/>
             <div className="color-picker-button" onClick={onColor}>
               {isShowColor ? <ColorPicker ref={colorPickerRef}/> : null}
             </div>
@@ -61,10 +73,10 @@ export const TaskCard: React.FC = () => {
             theme === Themes.LIGHT
               ? <>
                 <ClearIcon/>
-                <DoneIcon/></>
+                <DoneIcon onClick={onSubmit}/></>
               : <>
                 <ClearDarkIcon/>
-                <DoneDarkIcon/></>
+                <DoneDarkIcon onClick={onSubmit}/></>
           }
         </div>
       </div>

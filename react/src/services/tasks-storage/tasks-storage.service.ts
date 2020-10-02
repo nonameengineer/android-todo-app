@@ -1,4 +1,4 @@
-import { Task } from '../../models/task'
+import { ITask } from '../../models/ITask'
 import { TaskModel } from '../../models/task.model'
 import { Colors } from '../../models/colors'
 
@@ -6,15 +6,13 @@ const TASKS_STORAGE_KEY = 'tasks';
 
 export class TasksStorageService {
 
-  constructor() { }
-
-  addTask(task: Task): void {
+  addTask(task: ITask): void {
     const tasks = this.getTasks();
     tasks.push(task);
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
   }
 
-  getTasks(): Task[] {
+  getTasks(): ITask[] {
     const tasksFromStorage = localStorage.getItem(TASKS_STORAGE_KEY);
     if (tasksFromStorage === null) {
       return this.getMockTasks();
@@ -23,15 +21,15 @@ export class TasksStorageService {
     }
   }
 
-  getTaskById(id: string): Task {
+  getTaskById(id: string): ITask {
     return this.getTasks().filter(task => task.id === id)[0];
   }
 
-  updateTasks(tasks: Task[]): void {
+  updateTasks(tasks: ITask[]): void {
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
   }
 
-  updateTask(task: Task): void {
+  updateTask(task: ITask): void {
     const tasks = this.getTasks();
     for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].id === task.id) {
@@ -51,7 +49,7 @@ export class TasksStorageService {
     this.updateTasks(tasks);
   }
 
-  private getMockTasks(): Task[] {
+  private getMockTasks(): ITask[] {
     return [
       new TaskModel(
         '1',
