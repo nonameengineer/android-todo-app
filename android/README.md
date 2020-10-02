@@ -1,6 +1,6 @@
 # To do application (Android)
 
 ### Features
-- Android 11+
+- Android 10+
 - Theme toggle (dark and light themes)
 - Animations
