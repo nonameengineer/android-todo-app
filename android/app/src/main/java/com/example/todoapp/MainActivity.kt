@@ -3,6 +3,8 @@ package com.example.todoapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.todoapp.ui.main.MainFragment
+import com.example.todoapp.ui.trashcan.TrashcanFragment
+import kotlinx.android.synthetic.main.header.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,5 +17,23 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.container, MainFragment.newInstance())
                     .commitNow()
         }
+
+        logo.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, MainFragment.newInstance())
+                .commitNow()
+        }
+
+        deleteButton.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, TrashcanFragment.newInstance())
+                .commitNow()
+        }
+
+        toggleThemeButton.setOnClickListener {
+
+        }
     }
+
+
 }
