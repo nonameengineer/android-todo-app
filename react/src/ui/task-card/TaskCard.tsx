@@ -10,18 +10,26 @@ import { ReactComponent as DoneIcon } from '../../assets/svg/done-24px.svg'
 import { ReactComponent as DoneDarkIcon } from '../../assets/svg/done-dark-24px.svg'
 import { ThemeContext } from '../../App'
 import Themes from '../../models/themes'
-import { useForm } from 'react-hook-form'
 import { ITask } from '../../models/ITask'
+import { Colors } from '../../models/colors'
+import { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service'
 
 type TaskCardProps = {
   task?: ITask;
+  accepted: (task: ITask) => void,
+  closed: () => void
 }
 
-export const TaskCard = ({ task }: TaskCardProps) => {
+export const TaskCard = ({ task, accepted, closed }: TaskCardProps) => {
+  const tasksStorageService = new TasksStorageService()
+
   const theme = useContext(ThemeContext)
-  const { register, handleSubmit } = useForm();
   const colorPickerRef = useRef(null)
   const [isShowColor, setIsShowColor] = useState(false)
+
+  const [title, setTitle] = useState('')
+  const [date, setDate] = useState(new Date())
+  const [color, setColor] = useState(Colors.GREEN)
 
   const handleClickOutside = (event: any) => {
     if (colorPickerRef && colorPickerRef.current &&
@@ -35,18 +43,37 @@ export const TaskCard = ({ task }: TaskCardProps) => {
     setIsShowColor(true)
   }
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (event: any) => {
+    event.preventDefault()
+
+    console.log(`
+      Email: ${title}
+      Password: ${date}
+      Country: ${color}
+    `)
+
+    const task: ITask = {
+      id: '1',
+      title: 'task 1',
+      date: new Date('1995-12-17T03:24:00').toDateString(),
+      color: Colors.RED,
+      isFavorite: false,
+      isArchived: false,
+    }
+
+    accepted(task)
+  }
 
   useEffect(() => {
+    if (task) {
+      setTitle(task.title)
+    }
+
     document.addEventListener('click', handleClickOutside, true)
     return () => {
       document.removeEventListener('click', handleClickOutside, true)
     }
   }, [])
-
-  function onTextareaInput (e: any) {
-    console.log(e.value);
-  }
 
   return (
     <>
@@ -58,7 +85,8 @@ export const TaskCard = ({ task }: TaskCardProps) => {
             <textarea
               placeholder="New..."
               className={`${theme === Themes.DARK ? 'dark' : null}`}
-              onChange={onTextareaInput}/>
+              value={title}
+              onChange={e => setTitle(e.target.value)}/>
             <div className="color-picker-button" onClick={onColor}>
               {isShowColor ? <ColorPicker ref={colorPickerRef}/> : null}
             </div>
@@ -72,10 +100,10 @@ export const TaskCard = ({ task }: TaskCardProps) => {
           {
             theme === Themes.LIGHT
               ? <>
-                <ClearIcon/>
+                <ClearIcon onClick={closed}/>
                 <DoneIcon onClick={onSubmit}/></>
               : <>
-                <ClearDarkIcon/>
+                <ClearDarkIcon onClick={closed}/>
                 <DoneDarkIcon onClick={onSubmit}/></>
           }
         </div>
