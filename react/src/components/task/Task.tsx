@@ -3,11 +3,13 @@ import './Task.scss'
 import { TaskCard } from '../../ui/task-card/TaskCard'
 import { useHistory, useLocation } from 'react-router-dom'
 import { ITask } from '../../models/ITask'
+import { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service'
 
 
 export const Task = () => {
   const location = useLocation();
   const history = useHistory();
+  const tasksStorageService = new TasksStorageService()
 
   // @ts-ignore
   const task: ITask = location.state.task;
@@ -18,8 +20,10 @@ export const Task = () => {
     // @ts-ignore
   }, [location]);
 
-  function onAccept(e: any): void {
-    console.log(e);
+  function onAccept(task: ITask): void {
+    tasksStorageService.updateTask(task)
+    console.log(task);
+    history.push('/')
   }
 
   return (

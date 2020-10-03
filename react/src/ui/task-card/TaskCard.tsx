@@ -21,8 +21,6 @@ type TaskCardProps = {
 }
 
 export const TaskCard = ({ task, accepted, closed }: TaskCardProps) => {
-  const tasksStorageService = new TasksStorageService()
-
   const theme = useContext(ThemeContext)
   const colorPickerRef = useRef(null)
   const [isShowColor, setIsShowColor] = useState(false)
