@@ -13,6 +13,10 @@
 		BF86EDAB251690760034D6BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF86EDAA251690760034D6BD /* Preview Assets.xcassets */; };
 		BF86EDB6251690760034D6BD /* todo_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86EDB5251690760034D6BD /* todo_appTests.swift */; };
 		BF86EDC1251690770034D6BD /* todo_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86EDC0251690770034D6BD /* todo_appUITests.swift */; };
+		BFE6D90725285B45004BA28E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE6D90625285B45004BA28E /* Task.swift */; };
+		BFE6D91025285C83004BA28E /* tasksData.json in Resources */ = {isa = PBXBuildFile; fileRef = BFE6D90F25285C83004BA28E /* tasksData.json */; };
+		BFE6D91525285DA2004BA28E /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE6D91425285DA2004BA28E /* TaskRow.swift */; };
+		BFE6D91A25285F2D004BA28E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE6D91925285F2D004BA28E /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +49,10 @@
 		BF86EDBC251690770034D6BD /* todo-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "todo-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF86EDC0251690770034D6BD /* todo_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = todo_appUITests.swift; sourceTree = "<group>"; };
 		BF86EDC2251690770034D6BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFE6D90625285B45004BA28E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		BFE6D90F25285C83004BA28E /* tasksData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tasksData.json; sourceTree = "<group>"; };
+		BFE6D91425285DA2004BA28E /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
+		BFE6D91925285F2D004BA28E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +103,11 @@
 		BF86EDA2251690740034D6BD /* todo-app */ = {
 			isa = PBXGroup;
 			children = (
+				BFE6D90E25285C48004BA28E /* Resources */,
+				BFE6D90525285AD2004BA28E /* Models */,
 				BF86EDA3251690740034D6BD /* todo_appApp.swift */,
 				BF86EDA5251690740034D6BD /* ContentView.swift */,
+				BFE6D91425285DA2004BA28E /* TaskRow.swift */,
 				BF86EDA7251690760034D6BD /* Assets.xcassets */,
 				BF86EDAC251690760034D6BD /* Info.plist */,
 				BF86EDA9251690760034D6BD /* Preview Content */,
@@ -128,6 +139,23 @@
 				BF86EDC2251690770034D6BD /* Info.plist */,
 			);
 			path = "todo-appUITests";
+			sourceTree = "<group>";
+		};
+		BFE6D90525285AD2004BA28E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BFE6D90625285B45004BA28E /* Task.swift */,
+				BFE6D91925285F2D004BA28E /* Data.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BFE6D90E25285C48004BA28E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BFE6D90F25285C83004BA28E /* tasksData.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +263,7 @@
 			files = (
 				BF86EDAB251690760034D6BD /* Preview Assets.xcassets in Resources */,
 				BF86EDA8251690760034D6BD /* Assets.xcassets in Resources */,
+				BFE6D91025285C83004BA28E /* tasksData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +289,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF86EDA6251690740034D6BD /* ContentView.swift in Sources */,
+				BFE6D91A25285F2D004BA28E /* Data.swift in Sources */,
+				BFE6D90725285B45004BA28E /* Task.swift in Sources */,
 				BF86EDA4251690740034D6BD /* todo_appApp.swift in Sources */,
+				BFE6D91525285DA2004BA28E /* TaskRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +459,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "storm.todo-app";
+				PRODUCT_BUNDLE_IDENTIFIER = sone.todoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -449,7 +481,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "storm.todo-app";
+				PRODUCT_BUNDLE_IDENTIFIER = sone.todoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1001,
+        "title": "Joshua Tree National Park",
+        "color": "red"
+        "date": "1996-12-12",
+        "isFavorite": false,
+        "isArchived": false,
+    },
+        {
+        "id": 1002,
+        "title": "Joshua Tree National Park 2",
+        "color": "red"
+        "date": "1996-12-12",
+        "isFavorite": false,
+        "isArchived": false,
+    }
+]
