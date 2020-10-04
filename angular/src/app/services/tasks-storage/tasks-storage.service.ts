@@ -51,8 +51,6 @@ export class TasksStorageService {
   }
 
   removeTask(task: Task): void {
-    console.log('asfasf');
-
     const tasks = this.getTasks();
     for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].id === task.id) {

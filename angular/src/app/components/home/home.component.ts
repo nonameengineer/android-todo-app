@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
 import { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';
@@ -9,6 +9,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('enter', [
       transition(':enter', [
@@ -17,7 +18,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
           style({ opacity: 1}))
       ])
     ])
-  ]
+  ],
 })
 export class HomeComponent implements OnInit {
   readonly isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;

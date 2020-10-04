@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { browser, by, element, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('App', () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -15,14 +15,8 @@ describe('workspace-project App', () => {
 
   it('should go to new task page', () => {
     page.navigateTo();
-    element(by.tagName('input')).click();
+    element(by.tagName('.new')).click();
     expect(browser.getCurrentUrl()).toEqual('http://localhost:4200/new');
-  });
-
-  it('should go to today tasks section settings page', () => {
-    page.navigateTo();
-    element(by.tagName('app-section-title')).click();
-    expect(browser.getCurrentUrl()).toEqual('http://localhost:4200/section-settings?title=today');
   });
 
   it('should go to today task page', () => {

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DateInputComponent } from './date-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-fdescribe('DateInputComponent', () => {
+describe('DateInputComponent', () => {
   let component: DateInputComponent;
   let fixture: ComponentFixture<DateInputComponent>;
 
