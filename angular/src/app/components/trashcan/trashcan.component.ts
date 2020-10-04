@@ -29,11 +29,6 @@ export class TrashcanComponent implements OnInit {
     this.tasks = this.tasksStorage.getTasks().filter(task => task.isArchived);
   }
 
-  ngOnInit(): void {
-    this.loadTasks();
-    this.tasksStorage.updated$.subscribe(_ => this.loadTasks());
-  }
-
   onClearAll(): void {
     this.tasks.map(task => {
       this.tasksStorage.removeTask(task);
@@ -45,5 +40,10 @@ export class TrashcanComponent implements OnInit {
       task.isArchived = false;
       this.tasksStorage.removeTask(task);
     });
+  }
+
+  ngOnInit(): void {
+    this.loadTasks();
+    this.tasksStorage.updated$.subscribe(_ => this.loadTasks());
   }
 }
