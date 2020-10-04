@@ -1,10 +1,10 @@
 # To do application (Angular)
 
-## Light theme
-![Screenshot](screenshots/Screenshot from 2020-10-04 21-20-32.png)
+### Light theme
+![Screenshot](https://raw.githubusercontent.com/nonameengineer/todo-app/master/angular/screenshots/Screenshot%20from%202020-10-04%2021-20-32.png?raw=true)
 
-## Dark theme
-![Screenshot](screenshots/Screenshot from 2020-10-04 21-21-01.png)
+### Dark theme
+![Screenshot](https://raw.githubusercontent.com/nonameengineer/todo-app/master/angular/screenshots/Screenshot%20from%202020-10-04%2021-21-01.png?raw=true)
 
 <a href="https://github.com/storybooks/storybook" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
