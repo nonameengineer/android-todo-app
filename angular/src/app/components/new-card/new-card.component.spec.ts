@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';
 import { TaskModel } from '../../models/task.model';
 import { Colors } from '../../models/colors';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('NewCardComponent', () => {
   let component: NewCardComponent;
@@ -20,7 +22,9 @@ describe('NewCardComponent', () => {
       imports: [
         RouterTestingModule,
         ReactiveFormsModule,
+        NoopAnimationsModule
       ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     router = TestBed.inject(Router);

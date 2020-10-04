@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TrashcanComponent } from './trashcan.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TrashcanComponent', () => {
   let component: TrashcanComponent;
@@ -8,7 +10,9 @@ describe('TrashcanComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrashcanComponent ]
+      declarations: [ TrashcanComponent ],
+      imports: [NoopAnimationsModule],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
