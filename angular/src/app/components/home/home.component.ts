@@ -54,13 +54,13 @@ export class HomeComponent implements OnInit {
   }
 
   getSoonTasks(): void {
-    this.soonTasks = this.tasks.filter(task => task.date !== new Date().toDateString()
+    this.soonTasks = this.tasks.filter(task => task.date < new Date().toDateString()
       && task.isFavorite === false
       && task.isArchived === false);
   }
 
   getPastTasks(): void {
-    this.pastTasks = this.tasks.filter(task => task.date !== new Date().toDateString()
+    this.pastTasks = this.tasks.filter(task => task.date > new Date().toDateString()
       && task.isFavorite === false
       && task.isArchived === false);
   }
