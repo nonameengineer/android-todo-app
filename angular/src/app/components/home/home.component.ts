@@ -3,23 +3,18 @@ import { ThemeService } from '../../services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
 import { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service';
 import { Task } from 'src/app/models/task';
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [
-    trigger('enterHome', [
+    trigger('enter', [
       transition(':enter', [
-        style({ opacity: 0}),  // initial
-        animate('0.5s',
-          style({ opacity: 1}))  // final
-      ]),
-      transition(':leave', [
-        style({ height: '*', 'padding-top': '*', 'padding-bottom': '*', opacity: 1}),  // initial
-        animate('0.5s',
-          style({ height: '0px', 'padding-top': '0', 'padding-bottom': '0', opacity: 0}))  // final
+        style({ opacity: 0}),
+        animate('200ms',
+          style({ opacity: 1}))
       ])
     ])
   ]
