@@ -1,46 +1,60 @@
-<div class="wrapper">
-  <input
-    type="text"
-    placeholder="New..."
+<div class="wrapper" @enterHome>
+  <div
     class="input__new"
     routerLink="new"
     [ngClass]="{'dark': isDark$ | async}">
-  <section>
+    New...
+  </div>
+  <section *ngIf="todayTasks.length > 0">
     <app-section-title
       title="Today"
-      [clickable]="true"
-      [routerLink]="'section-settings'"
-      [queryParams]="{title: 'today'}"></app-section-title>
-    <app-task-item
-      *ngFor="let task of todayTasks"
-      [task]="task"
-      [routerLink]="'task'"
-      [queryParams]="{id: task.id}"></app-task-item>
+      [clickable]="!lists.today"
+      (click)="lists.today = !lists.today"></app-section-title>
+    <ng-container *ngIf="lists.today">
+      <app-task-item
+        *ngFor="let task of todayTasks"
+        [task]="task"
+        [routerLink]="'task'"
+        [queryParams]="{id: task.id}"></app-task-item>
+    </ng-container>
   </section>
-  <section>
+  <section *ngIf="favoriteTasks.length > 0">
     <app-section-title
       title="Favourites"
-      [clickable]="true"
-      [routerLink]="'section-settings'"
-      [queryParams]="{title: 'favourites'}"></app-section-title>
-    <app-task-item
-      *ngFor="let task of favoriteTasks"
-      [task]="task"
-      [isFavorite]="true"
-      [routerLink]="'task'"
-      [queryParams]="{id: task.id}"></app-task-item>
+      [clickable]="!lists.favourites"
+      (click)="lists.favourites = !lists.favourites"></app-section-title>
+    <ng-container *ngIf="lists.favourites">
+      <app-task-item
+        *ngFor="let task of favoriteTasks"
+        [task]="task"
+        [routerLink]="'task'"
+        [queryParams]="{id: task.id}"></app-task-item>
+    </ng-container>
   </section>
-  <section>
+  <section *ngIf="soonTasks.length > 0">
     <app-section-title
       title="Soon"
-      [clickable]="true"
-      [routerLink]="'section-settings'"
-      [queryParams]="{title: 'soon'}"></app-section-title>
-    <app-task-item
-      *ngFor="let task of soonTasks"
-      [task]="task"
-      [routerLink]="'task'"
-      [queryParams]="{id: task.id}"></app-task-item>
+      [clickable]="!lists.soon"
+      (click)="lists.soon = !lists.soon"></app-section-title>
+    <ng-container *ngIf="lists.soon">
+      <app-task-item
+        *ngFor="let task of soonTasks"
+        [task]="task"
+        [routerLink]="'task'"
+        [queryParams]="{id: task.id}"></app-task-item>
+    </ng-container>
   </section>
-  <div class="show-more">See more...</div>
+  <section *ngIf="pastTasks.length > 0">
+    <app-section-title
+      title="Past"
+      [clickable]="!lists.past"
+      (click)="lists.past = !lists.past"></app-section-title>
+    <ng-container *ngIf="lists.past">
+      <app-task-item
+        *ngFor="let task of soonTasks"
+        [task]="task"
+        [routerLink]="'task'"
+        [queryParams]="{id: task.id}"></app-task-item>
+    </ng-container>
+  </section>
 </div>

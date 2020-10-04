@@ -1,4 +1,10 @@
 <section>
-  <app-section-title title="Archived"></app-section-title>
+  <header>
+    <app-section-title title="Archived"></app-section-title>
+    <div class="buttons">
+      <div class="button" (click)="onClearAll()">Clear all</div>
+      <div class="button" (click)="onRestoreAll()">Restore all</div>
+    </div>
+  </header>
   <app-task-item *ngFor="let task of tasks" [task]="task"></app-task-item>
 </section>

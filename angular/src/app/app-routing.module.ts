@@ -15,10 +15,6 @@ const routes: Routes = [
     loadChildren: () => import('./components/trashcan/trashcan.module').then(m => m.TrashcanModule)
   },
   {
-    path: 'section-settings',
-    loadChildren: () => import('./components/section-settings/section-settings.module').then(m => m.SectionSettingsModule)
-  },
-  {
     path: 'task',
     loadChildren: () => import('./components/task/task.module').then(m => m.TaskModule)
   },

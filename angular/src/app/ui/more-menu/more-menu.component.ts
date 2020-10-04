@@ -4,10 +4,11 @@ import {
   Component, ElementRef,
   HostListener,
   Input,
-  OnInit,
+  OnInit, Output,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
+  EventEmitter,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ThemeService } from '../../services/theme/theme.service';
@@ -21,7 +22,12 @@ import { ThemeService } from '../../services/theme/theme.service';
 export class MoreMenuComponent implements OnInit, AfterViewInit {
   isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
+  @Output() clickFavorite = new EventEmitter();
+  @Output() clickRemove = new EventEmitter();
+  @Output() clickRestore = new EventEmitter();
+
   @Input() isFavorite: boolean;
+  @Input() isArchived: boolean;
 
   isShow = false;
 
@@ -63,11 +69,15 @@ export class MoreMenuComponent implements OnInit, AfterViewInit {
   }
 
   onRemove(event: any): void {
+    this.clickRemove.emit();
+
     event.stopPropagation();
     this.hideMenu();
   }
 
   onFavorite(event: any): void {
+    this.clickFavorite.emit();
+
     event.stopPropagation();
     this.hideMenu();
   }
@@ -77,5 +87,11 @@ export class MoreMenuComponent implements OnInit, AfterViewInit {
     console.log('on more');
     this.isShow ? this.hideMenu() : this.showMenu();
     console.log(this.isShow);
+  }
+
+  onRestore(event: any): void {
+    this.clickRestore.emit();
+
+    event.stopPropagation();
   }
 }

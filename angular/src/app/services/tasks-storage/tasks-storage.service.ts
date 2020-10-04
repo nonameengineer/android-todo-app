@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskModel } from '../../models/task.model';
 import { Colors } from '../../models/colors';
+import { Subject } from 'rxjs';
 
 const TASKS_STORAGE_KEY = 'tasks';
 
@@ -9,6 +10,7 @@ const TASKS_STORAGE_KEY = 'tasks';
   providedIn: 'root',
 })
 export class TasksStorageService {
+  readonly updated$ = new Subject<void>();
 
   constructor() { }
 
@@ -16,6 +18,7 @@ export class TasksStorageService {
     const tasks = this.getTasks();
     tasks.push(task);
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    this.updated$.next();
   }
 
   getTasks(): Task[] {
@@ -33,6 +36,7 @@ export class TasksStorageService {
 
   updateTasks(tasks: Task[]): void {
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    this.updated$.next();
   }
 
   updateTask(task: Task): void {
@@ -43,16 +47,20 @@ export class TasksStorageService {
       }
     }
     this.updateTasks(tasks);
+    this.updated$.next();
   }
 
-  removeTaskById(id: string): void {
+  removeTask(task: Task): void {
+    console.log('asfasf');
+
     const tasks = this.getTasks();
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === id) {
+      if (tasks[i].id === task.id) {
         tasks.splice(i, 1);
       }
     }
     this.updateTasks(tasks);
+    this.updated$.next();
   }
 
   private getMockTasks(): Task[] {

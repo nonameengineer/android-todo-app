@@ -1,6 +1,7 @@
 @import "../../../assets/scss/modules/theme.scss";
 
 .input__new {
+  cursor: pointer;
   border: $border-width solid #000;
   border-radius: 3px;
   width: 100%;
@@ -8,6 +9,13 @@
   padding: 0 9px;
   box-sizing: border-box;
   background: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  &:hover {
+    box-shadow: 0 0 4px 4px rgba(255, 230, 32, 0.2);
+  }
 
   &.dark {
     border: $border-width solid #fff;
@@ -20,11 +28,4 @@
   &::placeholder {
     color: #000;
   }
-}
-
-.show-more {
-  cursor: pointer;
-  width: 100%;
-  text-align: center;
-  color: #2094f9;
 }
