@@ -1,5 +1,11 @@
 # To do application (Angular)
 
+## Light theme
+![Screenshot](screenshots/Screenshot from 2020-10-04 21-20-32.png)
+
+## Dark theme
+![Screenshot](screenshots/Screenshot from 2020-10-04 21-21-01.png)
+
 <a href="https://github.com/storybooks/storybook" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
 ### Features
