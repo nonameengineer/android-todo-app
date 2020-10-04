@@ -10,6 +10,7 @@
   </div>
   <div class="buttons" *ngIf="!isActive; else activeButtons">
     <app-more-menu
+      class="more-menu"
       [isFavorite]="task.isFavorite"
       [isArchived]="task.isArchived"
       (clickFavorite)="onFavorite()"
