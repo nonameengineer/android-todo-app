@@ -12,7 +12,7 @@ export class ColorPickerComponent implements OnInit {
   @Output() colorSelect = new EventEmitter<string>();
   @Output() outsideClick = new EventEmitter<void>();
 
-  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+  readonly isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
   readonly colors = Object.keys(Colors);
 

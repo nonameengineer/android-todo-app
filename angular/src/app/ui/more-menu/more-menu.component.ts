@@ -20,7 +20,7 @@ import { ThemeService } from '../../services/theme/theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MoreMenuComponent implements OnInit, AfterViewInit {
-  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+  readonly isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
   @Output() clickFavorite = new EventEmitter();
   @Output() clickRemove = new EventEmitter();

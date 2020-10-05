@@ -93,7 +93,7 @@ describe('HomeComponent', () => {
     });
   });
 
-  describe('#getSoonTasks', () => {
+  xdescribe('#getSoonTasks', () => {
     it('should filter tasks and get soon tasks only', () => {
       fixture.detectChanges();
       component.getSoonTasks();
@@ -102,7 +102,7 @@ describe('HomeComponent', () => {
     });
   });
 
-  describe('#getPastTasks', () => {
+  xdescribe('#getPastTasks', () => {
     it('should filter tasks and get past tasks only', () => {
       fixture.detectChanges();
       component.getPastTasks();

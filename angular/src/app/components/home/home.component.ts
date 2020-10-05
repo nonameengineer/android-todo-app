@@ -22,6 +22,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class HomeComponent implements OnInit {
   readonly isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+
   tasks: Task[];
   todayTasks: Task[];
   favoriteTasks: Task[];

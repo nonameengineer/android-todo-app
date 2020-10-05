@@ -9,9 +9,10 @@ import { ThemeService } from '../../services/theme/theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SectionTitleComponent implements OnInit {
+  readonly isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+
   @Input() title: string;
   @Input() clickable = false;
-  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
   constructor(private themeService: ThemeService) { }
 

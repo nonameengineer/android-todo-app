@@ -31,7 +31,44 @@ describe('TaskItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('#onFavorite', () => {
+    it('should update task `isFavorite` property to be true', () => {
+      component.onFavorite();
+      expect(component.task.isFavorite).toBeTrue();
+    });
+  });
+
+  describe('#onRemove', () => {
+    it('should update task `isArchived` property to be true', () => {
+      component.onRemove();
+      expect(component.task.isArchived).toBeTrue();
+    });
+  });
+
+  describe('#onRestore', () => {
+    it('should update task `isArchived` property to be false', () => {
+      component.task.isArchived = true;
+      component.onRestore();
+      expect(component.task.isArchived).toBeFalse();
+    });
+  });
+
+  describe('#onTime', () => {
+    it('should set value of remaining property to task date', () => {
+      component.onTime(new Event('click'));
+      expect(component.remaining).toBe(`Remaining ${component.task.date}...`);
+    });
+
+    it('should set `isActive` to true', () => {
+      component.onTime(new Event('click'));
+      expect(component.isActive).toBeTrue();
+    });
+  });
+
+  describe('#onBack', () => {
+    it('should set `isActive` to false', () => {
+      component.onBack(new Event('click'));
+      expect(component.isActive).toBeFalse();
+    });
   });
 });

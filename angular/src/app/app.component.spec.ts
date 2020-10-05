@@ -22,6 +22,7 @@ describe('AppComponent', () => {
 
   describe('#changeTheme', () => {
     it('should change theme to dark', () => {
+      component.isDark$.next(false);
       component.changeTheme();
       expect(component.isDark$.getValue()).toBeTrue();
     });

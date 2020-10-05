@@ -12,13 +12,13 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskCardComponent implements OnInit {
+  readonly isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
+
   @Output() closed = new EventEmitter<void>();
   @Output() accepted = new EventEmitter<Task>();
 
   @Input() task: Task;
   @Input() isDark: boolean;
-
-  isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
   isColorPickerActive = false;
 
@@ -39,9 +39,7 @@ export class TaskCardComponent implements OnInit {
   ngOnInit(): void {
     if (this.task) {
       this.form.setValue(this.task);
-      console.log(this.task);
     }
-    this.form.valueChanges.subscribe(x => console.log(x));
   }
 
   onCancel(): void {
@@ -50,11 +48,9 @@ export class TaskCardComponent implements OnInit {
 
   onDone(): void {
     this.accepted.emit(this.form.value as Task);
-    // this.tasksStorage.saveTask(this.form.value as Task);
   }
 
   onDate(): void {
-    console.log('Input date');
   }
 
   onColorPicker(event): void {
