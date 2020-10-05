@@ -8,7 +8,7 @@ import { ThemeService } from '../../services/theme/theme.service';
   templateUrl: './color-picker.component.html',
   styleUrls: ['./color-picker.component.scss'],
 })
-export class ColorPickerComponent implements OnInit {
+export class ColorPickerComponent {
   @Output() colorSelect = new EventEmitter<string>();
   @Output() outsideClick = new EventEmitter<void>();
 
@@ -30,9 +30,6 @@ export class ColorPickerComponent implements OnInit {
   }
 
   constructor(private themeService: ThemeService) { }
-
-  ngOnInit(): void {
-  }
 
   onColor(color: string): void {
     this.colorSelect.emit(color);

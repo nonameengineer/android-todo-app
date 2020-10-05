@@ -18,7 +18,6 @@ export class TaskCardComponent implements OnInit {
   @Output() accepted = new EventEmitter<Task>();
 
   @Input() task: Task;
-  @Input() isDark: boolean;
 
   isColorPickerActive = false;
 
@@ -35,12 +34,6 @@ export class TaskCardComponent implements OnInit {
     private fb: FormBuilder,
     private themeService: ThemeService
   ) { }
-
-  ngOnInit(): void {
-    if (this.task) {
-      this.form.setValue(this.task);
-    }
-  }
 
   onCancel(): void {
     this.closed.emit();
@@ -65,5 +58,11 @@ export class TaskCardComponent implements OnInit {
   onColorSelect(color: string): void {
     this.form.controls.color.setValue(Colors[color]);
     this.isColorPickerActive = false;
+  }
+
+  ngOnInit(): void {
+    if (this.task) {
+      this.form.setValue(this.task);
+    }
   }
 }

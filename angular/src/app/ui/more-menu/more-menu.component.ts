@@ -19,7 +19,7 @@ import { ThemeService } from '../../services/theme/theme.service';
   styleUrls: ['./more-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MoreMenuComponent implements OnInit, AfterViewInit {
+export class MoreMenuComponent {
   readonly isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
   @Output() clickFavorite = new EventEmitter();
@@ -50,13 +50,6 @@ export class MoreMenuComponent implements OnInit, AfterViewInit {
     private elementRef: ElementRef,
     private themeService: ThemeService
   ) { }
-
-  ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(): void {
-  }
 
   showMenu(): void {
     this.viewContainerRef.createEmbeddedView(this.templateRef);

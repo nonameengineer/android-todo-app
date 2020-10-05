@@ -7,8 +7,6 @@ const DARK_THEME_STORAGE_KEY = 'isDark';
 })
 export class ThemeStorageService {
 
-  constructor() { }
-
   saveIsDarkTheme(isDark: boolean): void {
     localStorage.setItem(DARK_THEME_STORAGE_KEY, isDark.toString());
   }

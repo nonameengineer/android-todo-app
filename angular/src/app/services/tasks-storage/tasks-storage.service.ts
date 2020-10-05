@@ -12,8 +12,6 @@ const TASKS_STORAGE_KEY = 'tasks';
 export class TasksStorageService {
   readonly updated$ = new Subject<void>();
 
-  constructor() { }
-
   addTask(task: Task): void {
     const tasks = this.getTasks();
     tasks.push(task);

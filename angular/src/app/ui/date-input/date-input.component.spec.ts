@@ -25,10 +25,6 @@ describe('DateInputComponent', () => {
     fixture.nativeElement.remove();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should init form with empty values', () => {
     const initFormValues = {
       day: '',
@@ -36,5 +32,35 @@ describe('DateInputComponent', () => {
       year: ''
     };
     expect(component.form.value).toEqual(initFormValues);
+  });
+
+  xdescribe('#value', () => {
+    it('should...', () => {
+    });
+  });
+
+  xdescribe('#writeValue', () => {
+    it('should...', () => {
+    });
+  });
+
+  xdescribe('#registerOnChange', () => {
+    it('should...', () => {
+    });
+  });
+
+  xdescribe('#registerOnTouched', () => {
+    it('should...', () => {
+    });
+  });
+
+  xdescribe('#isValidDate', () => {
+    it('should...', () => {
+    });
+  });
+
+  xdescribe('#ngOnInit', () => {
+    it('should...', () => {
+    });
   });
 });

@@ -19,7 +19,42 @@ describe('MoreMenuComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    fixture.nativeElement.remove();
+  });
+
+  xdescribe('#onClick', () => {
+    it('should create', () => {
+    });
+  });
+
+  xdescribe('#showMenu', () => {
+    it('should create', () => {
+    });
+  });
+
+  xdescribe('#hideMenu', () => {
+    it('should create', () => {
+    });
+  });
+
+  xdescribe('#onRemove', () => {
+    it('should create', () => {
+    });
+  });
+
+  xdescribe('#onFavorite', () => {
+    it('should create', () => {
+    });
+  });
+
+  xdescribe('#onMore', () => {
+    it('should create', () => {
+    });
+  });
+
+  xdescribe('#onRestore', () => {
+    it('should create', () => {
+    });
   });
 });

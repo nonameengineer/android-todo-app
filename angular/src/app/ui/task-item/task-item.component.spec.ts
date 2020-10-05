@@ -31,6 +31,10 @@ describe('TaskItemComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    fixture.nativeElement.remove();
+  });
+
   describe('#onFavorite', () => {
     it('should update task `isFavorite` property to be true', () => {
       component.onFavorite();

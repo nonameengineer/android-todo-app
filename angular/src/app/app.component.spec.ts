@@ -20,6 +20,10 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
   }));
 
+  afterEach(() => {
+    fixture.nativeElement.remove();
+  });
+
   describe('#changeTheme', () => {
     it('should change theme to dark', () => {
       component.isDark$.next(false);

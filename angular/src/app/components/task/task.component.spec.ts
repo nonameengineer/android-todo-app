@@ -36,6 +36,10 @@ describe('TaskComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    fixture.nativeElement.remove();
+  });
+
   describe('#onCancel', () => {
     it('should navigate to home screen', () => {
       const navigateSpy = spyOn(router, 'navigate').and.stub();

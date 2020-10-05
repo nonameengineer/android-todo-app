@@ -10,7 +10,15 @@ describe('ThemeStorageService', () => {
     service = TestBed.inject(ThemeStorageService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  xdescribe('#saveIsDarkTheme', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
+  });
+
+  xdescribe('#getIsDarkTheme', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
   });
 });

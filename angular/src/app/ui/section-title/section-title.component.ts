@@ -8,14 +8,11 @@ import { ThemeService } from '../../services/theme/theme.service';
   styleUrls: ['./section-title.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SectionTitleComponent implements OnInit {
+export class SectionTitleComponent {
   readonly isDark$: BehaviorSubject<boolean> = this.themeService.isDark$;
 
   @Input() title: string;
   @Input() clickable = false;
 
   constructor(private themeService: ThemeService) { }
-
-  ngOnInit(): void {
-  }
 }

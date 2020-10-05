@@ -10,7 +10,33 @@ describe('TasksStorageService', () => {
     service = TestBed.inject(TasksStorageService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  xdescribe('#addTask', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
+  });
+
+  xdescribe('#getTaskById', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
+  });
+
+  xdescribe('#updateTasks', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
+  });
+
+  xdescribe('#updateTask', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
+  });
+
+  xdescribe('#removeTask', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
   });
 });

@@ -19,7 +19,22 @@ describe('ColorPickerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    fixture.nativeElement.remove();
+  });
+
+  xdescribe('#clickInside', () => {
+    it('should create', () => {
+    });
+  });
+
+  xdescribe('#clickOutside', () => {
+    it('should create', () => {
+    });
+  });
+
+  xdescribe('#onColor', () => {
+    it('should create', () => {
+    });
   });
 });

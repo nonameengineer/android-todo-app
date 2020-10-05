@@ -19,6 +19,10 @@ describe('SectionTitleComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    fixture.nativeElement.remove();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
