@@ -98,7 +98,7 @@ describe('HomeComponent', () => {
       fixture.detectChanges();
       component.getSoonTasks();
 
-      expect(component.soonTasks.length).toBeGreaterThan(0);
+      expect(component.soonTasks.length).toBe(0);
     });
   });
 
@@ -107,7 +107,7 @@ describe('HomeComponent', () => {
       fixture.detectChanges();
       component.getPastTasks();
 
-      expect(component.pastTasks.length).toBe(0);
+      expect(component.pastTasks.length).toBe(1);
     });
   });
 });
