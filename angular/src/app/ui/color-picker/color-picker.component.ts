@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { Colors } from '../../models/colors';
 import { BehaviorSubject } from 'rxjs';
 import { ThemeService } from '../../services/theme/theme.service';

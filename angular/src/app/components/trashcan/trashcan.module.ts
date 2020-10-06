@@ -6,7 +6,6 @@ import { TrashcanComponent } from './trashcan.component';
 import { SectionTitleModule } from '../../ui/section-title/section-title.module';
 import { TaskItemModule } from '../../ui/task-item/task-item.module';
 
-
 @NgModule({
   declarations: [TrashcanComponent],
   imports: [

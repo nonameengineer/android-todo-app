@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import {TaskCardComponent} from './task-card.component';
+import { Meta, Story } from '@storybook/angular/types-6-0';
+import { TaskCardComponent } from './task-card.component';
 import { TaskCardModule } from './task-card.module';
 
 export default {

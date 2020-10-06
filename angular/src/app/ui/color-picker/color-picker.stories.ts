@@ -1,5 +1,5 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import {ColorPickerComponent} from './color-picker.component';
+import { Meta, Story } from '@storybook/angular/types-6-0';
+import { ColorPickerComponent } from './color-picker.component';
 
 export default {
   title: 'UI kit/Color picker',

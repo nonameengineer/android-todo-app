@@ -6,7 +6,6 @@ import { HomeComponent } from './home.component';
 import { SectionTitleModule } from '../../ui/section-title/section-title.module';
 import { TaskItemModule } from '../../ui/task-item/task-item.module';
 
-
 @NgModule({
   declarations: [HomeComponent],
   imports: [

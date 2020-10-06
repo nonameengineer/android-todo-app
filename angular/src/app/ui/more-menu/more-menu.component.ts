@@ -1,14 +1,14 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
-  Component, ElementRef,
+  Component,
+  ElementRef,
+  EventEmitter,
   HostListener,
   Input,
-  OnInit, Output,
+  Output,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
-  EventEmitter,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ThemeService } from '../../services/theme/theme.service';

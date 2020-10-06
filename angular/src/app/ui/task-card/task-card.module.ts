@@ -5,8 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ColorPickerModule } from '../color-picker/color-picker.module';
 import { DateInputModule } from '../date-input/date-input.module';
 
-
-
 @NgModule({
   declarations: [TaskCardComponent],
   imports: [
