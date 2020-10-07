@@ -29,6 +29,7 @@ export const Home: React.FC = () => {
   const [todayTasks, setTodayTasks] = useState<ITask[]>([])
   const [favoriteTasks, setFavoriteTasks] = useState<ITask[]>([])
   const [soonTasks, setSoonTasks] = useState<ITask[]>([])
+  const [pastTasks, setPastTasks] = useState<ITask[]>([])
 
   function loadAllTasks (): void {
     setTasks(tasksStorage.getTasks())
@@ -49,7 +50,14 @@ export const Home: React.FC = () => {
 
   function getSoonTasks (): void {
     setSoonTasks(
-      tasks.filter(task => task.date !== new Date().toDateString() &&
+      tasks.filter(task => task.date < new Date().toDateString() &&
+        !task.isFavorite && !task.isArchived),
+    )
+  }
+
+  function getPastTasks (): void {
+    setPastTasks(
+      tasks.filter(task => task.date > new Date().toDateString() &&
         !task.isFavorite && !task.isArchived),
     )
   }
@@ -62,6 +70,7 @@ export const Home: React.FC = () => {
     getTodaysTasks()
     getFavoriteTasks()
     getSoonTasks()
+    getPastTasks()
   }, [tasks])
 
   return (
@@ -70,27 +79,46 @@ export const Home: React.FC = () => {
            onClick={() => history.push('/new')}>
         New...
       </div>
-      <section>
-        <SectionTitle title="Today" onClick={() => {}}/>
-        {
-          todayTasks.map((task, index) =>
-            <TaskItem key={index} task={task} onClick={() => {}}/>)
-        }
-      </section>
-      <section>
-        <SectionTitle title="Favourites" onClick={() => {}}/>
-        {
-          favoriteTasks.map((task, index) =>
-            <TaskItem key={index} task={task} onClick={() => {}}/>)
-        }
-      </section>
-      <section>
-        <SectionTitle title="Soon" onClick={() => {}}/>
-        {
-          soonTasks.map((task, index) =>
-            <TaskItem key={index} task={task} onClick={() => {}}/>)
-        }
-      </section>
+      {
+        todayTasks.length > 0 ?
+          <section>
+            <SectionTitle title="Today" onClick={() => {}}/>
+            {
+              todayTasks.map((task, index) =>
+                <TaskItem key={index} task={task} onClick={() => {}}/>)
+            }
+          </section> : null
+      }
+      {
+        favoriteTasks.length > 0 ?
+          <section>
+            <SectionTitle title="Favourites" onClick={() => {}}/>
+            {
+              favoriteTasks.map((task, index) =>
+                <TaskItem key={index} task={task} onClick={() => {}}/>)
+            }
+          </section> : null
+      }
+      {
+        soonTasks.length > 0 ?
+          <section>
+            <SectionTitle title="Soon" onClick={() => {}}/>
+            {
+              soonTasks.map((task, index) =>
+                <TaskItem key={index} task={task} onClick={() => {}}/>)
+            }
+          </section> : null
+      }
+      {
+        pastTasks.length > 0 ?
+          <section>
+            <SectionTitle title="Past" onClick={() => {}}/>
+            {
+              pastTasks.map((task, index) =>
+                <TaskItem key={index} task={task} onClick={() => {}}/>)
+            }
+          </section> : null
+      }
     </div>
   )
 }
