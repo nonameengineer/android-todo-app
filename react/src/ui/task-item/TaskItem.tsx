@@ -24,17 +24,20 @@ export const TaskItem = ({ task, onClick }: TaskItemProps) => {
 
   const tasksStorage = new TasksStorageService()
 
-  const onFavorite = () => {
+  const onFavorite = (event: any) => {
+    event.stopPropagation();
     task.isFavorite = !task.isFavorite
     tasksStorage.updateTask(task)
   }
 
-  const onRemove = () => {
+  const onRemove = (event: any) => {
+    event.stopPropagation();
     task.isArchived = true
     tasksStorage.updateTask(task)
   }
 
-  const onRestore = () => {
+  const onRestore = (e: any) => {
+    e.stopPropagation();
     task.isArchived = false
     tasksStorage.updateTask(task)
   }
@@ -61,9 +64,10 @@ export const TaskItem = ({ task, onClick }: TaskItemProps) => {
         pathname: '/task',
         state: { task },
       })}>
-      <div className={`text ${theme === Themes.DARK && !isActive
-        ? 'dark'
-        : null}`}>
+      <div className={
+        `text ${theme === Themes.DARK && !isActive
+          ? 'dark'
+          : null}`}>
         {isActive ? remaining : task?.title}
       </div>
       {
@@ -79,7 +83,7 @@ export const TaskItem = ({ task, onClick }: TaskItemProps) => {
               isArchived={task.isArchived}
               onFavorite={onFavorite}
               onRemove={onRemove}
-              onRestore={onRestore}/>
+              onRestore={(e: any) => onRestore(e)}/>
             {
               !task.isArchived ? theme === Themes.LIGHT
                 ? <AccessTimeIcon onClick={onTime}/>

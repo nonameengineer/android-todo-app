@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { ITask } from '../../models/ITask'
 import { TaskModel } from '../../models/task.model'
 import { Colors } from '../../models/colors'
@@ -5,11 +6,13 @@ import { Colors } from '../../models/colors'
 const TASKS_STORAGE_KEY = 'tasks';
 
 export class TasksStorageService {
+  readonly updated$ = new Subject<void>();
 
   addTask(task: ITask): void {
     const tasks = this.getTasks();
     tasks.push(task);
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    this.updated$.next();
   }
 
   getTasks(): ITask[] {
@@ -27,6 +30,7 @@ export class TasksStorageService {
 
   updateTasks(tasks: ITask[]): void {
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    this.updated$.next();
   }
 
   updateTask(task: ITask): void {
@@ -37,16 +41,18 @@ export class TasksStorageService {
       }
     }
     this.updateTasks(tasks);
+    this.updated$.next();
   }
 
-  removeTaskById(id: string): void {
+  removeTask(task: ITask): void {
     const tasks = this.getTasks();
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === id) {
+      if (tasks[i].id === task.id) {
         tasks.splice(i, 1);
       }
     }
     this.updateTasks(tasks);
+    this.updated$.next();
   }
 
   private getMockTasks(): ITask[] {

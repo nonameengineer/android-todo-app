@@ -16,9 +16,9 @@ import { ThemeContext } from '../../App'
 type MoreMenuProps = {
   isFavorite: boolean,
   isArchived: boolean,
-  onFavorite: () => void,
-  onRemove: () => void,
-  onRestore: () => void
+  onFavorite: (e: any) => void,
+  onRemove: (e: any) => void,
+  onRestore: (e: any) => void
 }
 
 export const MoreMenu = ({
