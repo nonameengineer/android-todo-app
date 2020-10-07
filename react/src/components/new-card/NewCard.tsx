@@ -11,13 +11,14 @@ export const NewCard = () => {
 
   function onAccept(task: ITask): void {
     tasksStorageService.addTask(task)
-    console.log(task);
     history.push('/')
   }
 
   return (
     <div className="wrapper">
-      <TaskCard accepted={onAccept} closed={() => history.push('/')}/>
+      <TaskCard
+        accepted={onAccept}
+        closed={() => history.push('/')}/>
     </div>
   )
 }

@@ -32,40 +32,4 @@
   justify-self: center;
   align-self: center;
   transition: 200ms;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-
-  &--red {
-    background-color: $red;
-  }
-
-  &--orange {
-    background-color: $orange;
-  }
-
-  &--yellow {
-    background-color: $yellow;
-  }
-
-  &--green {
-    background-color: $green;
-  }
-
-  &--cyan {
-    background-color: $cyan;
-  }
-
-  &--blue {
-    background-color: $blue;
-  }
-
-  &--dark-blue {
-    background-color: $dark-blue;
-  }
-
-  &--purple {
-    background-color: $purple;
-  }
 }

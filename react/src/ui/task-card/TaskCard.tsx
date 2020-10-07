@@ -27,18 +27,22 @@ export const TaskCard = ({ task, accepted, closed }: TaskCardProps) => {
 
   const [title, setTitle] = useState('')
   const [date, setDate] = useState(new Date())
-  const [color, setColor] = useState(Colors.GREEN)
+  const [color, setColor] = useState<string>(Colors.GREEN)
 
   const handleClickOutside = (event: any) => {
     if (colorPickerRef && colorPickerRef.current &&
       // @ts-ignore
-      !containerRef.current.contains(event.target)) {
+      !colorPickerRef.current.contains(event.target)) {
       setIsShowColor(false)
     }
   }
 
   const onColor = (event: any) => {
     setIsShowColor(true)
+  }
+
+  const onColorSelect = (color: string) => {
+    setColor(color);
   }
 
   const onSubmit = (event: any) => {
@@ -65,9 +69,11 @@ export const TaskCard = ({ task, accepted, closed }: TaskCardProps) => {
   useEffect(() => {
     if (task) {
       setTitle(task.title)
+      setColor(task.color)
     }
 
     document.addEventListener('click', handleClickOutside, true)
+
     return () => {
       document.removeEventListener('click', handleClickOutside, true)
     }
@@ -77,7 +83,7 @@ export const TaskCard = ({ task, accepted, closed }: TaskCardProps) => {
     <>
       <div
         className="card"
-        style={{ borderColor: task?.color }}>
+        style={{ borderColor: color }}>
         <div className="content">
           <div className="row header">
             <textarea
@@ -85,8 +91,12 @@ export const TaskCard = ({ task, accepted, closed }: TaskCardProps) => {
               className={`${theme === Themes.DARK ? 'dark' : null}`}
               value={title}
               onChange={e => setTitle(e.target.value)}/>
-            <div className="color-picker-button" onClick={onColor}>
-              {isShowColor ? <ColorPicker ref={colorPickerRef}/> : null}
+            <div
+              ref={colorPickerRef}
+              className="color-picker-button"
+              style={{ backgroundColor: color }}
+              onClick={onColor}>
+              {isShowColor ? <ColorPicker colorSelect={onColorSelect}/> : null}
             </div>
           </div>
           <div className="row">

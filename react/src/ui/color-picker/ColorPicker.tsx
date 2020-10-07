@@ -5,16 +5,19 @@ import { ThemeContext } from '../../App'
 import Themes from '../../models/themes'
 
 type ColorPickerProps = {
-  ref: any
+  colorSelect: (color: string) => void
 }
-export const ColorPicker = ({ref}: ColorPickerProps) => {
+export const ColorPicker = ({colorSelect}: ColorPickerProps) => {
   const theme = useContext(ThemeContext);
 
   return (
     <div className={`color-picker ${theme === Themes.DARK ? 'dark' : null}`}>
       {
-        Object.keys(Colors).map((color, index) =>
-          <div key={index} className={`color color--${color.toLowerCase()}`}/>)
+        Object.values(Colors).map((color: string, index: number) =>
+          <div key={index}
+               className='color'
+               style={{backgroundColor: color}}
+               onClick={(e) => colorSelect(color)} />)
       }
     </div>
   )
