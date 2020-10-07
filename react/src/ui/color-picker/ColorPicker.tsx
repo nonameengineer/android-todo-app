@@ -7,6 +7,7 @@ import Themes from '../../models/themes'
 type ColorPickerProps = {
   colorSelect: (color: string) => void
 }
+
 export const ColorPicker = ({colorSelect}: ColorPickerProps) => {
   const theme = useContext(ThemeContext);
 

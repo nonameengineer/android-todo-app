@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './DateInput.scss'
 
-export const DateInput = () => {
-  const [day, setDay] = useState()
-  const [month, setMonth] = useState()
-  const [year, setYear] = useState()
+type DateInputProps = {
+  onDate: (date: Date) => void
+}
+
+export const DateInput = ({onDate}: DateInputProps) => {
+  const [day, setDay] = useState('')
+  const [month, setMonth] = useState('')
+  const [year, setYear] = useState('')
+
   const [error, setError] = useState<boolean>(false)
 
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
@@ -43,15 +48,15 @@ export const DateInput = () => {
       setError(false)
 
       const date = new Date(
-        year > 0 ? year - 1 : 0,
-        month > 0 ? month - 1 : 0,
-        day > 0 ? day - 1 : 0,
+        +year > 0 ? +year - 1 : 0,
+        +month > 0 ? +month - 1 : 0,
+        +day > 0 ? +day - 1 : 0,
         0,
         0,
         0,
         0)
 
-      console.log(date);
+      onDate(date)
     }
   }, [day, month, year])
 

@@ -100,7 +100,7 @@ export const TaskCard = ({ task, accepted, closed }: TaskCardProps) => {
             </div>
           </div>
           <div className="row">
-            <DateInput/>
+            <DateInput onDate={setDate}/>
             {theme === Themes.LIGHT ? <AccessTimeIcon/> : <AccessTimeDarkIcon/>}
           </div>
         </div>

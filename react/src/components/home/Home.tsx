@@ -91,7 +91,6 @@ export const Home: React.FC = () => {
             <TaskItem key={index} task={task} onClick={() => {}}/>)
         }
       </section>
-      <div className="show-more">See more...</div>
     </div>
   )
 }
