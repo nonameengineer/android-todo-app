@@ -20,16 +20,31 @@ const todayTasks = [
   },
 ]
 
+type ListsVisibility = {
+  today: boolean,
+  favourites: boolean,
+  soon: boolean,
+  past: boolean
+}
+
 export const Home: React.FC = () => {
   const history = useHistory()
   const theme = useContext(ThemeContext)
 
   const tasksStorage = new TasksStorageService()
+
   const [tasks, setTasks] = useState<ITask[]>([])
   const [todayTasks, setTodayTasks] = useState<ITask[]>([])
   const [favoriteTasks, setFavoriteTasks] = useState<ITask[]>([])
   const [soonTasks, setSoonTasks] = useState<ITask[]>([])
   const [pastTasks, setPastTasks] = useState<ITask[]>([])
+
+  const [listsVisibility, setListsVisibility] = useState<ListsVisibility>({
+    today: true,
+    favourites: true,
+    soon: true,
+    past: true,
+  })
 
   function loadAllTasks (): void {
     setTasks(tasksStorage.getTasks())
@@ -63,6 +78,10 @@ export const Home: React.FC = () => {
   }
 
   useEffect(() => {
+    console.log(listsVisibility);
+  }, [listsVisibility])
+
+  useEffect(() => {
     loadAllTasks()
   }, [])
 
@@ -73,6 +92,14 @@ export const Home: React.FC = () => {
     getPastTasks()
   }, [tasks])
 
+  const onChangeListVisibility = (listName: keyof ListsVisibility) => {
+    const value = listsVisibility[listName];
+    setListsVisibility({
+      ...listsVisibility,
+      [listName]: !listsVisibility[listName],
+    })
+  }
+
   return (
     <div className="wrapper">
       <div className={`new ${theme === Themes.DARK ? 'dark' : null}`}
@@ -82,40 +109,40 @@ export const Home: React.FC = () => {
       {
         todayTasks.length > 0 ?
           <section>
-            <SectionTitle title="Today" onClick={() => {}}/>
+            <SectionTitle title="Today" clickable={!listsVisibility.today} onClick={() => onChangeListVisibility('today')}/>
             {
-              todayTasks.map((task, index) =>
-                <TaskItem key={index} task={task} onClick={() => {}}/>)
+              listsVisibility.today ? todayTasks.map((task, index) =>
+                <TaskItem key={index} task={task} onClick={() => {}}/>) : null
             }
           </section> : null
       }
       {
         favoriteTasks.length > 0 ?
           <section>
-            <SectionTitle title="Favourites" onClick={() => {}}/>
+            <SectionTitle title="Favourites" clickable={!listsVisibility.favourites} onClick={() => onChangeListVisibility('favourites')}/>
             {
-              favoriteTasks.map((task, index) =>
-                <TaskItem key={index} task={task} onClick={() => {}}/>)
+              listsVisibility.favourites ? favoriteTasks.map((task, index) =>
+                <TaskItem key={index} task={task} onClick={() => {}}/>) : null
             }
           </section> : null
       }
       {
         soonTasks.length > 0 ?
           <section>
-            <SectionTitle title="Soon" onClick={() => {}}/>
+            <SectionTitle title="Soon" clickable={!listsVisibility.soon} onClick={() => onChangeListVisibility('soon')}/>
             {
-              soonTasks.map((task, index) =>
-                <TaskItem key={index} task={task} onClick={() => {}}/>)
+              listsVisibility.soon ? soonTasks.map((task, index) =>
+                <TaskItem key={index} task={task} onClick={() => {}}/>) : null
             }
           </section> : null
       }
       {
         pastTasks.length > 0 ?
           <section>
-            <SectionTitle title="Past" onClick={() => {}}/>
+            <SectionTitle title="Past" clickable={!listsVisibility.past} onClick={() => onChangeListVisibility('past')}/>
             {
-              pastTasks.map((task, index) =>
-                <TaskItem key={index} task={task} onClick={() => {}}/>)
+              listsVisibility.past ? pastTasks.map((task, index) =>
+                <TaskItem key={index} task={task} onClick={() => {}}/>) : null
             }
           </section> : null
       }
