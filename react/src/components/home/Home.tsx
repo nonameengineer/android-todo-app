@@ -78,10 +78,6 @@ export const Home: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log(listsVisibility);
-  }, [listsVisibility])
-
-  useEffect(() => {
     loadAllTasks()
   }, [])
 

@@ -7,30 +7,42 @@ import { ReactComponent as FavoriteIcon } from '../../assets/svg/favorite-24px.s
 import { ReactComponent as FavoriteDarkIcon } from '../../assets/svg/favorite-dark-24px.svg'
 import { ReactComponent as DeleteIcon } from '../../assets/svg/delete-24px.svg'
 import { ReactComponent as DeleteDarkIcon } from '../../assets/svg/delete-dark-24px.svg'
+import { ReactComponent as RestoreFromTrashIcon } from '../../assets/svg/restore_from_trash-24px.svg'
+import { ReactComponent as RestoreFromTrashDarkIcon } from '../../assets/svg/restore_from_trash-dark-24px.svg'
 import Themes from '../../models/themes'
 import { ThemeContext } from '../../App'
 
-export const MoreMenu = () => {
+
+type MoreMenuProps = {
+  isFavorite: boolean,
+  isArchived: boolean,
+  onFavorite: () => void,
+  onRemove: () => void,
+  onRestore: () => void
+}
+
+export const MoreMenu = ({
+  isFavorite,
+  isArchived,
+  onFavorite,
+  onRemove,
+  onRestore
+}: MoreMenuProps) => {
   const theme = useContext(ThemeContext)
 
   const containerRef = useRef(null)
 
   const [isShow, setIsShow] = useState(false)
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavoriteState, setIsFavoriteState] = useState(false)
 
   const onMore = (event: any) => {
     event.stopPropagation()
     setIsShow(!isShow)
-    console.log(isShow)
   }
 
   const toggleFavorite = (event: any) => {
     event.stopPropagation()
-    setIsFavorite(!isFavorite)
-  }
-
-  const onRemove = (event: any) => {
-    event.stopPropagation()
+    setIsFavoriteState(!isFavoriteState)
   }
 
   const handleClickOutside = (event: any) => {
@@ -42,6 +54,7 @@ export const MoreMenu = () => {
   }
 
   useEffect(() => {
+    console.log(isArchived);
     document.addEventListener('click', handleClickOutside, true)
     return () => {
       document.removeEventListener('click', handleClickOutside, true)
@@ -51,17 +64,20 @@ export const MoreMenu = () => {
   return (
     <>
       {
-        theme === Themes.LIGHT
-          ? <MoreVertIcon onClick={onMore}/>
-          : <MoreVertDarkIcon onClick={onMore}/>
+        isArchived
+          ? theme === Themes.LIGHT
+            ? <RestoreFromTrashIcon onClick={onRestore}/>
+            : <RestoreFromTrashDarkIcon onClick={onRestore}/>
+          : theme === Themes.LIGHT
+            ? <MoreVertIcon onClick={onMore}/>
+            : <MoreVertDarkIcon onClick={onMore}/>
       }
       {
-        isShow
-          ? <div ref={containerRef}>
+        isShow ? <div ref={containerRef}>
             <div className={`more-menu ${theme === Themes.DARK ? 'dark' : null}`}>
               <div className="more-menu__item" onClick={toggleFavorite}>
                 {
-                  isFavorite
+                  isFavoriteState
                     ? theme === Themes.LIGHT ? <FavoriteIcon/> : <FavoriteDarkIcon/>
                     : theme === Themes.LIGHT ? <FavoriteBorderIcon/> : <FavoriteDarkIcon/>
                 }
@@ -76,8 +92,7 @@ export const MoreMenu = () => {
                 <span>Remove</span>
               </div>
             </div>
-          </div>
-          : null
+          </div> : null
       }
     </>
   )

@@ -8,8 +8,10 @@
   (click)="onRestore($event)">
 <ng-container #container></ng-container>
 <ng-template #template>
-  <div class="more-menu" [ngClass]="{'dark': isDark$ | async}">
-    <div class="more-menu__item" (click)="onFavorite($event)">
+  <div class="more-menu"
+       [ngClass]="{'dark': isDark$ | async}">
+    <div class="more-menu__item"
+         (click)="onFavorite($event)">
       <img *ngIf="!isFavorite; else favorite"
            [src]="(isDark$ | async) ? 'assets/svg/favorite_border-dark-24px.svg' : 'assets/svg/favorite_border-24px.svg'">
       <ng-template #favorite>
@@ -17,7 +19,8 @@
       </ng-template>
       <span>Add to Favourites</span>
     </div>
-    <div class="more-menu__item" (click)="onRemove($event)">
+    <div class="more-menu__item"
+         (click)="onRemove($event)">
       <img [src]="(isDark$ | async) ? 'assets/svg/delete-dark-24px.svg' : 'assets/svg/delete-24px.svg'">
       <span>Remove</span>
     </div>

@@ -8,6 +8,7 @@ import { ReactComponent as EastIcon } from '../../assets/svg/east-24px.svg'
 import { ITask } from '../../models/ITask'
 import { ThemeContext } from '../../App'
 import Themes from '../../models/themes'
+import { TasksStorageService } from '../../services/tasks-storage/tasks-storage.service'
 
 type TaskItemProps = {
   task: ITask;
@@ -15,10 +16,28 @@ type TaskItemProps = {
 }
 
 export const TaskItem = ({ task, onClick }: TaskItemProps) => {
-  const theme = useContext(ThemeContext);
+  const theme = useContext(ThemeContext)
   const history = useHistory()
+
   const [isActive, setIsActive] = useState(false)
   const [remaining, setRemaining] = useState('')
+
+  const tasksStorage = new TasksStorageService()
+
+  const onFavorite = () => {
+    task.isFavorite = !task.isFavorite
+    tasksStorage.updateTask(task)
+  }
+
+  const onRemove = () => {
+    task.isArchived = true
+    tasksStorage.updateTask(task)
+  }
+
+  const onRestore = () => {
+    task.isArchived = false
+    tasksStorage.updateTask(task)
+  }
 
   const onTime = (event: any) => {
     event.stopPropagation()
@@ -36,13 +55,15 @@ export const TaskItem = ({ task, onClick }: TaskItemProps) => {
       className="item"
       style={{
         borderColor: task.color,
-        backgroundColor: isActive ? task.color : 'unset'
+        backgroundColor: isActive ? task.color : 'unset',
       }}
       onClick={() => history.push({
         pathname: '/task',
-        state: { task }
+        state: { task },
       })}>
-      <div className={`text ${theme === Themes.DARK && !isActive ? 'dark' : null}`}>
+      <div className={`text ${theme === Themes.DARK && !isActive
+        ? 'dark'
+        : null}`}>
         {isActive ? remaining : task?.title}
       </div>
       {
@@ -53,8 +74,17 @@ export const TaskItem = ({ task, onClick }: TaskItemProps) => {
           </div>
           :
           <div className="buttons">
-            <MoreMenu/>
-            {theme === Themes.LIGHT ? <AccessTimeIcon onClick={onTime}/> : <AccessTimeDarkIcon onClick={onTime}/>}
+            <MoreMenu
+              isFavorite={task.isFavorite}
+              isArchived={task.isArchived}
+              onFavorite={onFavorite}
+              onRemove={onRemove}
+              onRestore={onRestore}/>
+            {
+              !task.isArchived ? theme === Themes.LIGHT
+                ? <AccessTimeIcon onClick={onTime}/>
+                : <AccessTimeDarkIcon onClick={onTime}/> : null
+            }
           </div>
       }
     </div>

@@ -1,30 +1,22 @@
 @import "../../assets/scss/modules/theme.scss";
 
-.input__new {
-  border: $border-width solid #000;
-  border-radius: 3px;
-  width: 100%;
-  height: 40px;
-  padding: 0 9px;
-  box-sizing: border-box;
-  background: none;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  &.dark {
-    border: $border-width solid #fff;
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 8px;
 
-    &::placeholder {
-      color: #fff;
+    .button {
+      cursor: pointer;
+      text-align: center;
+      color: #2094f9;
+      margin-left: 24px;
     }
   }
-
-  &::placeholder {
-    color: #000;
-  }
-}
-
-.show-more {
-  cursor: pointer;
-  width: 100%;
-  text-align: center;
-  color: #2094f9;
 }

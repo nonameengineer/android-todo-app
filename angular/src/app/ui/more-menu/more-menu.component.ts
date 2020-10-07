@@ -62,29 +62,24 @@ export class MoreMenuComponent {
   }
 
   onRemove(event: any): void {
-    this.clickRemove.emit();
-
     event.stopPropagation();
+    this.clickRemove.emit();
     this.hideMenu();
   }
 
   onFavorite(event: any): void {
-    this.clickFavorite.emit();
-
     event.stopPropagation();
+    this.clickFavorite.emit();
     this.hideMenu();
   }
 
   onMore(event: any): void {
     event.stopPropagation();
-    console.log('on more');
     this.isShow ? this.hideMenu() : this.showMenu();
-    console.log(this.isShow);
   }
 
   onRestore(event: any): void {
-    this.clickRestore.emit();
-
     event.stopPropagation();
+    this.clickRestore.emit();
   }
 }
