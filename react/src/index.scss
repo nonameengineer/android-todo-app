@@ -9,6 +9,10 @@
   padding: 0;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   height: 100%;
   transition: background-color 200ms;
@@ -16,6 +20,13 @@ body {
   &.dark {
     background-color: #000000;
   }
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .dark {
