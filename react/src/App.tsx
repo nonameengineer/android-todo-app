@@ -9,7 +9,6 @@ import { ReactComponent as WBSunnyIcon } from './assets/svg/wb_sunny-24px.svg'
 import { ReactComponent as WBSunnyDarkIcon } from './assets/svg/wb_sunny-dark-24px.svg'
 import Themes from './models/themes'
 import { Trashcan } from './components/trashcan/Trashcan'
-import { SectionSettings } from './components/section-settings/SectionSettings'
 import { Task } from './components/task/Task'
 
 export const ThemeContext = React.createContext(Themes.LIGHT)
@@ -57,9 +56,6 @@ function App () {
             </Route>
             <Route path="/trashcan">
               <Trashcan/>
-            </Route>
-            <Route path="/section-settings">
-              <SectionSettings/>
             </Route>
             <Route path="/task">
               <Task/>
