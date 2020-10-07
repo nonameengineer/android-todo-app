@@ -22,55 +22,54 @@ const todayTasks = [
 
 export const Home: React.FC = () => {
   const history = useHistory()
-  const theme = useContext(ThemeContext);
+  const theme = useContext(ThemeContext)
 
-  const tasksStorage = new TasksStorageService();
-  const [tasks, setTasks] = useState<ITask[]>([]);
-  const [todayTasks, setTodayTasks] = useState<ITask[]>([]);
-  const [favoriteTasks, setFavoriteTasks] = useState<ITask[]>([]);
-  const [soonTasks, setSoonTasks] = useState<ITask[]>([]);
+  const tasksStorage = new TasksStorageService()
+  const [tasks, setTasks] = useState<ITask[]>([])
+  const [todayTasks, setTodayTasks] = useState<ITask[]>([])
+  const [favoriteTasks, setFavoriteTasks] = useState<ITask[]>([])
+  const [soonTasks, setSoonTasks] = useState<ITask[]>([])
 
-  function loadAllTasks(): void {
-    setTasks(tasksStorage.getTasks());
+  function loadAllTasks (): void {
+    setTasks(tasksStorage.getTasks())
   }
 
-  function getTodaysTasks(): void {
+  function getTodaysTasks (): void {
     setTodayTasks(
       tasks.filter(task => task.date === new Date().toDateString() &&
-      !task.isFavorite && !task.isArchived)
-    );
+        !task.isFavorite && !task.isArchived),
+    )
   }
 
-  function getFavoriteTasks(): void {
+  function getFavoriteTasks (): void {
     setFavoriteTasks(
-      tasks.filter(task => task.isFavorite && !task.isArchived)
-    );
+      tasks.filter(task => task.isFavorite && !task.isArchived),
+    )
   }
 
-  function getSoonTasks(): void {
+  function getSoonTasks (): void {
     setSoonTasks(
       tasks.filter(task => task.date !== new Date().toDateString() &&
-        !task.isFavorite && !task.isArchived)
-    );
+        !task.isFavorite && !task.isArchived),
+    )
   }
 
   useEffect(() => {
-    loadAllTasks();
+    loadAllTasks()
   }, [])
 
   useEffect(() => {
-    getTodaysTasks();
-    getFavoriteTasks();
-    getSoonTasks();
+    getTodaysTasks()
+    getFavoriteTasks()
+    getSoonTasks()
   }, [tasks])
 
   return (
     <div className="wrapper">
-      <input
-        type="text"
-        placeholder="New..."
-        className={`input__new ${theme === Themes.DARK ? 'dark' : null}`}
-        onClick={() => history.push('/new')}/>
+      <div className={`new ${theme === Themes.DARK ? 'dark' : null}`}
+           onClick={() => history.push('/new')}>
+        New...
+      </div>
       <section>
         <SectionTitle title="Today" onClick={() => {}}/>
         {
