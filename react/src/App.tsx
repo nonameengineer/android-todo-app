@@ -10,18 +10,32 @@ import { ReactComponent as WBSunnyDarkIcon } from './assets/svg/wb_sunny-dark-24
 import Themes from './models/themes'
 import { Trashcan } from './components/trashcan/Trashcan'
 import { Task } from './components/task/Task'
+import { ThemeStorageService } from './services/theme-storage/theme-storage.service'
 
+// By default is light theme
 export const ThemeContext = React.createContext(Themes.LIGHT)
 
 function App () {
-  const [theme, setTheme] = useState(useContext(ThemeContext))
-  const toggleTheme = () => {
-    theme === Themes.DARK
-      ? setTheme(Themes.LIGHT)
-      : setTheme(Themes.DARK)
-  }
+  const themeStorage = new ThemeStorageService();
 
   const history = useHistory()
+
+  const [theme, setTheme] = useState(useContext(ThemeContext))
+  const toggleTheme = () => {
+    if (theme === Themes.DARK) {
+      setTheme(Themes.LIGHT)
+      themeStorage.saveIsDarkTheme(false)
+    } else {
+      setTheme(Themes.DARK)
+      themeStorage.saveIsDarkTheme(true)
+    }
+  }
+
+  useEffect(() => {
+    themeStorage.getIsDarkTheme()
+      ? setTheme(Themes.DARK)
+      : setTheme(Themes.LIGHT);
+  }, [])
 
   useEffect(() => {
     const BODY_DARK_CLASS = 'dark'
