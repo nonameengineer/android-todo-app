@@ -10,12 +10,107 @@
     src: url("assets/fonts/Roboto/Roboto-Bold.ttf") format("ttf")
 }
 
+.content {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+}
+
 * {
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
     font-size: 12pt;
     margin: 0;
     padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    transition: background-color 200ms;
+
+    &.dark {
+        background-color: #000000;
+    }
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.dark {
+    color: #ffffff;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 372px;
+    width: 100%;
+}
+
+img {
+    position: relative;
+    z-index: 0;
+    outline: none;
+    transition: 200ms;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+// Section
+
+section {
+    margin-top: 32px;
+}
+
+.section-title {
+    font-size: 18pt;
+    margin-bottom: 9px;
+    font-weight: 700;
+    transition: 200ms;
+    cursor: pointer;
+
+    &.dark {
+        color: #ffffff;
+    }
+
+    &--clickable {
+        &.dark {
+            color: #2094f9;
+        }
+
+        color: #2094f9;
+    }
+}
+
+// Text {
+
+.text {
+    transition: color 200ms;
+
+    &.dark {
+        color: #ffffff;
+    }
+}
+
+// Title
+.title {
+    outline: none;
+}
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
 }
 
 main {
@@ -162,4 +257,21 @@ img {
     background-color: #FA124F;
     border-radius: 100%;
     box-sizing: border-box;
+}
+
+main {
+    min-height: 812px;
+    height: 100%;
+    width: 100%;
+}
+
+.buttons {
+    margin-top: 6px;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+
+    svg {
+        margin-left: 12px;
+    }
 }

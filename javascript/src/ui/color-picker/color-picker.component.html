@@ -1,0 +1,3 @@
+<div class="color-picker" [ngClass]="{'dark': (isDark$ | async)}">
+  <div *ngFor="let color of colors" class="color color--{{color | lowercase}}" (click)="onColor(color)"></div>
+</div>

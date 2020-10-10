@@ -1,0 +1,20 @@
+@import "../../../assets/scss/modules/theme.scss";
+
+.date-input {
+  display: flex;
+  align-items: center;
+}
+
+input {
+  margin-left: 3px;
+  background: unset;
+  border: 2px solid $light-orange;
+  border-radius: 3px;
+  padding: 2px 4px;
+  color: $light-orange;
+  width: 50px;
+
+  &.error {
+    border: 2px solid $red;
+  }
+}

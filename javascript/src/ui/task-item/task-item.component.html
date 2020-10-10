@@ -1,0 +1,29 @@
+<div class="item"
+     [ngClass]="{'item--active': isActive}"
+     [ngStyle]="{
+       'border-color': task?.color,
+       'background-color': isActive ? task?.color : 'unset'
+     }">
+  <div class="text"
+       [ngClass]="{'dark': (isDark$ | async) && !isActive}">
+    {{isActive ? remaining : task?.title}}
+  </div>
+  <div class="buttons" *ngIf="!isActive; else activeButtons">
+    <app-more-menu
+      class="more-menu"
+      [isFavorite]="task.isFavorite"
+      [isArchived]="task.isArchived"
+      (clickFavorite)="onFavorite()"
+      (clickRemove)="onRemove()"
+      (clickRestore)="onRestore()"></app-more-menu>
+    <img [src]="(isDark$ | async) ? 'assets/svg/access_time-dark-24px.svg' : 'assets/svg/access_time-24px.svg'"
+         (click)="onTime($event)"
+         *ngIf="!task?.isArchived">
+  </div>
+  <ng-template #activeButtons>
+    <div class="buttons">
+      <img src="assets/svg/east-24px.svg"
+           (click)="onBack($event)">
+    </div>
+  </ng-template>
+</div>

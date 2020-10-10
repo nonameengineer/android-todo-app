@@ -1,0 +1,5 @@
+<div class="date-input" [formGroup]="form">
+  <input placeholder="Day" formControlName="day" type="number" [ngClass]="{'error': form.invalid}">
+  <input placeholder="Month" formControlName="month" type="number" [ngClass]="{'error': form.invalid}">
+  <input placeholder="Year" formControlName="year" type="number" [ngClass]="{'error': form.invalid}">
+</div>
