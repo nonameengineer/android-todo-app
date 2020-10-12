@@ -50,20 +50,6 @@ class Router {
         return this.clearSlashes(fragment);
     };
 
-    getFragment() {
-        let fragment = "";
-
-        if (this.mode === "history") {
-            fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
-            fragment = fragment.replace(/\?(.*)$/, "");
-            fragment = this.root !== "/" ? fragment.replace(this.root, "") : fragment;
-        } else {
-            const match = window.location.href.match(/#(.*)$/);
-            fragment = match ? match[1] : "";
-        }
-        return this.clearSlashes(fragment);
-    };
-
     navigate(path = "") {
         if (this.mode === "history") {
             window.history.pushState(null, null, this.root + this.clearSlashes(path));
