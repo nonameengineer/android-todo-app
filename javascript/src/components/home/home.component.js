@@ -8,7 +8,6 @@ class HomeComponent extends Component {
 
   render () {
     return `
-      <h1>Home</h1>
       ${Renderer.render(new SectionTitleComponent('Some title'), this.id)}
      `
   }

@@ -3,11 +3,9 @@ import HomeComponent from './components/home/home.component'
 import Utils from './services/Utils'
 import HeaderComponent from './components/header/header.component'
 import Renderer from './lib/Renderer'
-
-// List of supported routes. Any url other than these routes will throw a 404 error
-const routes = {
-  '/': HomeComponent,
-}
+import TrashcanComponent from './components/trashcan/trashcan.component'
+import TaskComponent from './components/task/task.component'
+import NewTaskComponent from './components/new-task/new-task.component'
 
 // Add Wrapper
 const wrapper = document.createElement('div');
@@ -28,6 +26,15 @@ header.after(content);
 
 Renderer.render(new HeaderComponent(), header.id);
 
+// List of supported routes.
+// Any url other than these routes will throw a 404 error
+const routes = {
+  '/new-task': NewTaskComponent,
+  '/task': TaskComponent,
+  '/trashcan': TrashcanComponent,
+  '/': HomeComponent,
+}
+
 // The router code. Takes a URL, checks against the list of supported routes and then renders the corresponding content page.
 const router = async () => {
   // Lazy load view element:
@@ -43,7 +50,7 @@ const router = async () => {
   // Get the page from our hash of supported routes.
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   let page = routes[parsedURL] ? routes[parsedURL] : Error404
-  Renderer.render(new HomeComponent(), 'content');
+  Renderer.render(new page(), 'content');
 }
 
 // Listen on hash change:
