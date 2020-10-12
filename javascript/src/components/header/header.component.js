@@ -4,23 +4,29 @@ import wbSunnyIcon from './../../assets/svg/wb_sunny-24px.svg'
 import DARK_THEME_VAR from '../../services/theme.service'
 import Component from '../../lib/Component'
 
-class Header extends Component {
+class HeaderComponent extends Component {
+
   constructor () {
     super();
     this.darkTheme = window[DARK_THEME_VAR];
   }
 
-  async beforeRender() {
+  beforeRender() {
     this.darkTheme = false;
   }
 
-  async afterRender() {
+  afterRender() {
     document.getElementById('theme-icon').addEventListener('click', () => {
       this.darkTheme = !this.darkTheme;
+
+      const BODY_DARK_CLASS = 'dark'
+      this.darkTheme
+        ? document.body.classList.add(BODY_DARK_CLASS)
+        : document.body.classList.remove(BODY_DARK_CLASS)
     })
   }
 
-  async render() {
+  render() {
     return `
       <header>
         <div class="title">Delat<span>'</span></div>
@@ -33,4 +39,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default HeaderComponent;

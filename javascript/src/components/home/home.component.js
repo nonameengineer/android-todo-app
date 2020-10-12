@@ -1,20 +1,17 @@
 import Component from '../../lib/Component'
 import './home.component.scss'
-import renderComponent from '../../lib/render'
+import Renderer from '../../lib/Renderer'
 import SectionTitleComponent
   from '../../ui/section-title/section-title.component'
 
-class Home extends Component {
-  constructor () {
-    super()
-  }
+class HomeComponent extends Component {
 
-  async render () {
+  render () {
     return `
       <h1>Home</h1>
-      ${await renderComponent(this.ref, new SectionTitleComponent('Some title'))} 
-    `
+      ${Renderer.render(new SectionTitleComponent('Some title'), this.id)}
+     `
   }
 }
 
-export default Home
+export default HomeComponent

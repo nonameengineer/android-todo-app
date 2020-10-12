@@ -1,19 +1,23 @@
 class Component {
 
+  constructor () {
+    this.name = this.constructor.name.toLowerCase();
+  }
+
   /**
    * Running before calling `render` function
    */
-  async beforeRender() {}
+  beforeRender() {}
 
   /**
    * Running after calling `render` function
    */
-  async afterRender() {}
+  afterRender() {}
 
   /**
    * Returns component template
    */
-  async render() {}
+  render() {}
 }
 
 export default Component;

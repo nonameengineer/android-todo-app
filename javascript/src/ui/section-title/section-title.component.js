@@ -7,7 +7,11 @@ class SectionTitleComponent extends Component {
     this.title = title;
   }
 
-  async render() {
+  afterRender () {
+    super.afterRender()
+  }
+
+  render() {
     return `
       <div class="section-title">${this.title}</div>
     `
