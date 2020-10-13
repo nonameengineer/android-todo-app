@@ -1,5 +1,6 @@
 import Component from '../../lib/Component'
 import './task-item.component.scss';
+import DARK_THEME_VAR from '../../services/theme.service'
 
 class TaskItemComponent extends Component {
 
@@ -11,7 +12,7 @@ class TaskItemComponent extends Component {
   render () {
     return `
       <div class="item">
-        <div class="text">
+        <div class="text ${window[DARK_THEME_VAR] ? 'dark' : 'light'}">
           ${this.title}
         </div>
       </div>
