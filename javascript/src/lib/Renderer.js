@@ -4,9 +4,9 @@ class Renderer {
     let count = 0;
     let elementId = `${component.name}-child-${count}`;
 
-    const duplicateId = document.querySelector(`#${elementId}`);
-    if (duplicateId) {
-      count = +duplicateId.split('-')[2];
+    const duplicateElement = document.querySelector(`#${elementId}`);
+    if (duplicateElement) {
+      count = +(duplicateElement.id.split('-')[2]);
       count++;
     }
 
