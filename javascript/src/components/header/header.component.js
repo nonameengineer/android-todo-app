@@ -16,6 +16,10 @@ class HeaderComponent extends Component {
   }
 
   afterRender() {
+    document.getElementById('title').addEventListener('click', () => {
+      window.location.pathname = '/';
+    })
+
     document.getElementById('theme-icon').addEventListener('click', () => {
       this.darkTheme = !this.darkTheme;
 
@@ -24,14 +28,18 @@ class HeaderComponent extends Component {
         ? document.body.classList.add(BODY_DARK_CLASS)
         : document.body.classList.remove(BODY_DARK_CLASS)
     })
+
+    document.getElementById('trashcan-icon').addEventListener('click', () => {
+      window.location.pathname = '/trashcan';
+    })
   }
 
   render() {
     return `
       <header>
-        <div class="title">Delat<span>'</span></div>
+        <div class="title" id="title">Delat<span>'</span></div>
         <div class="buttons">
-          <img src="${deleteIcon}">
+          <img src="${deleteIcon}" id="trashcan-icon">
           <img src="${wbSunnyIcon}" id="theme-icon">
         </div>
       </header>
