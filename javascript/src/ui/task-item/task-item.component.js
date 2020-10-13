@@ -3,11 +3,16 @@ import './task-item.component.scss';
 
 class TaskItemComponent extends Component {
 
+  constructor (title) {
+    super();
+    this.title = title;
+  }
+
   render () {
     return `
       <div class="item">
         <div class="text">
-          Title
+          ${this.title}
         </div>
       </div>
     `

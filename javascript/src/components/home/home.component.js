@@ -9,9 +9,26 @@ class HomeComponent extends Component {
 
   render () {
     return `
-      ${Renderer.render(new SectionTitleComponent('Some title'), this.id)}
-      ${Renderer.render(new TaskItemComponent(), this.id)}
-      ${Renderer.render(new TaskItemComponent(), this.id)}
+      <section>
+        ${Renderer.render(new SectionTitleComponent('Today'), this.id)}
+        ${Renderer.render(new TaskItemComponent('Title 1'), this.id)}
+        ${Renderer.render(new TaskItemComponent('Title 2'), this.id)}
+      </section>      
+      <section>
+        ${Renderer.render(new SectionTitleComponent('Favourites'), this.id)}
+        ${Renderer.render(new TaskItemComponent('Title 1'), this.id)}
+        ${Renderer.render(new TaskItemComponent('Title 2'), this.id)}
+      </section>
+      <section>
+        ${Renderer.render(new SectionTitleComponent('Soon'), this.id)}
+        ${Renderer.render(new TaskItemComponent('Title 1'), this.id)}
+        ${Renderer.render(new TaskItemComponent('Title 2'), this.id)}
+      </section>
+      <section>
+        ${Renderer.render(new SectionTitleComponent('Past'), this.id)}
+        ${Renderer.render(new TaskItemComponent('Title 1'), this.id)}
+        ${Renderer.render(new TaskItemComponent('Title 2'), this.id)}
+      </section>
      `
   }
 }
