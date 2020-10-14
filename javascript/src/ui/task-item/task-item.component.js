@@ -9,10 +9,16 @@ class TaskItemComponent extends Component {
     this.title = title;
   }
 
+  afterRender () {
+    document.getElementById(this.id).addEventListener('click', () => {
+      console.log(this.id);
+    })
+  }
+
   render () {
     return `
       <div class="item">
-        <div class="text ${window[DARK_THEME_VAR] ? 'dark' : 'light'}">
+        <div class="text ${window[DARK_THEME_VAR] ? 'dark' : ''}">
           ${this.title}
         </div>
       </div>

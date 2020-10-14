@@ -2,6 +2,10 @@ class Renderer {
 
   static _createComponentContainer(component) {
     let count = 0;
+    const elements = document.getElementsByTagName(component.name);
+    if (elements) {
+      count = elements.length;
+    }
     let elementId = `${component.name}-child-${count}`;
 
     const duplicateElement = document.querySelector(`#${elementId}`);
@@ -55,7 +59,7 @@ class Renderer {
     // After render
     component.afterRender();
 
-    return componentContainer.innerHTML;
+    return componentContainer.outerHTML;
   }
 }
 
