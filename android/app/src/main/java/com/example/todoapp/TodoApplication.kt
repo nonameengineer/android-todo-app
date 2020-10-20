@@ -11,10 +11,6 @@ import timber.log.Timber
  */
 class TodoApplication : Application() {
 
-    // Depends on the flavor,
-    val taskRepository: TasksRepository
-        get() = ServiceLocator.provideTasksRepository(this)
-
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
