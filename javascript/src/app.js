@@ -7,11 +7,13 @@ import TrashcanComponent from './components/trashcan/trashcan.component'
 import TaskComponent from './components/task/task.component'
 import NewTaskComponent from './components/new-task/new-task.component'
 import DARK_THEME_VAR from './services/theme.service'
+import FooterComponent from './components/footer/footer.component'
 
 window[DARK_THEME_VAR] = false
 
 function renderLayout () {
   document.body.innerHTML = ''
+  document.body.id = 'root'
 
   // Add Wrapper
   const wrapper = document.createElement('div')
@@ -19,12 +21,12 @@ function renderLayout () {
   wrapper.id = 'wrapper'
   document.body.appendChild(wrapper)
 
-// Add Header
+  // Add Header
   const header = document.createElement('div')
   header.id = 'header'
   wrapper.appendChild(header)
 
-// Add Content
+  // Add Content
   const content = document.createElement('div')
   content.className = 'content'
   content.id = 'content'
@@ -58,6 +60,8 @@ const router = async () => {
   let page = routes[parsedURL] ? routes[parsedURL] : Error404
 
   Renderer.render(new page(), 'content')
+
+  Renderer.render(new FooterComponent, 'root')
 }
 
 // Listen on hash change:

@@ -1,0 +1,40 @@
+footer {
+  background-color: #333;
+  height: 120px;
+  color: #ffffff;
+
+  .wrapper {
+    height: 100%;
+  }
+
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  svg {
+    cursor: pointer;
+    margin-top: 32px;
+
+    path {
+      transition: 200ms;
+    }
+
+    &:hover path {
+      fill: #2094f9;
+    }
+  }
+
+  .copyright {
+    font-size: 10pt;
+    transition: 200ms;
+    cursor: pointer;
+    margin-bottom: 12px;
+
+    &:hover {
+      color: #2094f9;
+    }
+  }
+}
+
+
