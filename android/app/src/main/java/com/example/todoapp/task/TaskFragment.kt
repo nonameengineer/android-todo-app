@@ -1,4 +1,4 @@
-package com.example.todoapp.ui.trashcan
+package com.example.todoapp.task
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.todoapp.R
 
-class TrashcanFragment : Fragment() {
+class TaskFragment : Fragment() {
 
     companion object {
-        fun newInstance() = TrashcanFragment()
+        fun newInstance() = TaskFragment()
     }
 
-    private lateinit var viewModel: TrashcanViewModel
+    private lateinit var viewModel: TaskViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.trashcan_fragment, container, false)
+        return inflater.inflate(R.layout.task_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TrashcanViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

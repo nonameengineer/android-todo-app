@@ -1,4 +1,4 @@
-package com.example.todoapp.ui.sectionsettings
+package com.example.todoapp.sectionsettings
 
 import androidx.lifecycle.ViewModel
 

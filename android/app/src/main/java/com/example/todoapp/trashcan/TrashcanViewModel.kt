@@ -1,4 +1,4 @@
-package com.example.todoapp.ui.trashcan
+package com.example.todoapp.trashcan
 
 import androidx.lifecycle.ViewModel
 

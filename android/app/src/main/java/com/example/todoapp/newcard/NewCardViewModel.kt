@@ -1,7 +1,7 @@
-package com.example.todoapp.ui.task
+package com.example.todoapp.newcard
 
 import androidx.lifecycle.ViewModel
 
-class TaskViewModel : ViewModel() {
+class NewCardViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

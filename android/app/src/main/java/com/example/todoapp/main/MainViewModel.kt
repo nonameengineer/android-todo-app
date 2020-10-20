@@ -1,4 +1,4 @@
-package com.example.todoapp.ui.main
+package com.example.todoapp.main
 
 import androidx.lifecycle.ViewModel
 

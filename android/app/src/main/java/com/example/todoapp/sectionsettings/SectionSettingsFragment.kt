@@ -1,31 +1,31 @@
-package com.example.todoapp.ui.newcard
+package com.example.todoapp.sectionsettings
 
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.example.todoapp.R
 
-class NewCardFragment : Fragment() {
+class SectionSettingsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = NewCardFragment()
+        fun newInstance() = SectionSettingsFragment()
     }
 
-    private lateinit var viewModel: NewCardViewModel
+    private lateinit var viewModel: SectionSettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.new_card_fragment, container, false)
+        return inflater.inflate(R.layout.section_settings_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(NewCardViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(SectionSettingsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

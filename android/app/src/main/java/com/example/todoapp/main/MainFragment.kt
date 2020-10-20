@@ -1,4 +1,4 @@
-package com.example.todoapp.ui.main
+package com.example.todoapp.main
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.todoapp.R
-import com.example.todoapp.ui.newcard.NewCardFragment
+import com.example.todoapp.newcard.NewCardFragment
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.android.synthetic.main.new_card_fragment.*
 
 class MainFragment : Fragment() {
 
