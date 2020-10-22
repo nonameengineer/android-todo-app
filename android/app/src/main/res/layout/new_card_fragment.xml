@@ -10,7 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" android:paddingStart="16dp" android:paddingTop="8dp"
+        android:paddingRight="16dp" android:paddingBottom="8dp">
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -27,7 +28,7 @@
                 android:id="@+id/imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" android:layout_weight="1" android:background="#00FFFFFF"
-                android:src="@drawable/circle"/>
+                android:src="@drawable/circle_red"/>
         </LinearLayout>
         <ImageButton
             android:id="@+id/imageButton3"
@@ -45,6 +46,12 @@
             android:layout_weight="0"
             android:background="#00FFFFFF" android:src="@drawable/ic_baseline_clear_24"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+        <include
+            layout="@layout/color_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@+id/linearLayout2"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
