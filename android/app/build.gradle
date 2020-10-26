@@ -35,6 +35,13 @@ android {
         }
     }
 
+    buildFeatures {
+        dataBinding {
+            enabled = true
+            enabledForTests = true
+        }
+    }
+
     // Always show the result of every unit test, even if it passes.
     testOptions.unitTests {
         includeAndroidResources = true
@@ -46,10 +53,13 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
-    dataBinding {
-        enabled = true
-        enabledForTests = true
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 

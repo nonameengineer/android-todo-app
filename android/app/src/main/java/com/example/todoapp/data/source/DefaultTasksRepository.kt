@@ -167,7 +167,7 @@ class DefaultTasksRepository @Inject constructor(
     override suspend fun completeTask(task: Task) {
         // Do in memory cache update to keep the app UI up to date
         cacheAndPerform(task) {
-            it.isCompleted = true
+            it.isArchived = true
             coroutineScope {
                 launch { tasksRemoteDataSource.completeTask(it) }
                 launch { tasksLocalDataSource.completeTask(it) }
@@ -183,35 +183,7 @@ class DefaultTasksRepository @Inject constructor(
         }
     }
 
-    override suspend fun activateTask(task: Task) = withContext(ioDispatcher) {
-        // Do in memory cache update to keep the app UI up to date
-        cacheAndPerform(task) {
-            it.isCompleted = false
-            coroutineScope {
-                launch { tasksRemoteDataSource.activateTask(it) }
-                launch { tasksLocalDataSource.activateTask(it) }
-            }
 
-        }
-    }
-
-    override suspend fun activateTask(taskId: String) {
-        withContext(ioDispatcher) {
-            getTaskWithId(taskId)?.let {
-                activateTask(it)
-            }
-        }
-    }
-
-    override suspend fun clearCompletedTasks() {
-        coroutineScope {
-            launch { tasksRemoteDataSource.clearCompletedTasks() }
-            launch { tasksLocalDataSource.clearCompletedTasks() }
-        }
-        withContext(ioDispatcher) {
-            cachedTasks?.entries?.removeAll { it.value.isCompleted }
-        }
-    }
 
     override suspend fun deleteAllTasks() {
         withContext(ioDispatcher) {
@@ -253,7 +225,7 @@ class DefaultTasksRepository @Inject constructor(
     private fun getTaskWithId(id: String) = cachedTasks?.get(id)
 
     private fun cacheTask(task: Task): Task {
-        val cachedTask = Task(task.title, task.description, task.isCompleted, task.id)
+        val cachedTask = Task(task.id, task.title, task.date, task.color, task.isFavorite, task.isArchived)
         // Create if it doesn't exist.
         if (cachedTasks == null) {
             cachedTasks = ConcurrentHashMap()

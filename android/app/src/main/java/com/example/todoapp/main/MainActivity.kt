@@ -1,14 +1,11 @@
 package com.example.todoapp.main
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todoapp.R
 import com.example.todoapp.trashcan.TrashcanFragment
 import kotlinx.android.synthetic.main.header.*
-import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,8 +23,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
-                    .commitNow()
+                .replace(R.id.container, MainFragment.newInstance())
+                .commitNow()
         }
 
         logo.setOnClickListener {
@@ -46,13 +43,13 @@ class MainActivity : AppCompatActivity() {
             val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
             if (darkTheme) {
                 this.setTheme(R.style.AppTheme)
-                with (sharedPref.edit()) {
+                with(sharedPref.edit()) {
                     putBoolean("dark", false)
                     apply()
                 }
             } else {
                 this.setTheme(R.style.AppDarkTheme)
-                with (sharedPref.edit()) {
+                with(sharedPref.edit()) {
                     putBoolean("dark", true)
                     apply()
                 }

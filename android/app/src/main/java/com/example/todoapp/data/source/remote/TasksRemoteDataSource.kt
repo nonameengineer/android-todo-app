@@ -73,8 +73,8 @@ object TasksRemoteDataSource : TasksDataSource {
     }
 
     override suspend fun completeTask(task: Task) {
-        val completedTask = Task(task.title, task.description, true, task.id)
-        TASKS_SERVICE_DATA.put(task.id, completedTask)
+        /*val completedTask = Task(task.title, task.date, true, task.id)
+        TASKS_SERVICE_DATA.put(task.id, completedTask)*/
     }
 
     override suspend fun completeTask(taskId: String) {
@@ -83,8 +83,8 @@ object TasksRemoteDataSource : TasksDataSource {
     }
 
     override suspend fun activateTask(task: Task) {
-        val activeTask = Task(task.title, task.description, false, task.id)
-        TASKS_SERVICE_DATA.put(task.id, activeTask)
+        /*val activeTask = Task(task.title, task.date, false, task.id)
+        TASKS_SERVICE_DATA.put(task.id, activeTask)*/
     }
 
     override suspend fun activateTask(taskId: String) {
@@ -93,9 +93,9 @@ object TasksRemoteDataSource : TasksDataSource {
     }
 
     override suspend fun clearCompletedTasks() {
-        TASKS_SERVICE_DATA = TASKS_SERVICE_DATA.filterValues {
-            !it.isCompleted
-        } as LinkedHashMap<String, Task>
+      /*  TASKS_SERVICE_DATA = TASKS_SERVICE_DATA.filterValues {
+            !it.color
+        } as LinkedHashMap<String, Task>*/
     }
 
     override suspend fun deleteAllTasks() {

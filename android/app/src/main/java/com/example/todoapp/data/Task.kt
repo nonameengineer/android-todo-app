@@ -18,32 +18,33 @@ package com.example.android.architecture.blueprints.todoapp.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.todoapp.Color
 import java.util.UUID
 
 /**
  * Immutable model class for a Task. In order to compile with Room, we can't use @JvmOverloads to
  * generate multiple constructors.
  *
- * @param title       title of the task
- * @param description description of the task
- * @param isCompleted whether or not this task is completed
- * @param id          id of the task
+ * @param id id of the task
+ * @param title title of the task
+ * @param date date of the task
+ * @param color color of the task
+ * @param isFavorite is task in favourites
+ * @param isArchived is task removed
  */
 @Entity(tableName = "tasks")
 data class Task @JvmOverloads constructor(
+    @PrimaryKey @ColumnInfo(name = "id") var id: String = UUID.randomUUID().toString(),
     @ColumnInfo(name = "title") var title: String = "",
-    @ColumnInfo(name = "description") var description: String = "",
-    @ColumnInfo(name = "completed") var isCompleted: Boolean = false,
-    @PrimaryKey @ColumnInfo(name = "entryid") var id: String = UUID.randomUUID().toString()
+    @ColumnInfo(name = "date") var date: String = "",
+    @ColumnInfo(name = "color") var color: String = "",
+    @ColumnInfo(name = "isFavorite") var isFavorite: Boolean = false,
+    @ColumnInfo(name = "isArchived") var isArchived: Boolean = false
 ) {
 
     val titleForList: String
-        get() = if (title.isNotEmpty()) title else description
-
-
-    val isActive
-        get() = !isCompleted
+        get() = if (title.isNotEmpty()) title else date
 
     val isEmpty
-        get() = title.isEmpty() || description.isEmpty()
+        get() = title.isEmpty() || date.isEmpty()
 }
