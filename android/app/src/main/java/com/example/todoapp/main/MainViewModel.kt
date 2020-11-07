@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android.architecture.blueprints.todoapp.data.Result
-import com.example.android.architecture.blueprints.todoapp.data.Task
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository
-import com.example.android.architecture.blueprints.todoapp.util.wrapEspressoIdlingResource
+import com.example.todoapp.data.Result
+import com.example.todoapp.data.Task
+import com.example.todoapp.data.source.TasksDataSource
+import com.example.todoapp.data.source.TasksRepository
+import com.example.todoapp.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,7 +38,7 @@ class MainViewModel @Inject constructor(
                 val tasksResult = tasksRepository.getTasks(forceUpdate)
 
                 if (tasksResult is Result.Success) {
-                    val tasks = tasksResult.data
+                    // val tasks = tasksResult.data
                 } else {
                     _items.value = emptyList()
                 }

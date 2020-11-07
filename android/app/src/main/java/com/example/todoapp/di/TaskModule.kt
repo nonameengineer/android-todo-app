@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.todoapp.task
+package com.example.todoapp.di
 
 import androidx.lifecycle.ViewModel
-import com.example.todoapp.di.ViewModelBuilder
-import com.example.todoapp.di.ViewModelKey
+import com.example.todoapp.task.TaskFragment
+import com.example.todoapp.task.TaskViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -38,5 +38,5 @@ abstract class TaskModule {
     @Binds
     @IntoMap
     @ViewModelKey(TaskViewModel::class)
-    abstract fun bindViewModel(viewmodel: TaskViewModel): ViewModel
+    abstract fun bindViewModel(viewModel: TaskViewModel): ViewModel
 }

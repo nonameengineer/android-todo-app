@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.architecture.blueprints.todoapp.util
+package com.example.todoapp.util
 
 /**
  * Extension functions and Binding Adapters.
@@ -25,8 +25,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.example.android.architecture.blueprints.todoapp.Event
-import com.example.android.architecture.blueprints.todoapp.ScrollChildSwipeRefreshLayout
+import com.example.todoapp.Event
+import com.example.todoapp.ScrollChildSwipeRefreshLayout
 import com.example.todoapp.R
 import com.google.android.material.snackbar.Snackbar
 

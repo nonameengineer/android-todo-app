@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.architecture.blueprints.todoapp.data
+package com.example.todoapp.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.todoapp.Color
-import java.util.UUID
+import java.util.*
 
 /**
  * Immutable model class for a Task. In order to compile with Room, we can't use @JvmOverloads to

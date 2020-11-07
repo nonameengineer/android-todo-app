@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.todoapp.newcard
+package com.example.todoapp.di
 
 import androidx.lifecycle.ViewModel
-import com.example.todoapp.di.ViewModelBuilder
-import com.example.todoapp.di.ViewModelKey
+import com.example.todoapp.main.MainFragment
+import com.example.todoapp.main.MainViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -28,15 +28,17 @@ import dagger.multibindings.IntoMap
  * Dagger module for the tasks list feature.
  */
 @Module
-abstract class NewCardModule {
+abstract class MainModule {
 
-    @ContributesAndroidInjector(modules = [
-        ViewModelBuilder::class
-        ])
-    internal abstract fun newCardFragment(): NewCardFragment
+    @ContributesAndroidInjector(
+        modules = [
+            ViewModelBuilder::class
+        ]
+    )
+    internal abstract fun mainFragment(): MainFragment
 
     @Binds
     @IntoMap
-    @ViewModelKey(NewCardViewModel::class)
-    abstract fun bindViewModel(viewmodel: NewCardViewModel): ViewModel
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindViewModel(viewModel: MainViewModel): ViewModel
 }

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.architecture.blueprints.todoapp.data.source.remote
+package com.example.todoapp.data.source.remote
 
-import com.example.android.architecture.blueprints.todoapp.data.Result
-import com.example.android.architecture.blueprints.todoapp.data.Result.Error
-import com.example.android.architecture.blueprints.todoapp.data.Result.Success
-import com.example.android.architecture.blueprints.todoapp.data.Task
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource
+import com.example.todoapp.data.Result
+import com.example.todoapp.data.Result.Error
+import com.example.todoapp.data.Result.Success
+import com.example.todoapp.data.Task
+import com.example.todoapp.data.source.TasksDataSource
 import kotlinx.coroutines.delay
 
 /**

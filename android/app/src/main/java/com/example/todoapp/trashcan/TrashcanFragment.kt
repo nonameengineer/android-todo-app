@@ -1,6 +1,6 @@
 package com.example.todoapp.trashcan
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,13 +20,8 @@ class TrashcanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProvider(this).get(TrashcanViewModel::class.java)
+
         return inflater.inflate(R.layout.trashcan_fragment, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TrashcanViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

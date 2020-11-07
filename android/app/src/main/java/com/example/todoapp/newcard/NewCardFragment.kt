@@ -20,13 +20,8 @@ class NewCardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProvider(this).get(NewCardViewModel::class.java)
+
         return inflater.inflate(R.layout.new_card_fragment, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(NewCardViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

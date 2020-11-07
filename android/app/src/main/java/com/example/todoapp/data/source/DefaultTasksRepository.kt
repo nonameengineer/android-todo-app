@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.architecture.blueprints.todoapp.data.source
+package com.example.todoapp.data.source
 
-import com.example.android.architecture.blueprints.todoapp.data.Result
-import com.example.android.architecture.blueprints.todoapp.data.Result.Error
-import com.example.android.architecture.blueprints.todoapp.data.Result.Success
-import com.example.android.architecture.blueprints.todoapp.data.Task
-import com.example.android.architecture.blueprints.todoapp.di.ApplicationModule.TasksLocalDataSource
-import com.example.android.architecture.blueprints.todoapp.di.ApplicationModule.TasksRemoteDataSource
-import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource
-import com.example.android.architecture.blueprints.todoapp.util.wrapEspressoIdlingResource
+import com.example.todoapp.data.Result
+import com.example.todoapp.data.Result.Error
+import com.example.todoapp.data.Result.Success
+import com.example.todoapp.data.Task
+import com.example.todoapp.di.ApplicationModule.TasksLocalDataSource
+import com.example.todoapp.di.ApplicationModule.TasksRemoteDataSource
+import com.example.todoapp.util.EspressoIdlingResource
+import com.example.todoapp.util.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope

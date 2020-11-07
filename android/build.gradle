@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.0-alpha16'
+        classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
 
@@ -44,7 +44,7 @@ ext {
     androidXAnnotations = '1.1.0'
     androidXLegacySupport = '1.0.0'
     appCompatVersion = '1.2.0'
-    archLifecycleVersion = '2.3.0-beta01'
+    archLifecycleVersion = '2.2.0'
     archTestingVersion = '2.1.0'
     cardVersion = '1.0.0'
     coroutinesVersion = '1.2.1'
