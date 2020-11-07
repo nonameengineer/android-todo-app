@@ -14,30 +14,30 @@ class HomeComponent extends Component {
     })
   }
 
-  render () {
+  async render () {
     return `
       <div id="new" class="new ${window[DARK_THEME_VAR] ? 'dark' : ''}">
         New...
       </div>
       <section>
-        ${Renderer.render(new SectionTitleComponent('Today'), this.id)}
-        ${Renderer.render(new TaskItemComponent('Title 1'), this.id)}
-        ${Renderer.render(new TaskItemComponent('Title 2'), this.id)}
+        ${await Renderer.render(new SectionTitleComponent('Today'), this.id)}
+        ${await Renderer.render(new TaskItemComponent('Title 1'), this.id)}
+        ${await Renderer.render(new TaskItemComponent('Title 2'), this.id)}
       </section>      
       <section>
-        ${Renderer.render(new SectionTitleComponent('Favourites'), this.id)}
-        ${Renderer.render(new TaskItemComponent('Title 1'), this.id)}
-        ${Renderer.render(new TaskItemComponent('Title 2'), this.id)}
+        ${await Renderer.render(new SectionTitleComponent('Favourites'), this.id)}
+        ${await Renderer.render(new TaskItemComponent('Title 1'), this.id)}
+        ${await Renderer.render(new TaskItemComponent('Title 2'), this.id)}
       </section>
       <section>
-        ${Renderer.render(new SectionTitleComponent('Soon'), this.id)}
-        ${Renderer.render(new TaskItemComponent('Title 1'), this.id)}
-        ${Renderer.render(new TaskItemComponent('Title 2'), this.id)}
+        ${await Renderer.render(new SectionTitleComponent('Soon'), this.id)}
+        ${await Renderer.render(new TaskItemComponent('Title 1'), this.id)}
+        ${await Renderer.render(new TaskItemComponent('Title 2'), this.id)}
       </section>
       <section>
-        ${Renderer.render(new SectionTitleComponent('Past'), this.id)}
-        ${Renderer.render(new TaskItemComponent('Title 1'), this.id)}
-        ${Renderer.render(new TaskItemComponent('Title 2'), this.id)}
+        ${await Renderer.render(new SectionTitleComponent('Past'), this.id)}
+        ${await Renderer.render(new TaskItemComponent('Title 1'), this.id)}
+        ${await Renderer.render(new TaskItemComponent('Title 2'), this.id)}
       </section>
      `
   }

@@ -11,7 +11,7 @@ import FooterComponent from './components/footer/footer.component'
 
 window[DARK_THEME_VAR] = false
 
-function renderLayout () {
+async function renderLayout () {
   document.body.innerHTML = ''
   document.body.id = 'root'
 
@@ -32,7 +32,7 @@ function renderLayout () {
   content.id = 'content'
   header.after(content)
 
-  Renderer.render(new HeaderComponent(), header.id)
+  await Renderer.render(new HeaderComponent(), header.id)
 }
 
 // List of supported routes.
@@ -46,7 +46,7 @@ const routes = {
 
 // The router code. Takes a URL, checks against the list of supported routes and then renders the corresponding content page.
 const router = async () => {
-  renderLayout()
+  await renderLayout()
 
   // Get the parsed URl from the addressbar
   let request = Utils.parseRequestURL()
@@ -59,9 +59,9 @@ const router = async () => {
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   let page = routes[parsedURL] ? routes[parsedURL] : Error404
 
-  Renderer.render(new page(), 'content')
+  await Renderer.render(new page(), 'content')
 
-  Renderer.render(new FooterComponent, 'root')
+  await Renderer.render(new FooterComponent, 'root')
 }
 
 // Listen on hash change:

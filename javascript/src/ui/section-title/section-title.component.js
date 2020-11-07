@@ -11,7 +11,7 @@ class SectionTitleComponent extends Component {
     super.afterRender()
   }
 
-  render() {
+  async render() {
     return `
       <div class="section-title">${this.title}</div>
     `
