@@ -41,7 +41,7 @@ class Renderer {
    * `
    * @see `src/lib/Component.js`
    */
-  static render(component, containerId) {
+  static async render(component, containerId) {
     const componentContainer = Renderer._createComponentContainer(component);
 
     // Set id of component
@@ -54,12 +54,10 @@ class Renderer {
     // Render
     const container = document.getElementById(containerId)
     container.appendChild(componentContainer);
-    componentContainer.innerHTML = component.render();
+    componentContainer.innerHTML = await component.render();
 
     // After render
     component.afterRender();
-
-    return componentContainer.outerHTML;
   }
 }
 

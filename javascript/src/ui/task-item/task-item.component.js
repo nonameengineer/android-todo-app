@@ -15,7 +15,7 @@ class TaskItemComponent extends Component {
     })
   }
 
-  render () {
+  async render () {
     return `
       <div class="item">
         <div class="text ${window[DARK_THEME_VAR] ? 'dark' : ''}">

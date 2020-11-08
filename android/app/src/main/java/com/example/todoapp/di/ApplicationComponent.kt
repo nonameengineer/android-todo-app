@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.di
+package com.example.todoapp.di
 
 import android.content.Context
 import com.example.todoapp.TodoApplication
-import com.example.todoapp.main.MainModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -36,6 +35,9 @@ import javax.inject.Singleton
         ApplicationModule::class,
         AndroidSupportInjectionModule::class,
         MainModule::class,
+        TaskModule::class,
+        NewCardModule::class,
+        TrashcanModule::class
     ])
 interface ApplicationComponent : AndroidInjector<TodoApplication> {
 

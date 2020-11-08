@@ -5,9 +5,9 @@ import TaskCardComponent from '../../ui/task-card/task-card.component'
 
 class NewTaskComponent extends Component {
 
-  render () {
+  async render () {
     return `
-      ${Renderer.render(new TaskCardComponent(), this.id)}
+      ${await Renderer.render(new TaskCardComponent(), this.id)}
     `
   }
 }

@@ -4,7 +4,7 @@ import DARK_THEME_VAR from '../../services/theme.service'
 
 class TaskCardComponent extends Component {
 
-  render () {
+  async render () {
     return `
       <div class="card">
         <div class="content">

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.data
+package com.example.todoapp.data
 
-import com.example.android.architecture.blueprints.todoapp.data.Result.Success
+import com.example.todoapp.data.Result.Success
 
 /**
  * A generic class that holds a value with its loading status.

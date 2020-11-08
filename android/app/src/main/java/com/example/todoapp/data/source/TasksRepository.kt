@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.data.source
+package com.example.todoapp.data.source
 
-import com.example.android.architecture.blueprints.todoapp.data.Result
-import com.example.android.architecture.blueprints.todoapp.data.Task
+import com.example.todoapp.data.Result
+import com.example.todoapp.data.Task
 
 /**
  * Interface to the data layer.

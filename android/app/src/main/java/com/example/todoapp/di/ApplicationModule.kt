@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.di
+package com.example.todoapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.android.architecture.blueprints.todoapp.data.source.DefaultTasksRepository
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository
-import com.example.android.architecture.blueprints.todoapp.data.source.local.TasksLocalDataSource
-import com.example.android.architecture.blueprints.todoapp.data.source.local.ToDoDatabase
-import com.example.android.architecture.blueprints.todoapp.data.source.remote.TasksRemoteDataSource
+import com.example.todoapp.data.source.DefaultTasksRepository
+import com.example.todoapp.data.source.TasksDataSource
+import com.example.todoapp.data.source.TasksRepository
+import com.example.todoapp.data.source.local.TasksLocalDataSource
+import com.example.todoapp.data.source.local.ToDoDatabase
+import com.example.todoapp.data.source.remote.TasksRemoteDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -34,7 +34,9 @@ import javax.inject.Singleton
 import kotlin.annotation.AnnotationRetention.RUNTIME
 
 
-@Module(includes = [ApplicationModuleBinds::class])
+@Module(includes = [
+    ApplicationModuleBinds::class,
+])
 object ApplicationModule {
 
     @Qualifier
@@ -45,7 +47,6 @@ object ApplicationModule {
     @Retention(RUNTIME)
     annotation class TasksLocalDataSource
 
-    @JvmStatic
     @Singleton
     @TasksRemoteDataSource
     @Provides
@@ -53,7 +54,6 @@ object ApplicationModule {
         return TasksRemoteDataSource
     }
 
-    @JvmStatic
     @Singleton
     @TasksLocalDataSource
     @Provides
@@ -66,7 +66,6 @@ object ApplicationModule {
         )
     }
 
-    @JvmStatic
     @Singleton
     @Provides
     fun provideDataBase(context: Context): ToDoDatabase {
@@ -77,7 +76,6 @@ object ApplicationModule {
         ).build()
     }
 
-    @JvmStatic
     @Singleton
     @Provides
     fun provideIoDispatcher() = Dispatchers.IO

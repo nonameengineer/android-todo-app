@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.todoapp.trashcan
+package com.example.todoapp.di
 
 import androidx.lifecycle.ViewModel
-import com.example.todoapp.di.ViewModelBuilder
-import com.example.todoapp.di.ViewModelKey
+import com.example.todoapp.trashcan.TrashcanFragment
+import com.example.todoapp.trashcan.TrashcanViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -38,5 +38,5 @@ abstract class TrashcanModule {
     @Binds
     @IntoMap
     @ViewModelKey(TrashcanViewModel::class)
-    abstract fun bindViewModel(viewmodel: TrashcanViewModel): ViewModel
+    abstract fun bindViewModel(viewModel: TrashcanViewModel): ViewModel
 }

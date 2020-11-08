@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.R
+import dagger.android.support.DaggerFragment
 
-class NewCardFragment : Fragment() {
+class NewCardFragment : DaggerFragment()  {
 
     companion object {
         fun newInstance() = NewCardFragment()
@@ -20,13 +21,8 @@ class NewCardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProvider(this).get(NewCardViewModel::class.java)
+
         return inflater.inflate(R.layout.new_card_fragment, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(NewCardViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

@@ -24,7 +24,7 @@ class Component {
   /**
    * Returns component template
    */
-  render() {}
+  async render() {}
 }
 
 export default Component;
