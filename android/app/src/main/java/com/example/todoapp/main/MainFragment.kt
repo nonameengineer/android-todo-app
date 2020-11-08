@@ -4,21 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.R
 import com.example.todoapp.databinding.MainFragmentBinding
 import com.example.todoapp.newcard.NewCardFragment
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : DaggerFragment() {
 
-    /*@Inject
+    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by viewModels<MainViewModel> { viewModelFactory }*/
+    private val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
     private lateinit var viewDataBinding: MainFragmentBinding
 
@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewDataBinding = MainFragmentBinding.inflate(inflater, container, false).apply {
-            // viewmodel = viewModel
+            viewmodel = viewModel
         }
 
         // Set the lifecycle owner to the lifecycle of the view

@@ -35,6 +35,9 @@ import javax.inject.Singleton
         ApplicationModule::class,
         AndroidSupportInjectionModule::class,
         MainModule::class,
+        TaskModule::class,
+        NewCardModule::class,
+        TrashcanModule::class
     ])
 interface ApplicationComponent : AndroidInjector<TodoApplication> {
 

@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.R
+import dagger.android.support.DaggerFragment
 
-class NewCardFragment : Fragment() {
+class NewCardFragment : DaggerFragment()  {
 
     companion object {
         fun newInstance() = NewCardFragment()
